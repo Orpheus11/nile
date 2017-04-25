@@ -22,9 +22,9 @@ from nile.common import base_exception
 from nile.common.i18n import _
 from nile.common import xmlutils
 
-CONF = cfg.CONF
-CONF.backlog = 4096
-CONF.tcp_keepidle = 600
+# CONF = cfg.CONF
+# CONF.backlog = 4096
+# CONF.tcp_keepidle = 600
 
 LOG = logging.getLogger(__name__)
 
@@ -48,7 +48,8 @@ class Service(service.Service):
         self.application = application
         self._port = port
         self._host = host
-        self._backlog = backlog if backlog else CONF.backlog
+        # self._backlog = backlog if backlog else CONF.backlog
+        self._backlog = backlog
         self._socket = self._get_socket(host, port, self._backlog)
         super(Service, self).__init__(threads)
 
@@ -87,7 +88,8 @@ class Service(service.Service):
         if hasattr(socket, 'TCP_KEEPIDLE'):
             sock.setsockopt(socket.IPPROTO_TCP,
                             socket.TCP_KEEPIDLE,
-                            CONF.tcp_keepidle)
+                            600)
+                            # CONF.tcp_keepidle)
 
         return sock
 
@@ -127,77 +129,6 @@ class Service(service.Service):
                              application,
                              custom_pool=self.tg.pool,
                              log=loggers.WritableLogger(logger))
-
-
-class Middleware(object):
-    """
-    Base WSGI middleware wrapper. These classes require an application to be
-    initialized that will be called next.  By default the middleware will
-    simply call its wrapped app, or you can override __call__ to customize its
-    behavior.
-    """
-
-    def __init__(self, application):
-        self.application = application
-
-    def process_request(self, req):
-        """
-        Called on each request.
-
-        If this returns None, the next application down the stack will be
-        executed. If it returns a response then that response will be returned
-        and execution will stop here.
-        """
-        return None
-
-    def process_response(self, response):
-        """Do whatever you'd like to the response."""
-        return response
-
-    @webob.dec.wsgify
-    def __call__(self, req):
-        response = self.process_request(req)
-        if response:
-            return response
-        response = req.get_response(self.application)
-        return self.process_response(response)
-
-
-class Debug(Middleware):
-    """
-    Helper class that can be inserted into any WSGI application chain
-    to get information about the request and response.
-    """
-
-    @webob.dec.wsgify
-    def __call__(self, req):
-        print(("*" * 40) + " REQUEST ENVIRON")
-        for key, value in req.environ.items():
-            print(key, "=", value)
-        print()
-        resp = req.get_response(self.application)
-
-        print(("*" * 40) + " RESPONSE HEADERS")
-        for (key, value) in resp.headers.iteritems():
-            print(key, "=", value)
-        print()
-
-        resp.app_iter = self.print_generator(resp.app_iter)
-
-        return resp
-
-    @staticmethod
-    def print_generator(app_iter):
-        """
-        Iterator that prints the contents of a wrapper string iterator
-        when iterated.
-        """
-        print(("*" * 40) + " BODY")
-        for part in app_iter:
-            sys.stdout.write(part)
-            sys.stdout.flush()
-            yield part
-        print()
 
 
 class Router(object):

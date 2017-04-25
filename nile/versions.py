@@ -1,6 +1,8 @@
 import os
 import routes
 from nile.common import wsgi
+from nile.common import log as logging
+LOG = logging.getLogger(__name__)
 
 VERSIONS = {
     "1.0": {
@@ -29,7 +31,9 @@ class VersionsController(wsgi.Controller):
     def show(self, request):
         """Respond to a request for a specific API version."""
         # data = VERSIONS[request.url_version]
+        LOG.debug('request: %s ' % request)
         data = VERSIONS['1.0']
+        LOG.debug('data: %s ' % data)
         v = Version(data["id"], data["status"],
                     request.application_url, data["updated"])
         return wsgi.Result(VersionDataView(v))

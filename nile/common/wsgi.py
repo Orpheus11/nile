@@ -19,12 +19,10 @@ from nile.common import utils
 
 CONTEXT_KEY = 'nile.context'
 Router = base_wsgi.Router
-Debug = base_wsgi.Debug
-Middleware = base_wsgi.Middleware
 JSONDictSerializer = base_wsgi.JSONDictSerializer
 RequestDeserializer = base_wsgi.RequestDeserializer
-CONF = cfg.CONF
-eventlet.wsgi.MAX_HEADER_LINE = CONF.max_header_line
+# CONF = cfg.CONF
+eventlet.wsgi.MAX_HEADER_LINE = 16384
 
 eventlet.patcher.monkey_patch(all=False, socket=True)
 
@@ -210,57 +208,8 @@ class Controller(object):
     """Base controller that creates a Resource with default serializers."""
 
     exception_map = {
-        webob.exc.HTTPUnprocessableEntity: [
-            exception.UnprocessableEntity,
-        ],
-        webob.exc.HTTPUnauthorized: [
-            exception.Forbidden,
-            exception.SwiftAuthError,
-        ],
-        webob.exc.HTTPForbidden: [
-            exception.ReplicaSourceDeleteForbidden,
-            exception.BackupTooLarge,
-        ],
-        webob.exc.HTTPBadRequest: [
-            exception.InvalidModelError,
-            exception.BadRequest,
-            exception.CannotResizeToSameSize,
-            exception.BadValue,
-            exception.DatabaseAlreadyExists,
-            exception.UserAlreadyExists,
-            exception.LocalStorageNotSpecified,
-        ],
         webob.exc.HTTPNotFound: [
             exception.NotFound,
-            exception.ComputeInstanceNotFound,
-            exception.ModelNotFoundError,
-            exception.UserNotFound,
-            exception.DatabaseNotFound,
-            exception.QuotaResourceUnknown,
-            exception.BackupFileNotFound,
-            exception.ClusterNotFound,
-            exception.DatastoreNotFound,
-            exception.SwiftNotFound,
-        ],
-        webob.exc.HTTPConflict: [
-            exception.BackupNotCompleteError,
-            exception.RestoreBackupIntegrityError,
-        ],
-        webob.exc.HTTPRequestEntityTooLarge: [
-            exception.OverLimit,
-            exception.QuotaExceeded,
-            exception.VolumeQuotaExceeded,
-        ],
-        webob.exc.HTTPServerError: [
-            exception.VolumeCreationFailure,
-            exception.UpdateGuestError,
-        ],
-        webob.exc.HTTPNotImplemented: [
-            exception.VolumeNotSupported,
-            exception.LocalStorageNotSupported,
-            exception.DatastoreOperationNotSupported,
-            exception.ClusterInstanceOperationNotSupported,
-            exception.ClusterDatastoreNotSupported
         ],
     }
 
