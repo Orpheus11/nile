@@ -1,7 +1,8 @@
 import logging
 import logging.handlers
-
-LOG_FILE = '/root/tst.log'
+from nile.common import cfg
+CONF = cfg.CONF
+LOG_FILE = CONF.get('DEFAULT', 'log_dir') + "/" + CONF.get('DEFAULT', 'log_file')
 handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes = 1024*1024, backupCount = 5)
 fmt = '%(asctime)s %(levelname)s %(name)s [-] %(message)s from (pid=%(process)d) %(funcName)s %(pathname)s:%(lineno)s'
 

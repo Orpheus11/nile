@@ -1,10 +1,21 @@
+import argparse
+import eventlet
+from nile.common import cfg
+
+def get_conf_file():
+    conf_file = None
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--conf_file", help="increase output verbosity")
+    args = parser.parse_args()
+    if args.conf_file:
+        conf_file = args.conf_file
+    return conf_file
+
 def initialize(conf_file=None):
-    import eventlet
     eventlet.monkey_patch(all=True, thread=False)
-    from nile.common import cfg
     conf = cfg.CONF
-    if conf_file:
-        conf(conf_file)
+    conf_file = get_conf_file()
+    conf(conf_file)
     # from nile.db import get_db_api
     # get_db_api().configure_db(conf)
     return conf
@@ -20,12 +31,6 @@ def with_initialize(main_function=None, **kwargs):
     else:
         return apply
 
-
-from nile.common import log as logging
-LOG = logging.getLogger(__name__)
-
-
-
 def get_worker_count():
     """Utility to get the default worker count.
 
@@ -38,13 +43,11 @@ def get_worker_count():
     except NotImplementedError:
         return 1
 
-from nile.common import service
-from nile.common import api
-from nile.common import base_wsgi
 def launch(app_name, port,
            host='0.0.0.0', backlog=128, threads=1000, workers=None):
-
-    LOG.debug("nile started on %s", host)
+    from nile.common import service
+    from nile.common import api
+    from nile.common import base_wsgi
     app = api.API()
     server = base_wsgi.Service(app, port, host=host,
                                backlog=backlog, threads=threads)

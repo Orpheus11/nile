@@ -1,8 +1,10 @@
 import os
 import routes
 from nile.common import wsgi
+from nile.common import cfg
 from nile.common import log as logging
 LOG = logging.getLogger(__name__)
+conf = cfg.CONF
 
 VERSIONS = {
     "1.0": {
@@ -34,6 +36,7 @@ class VersionsController(wsgi.Controller):
         LOG.debug('request: %s ' % request)
         data = VERSIONS['1.0']
         LOG.debug('data: %s ' % data)
+        LOG.debug("conf: sections:%s" % conf.sections())
         v = Version(data["id"], data["status"],
                     request.application_url, data["updated"])
         return wsgi.Result(VersionDataView(v))
