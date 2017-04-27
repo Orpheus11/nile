@@ -20,7 +20,7 @@ class API(wsgi.Router):
 
     def _clusters_resource_router(self, mapper):
         clusters_resource = ClusterController().create_resource()
-        mapper.connect("/",
+        mapper.connect("/{tenant_id}/clusters/{id}",
                        controller=clusters_resource,
                        action="show",
                        conditions={'method': ['GET']})
