@@ -69,7 +69,7 @@ class ContextMiddleware(base_wsgi.Middleware):
                 raise webob.exc.HTTPInternalServerError(
                     _('Invalid service catalog json.'))
         tenant_id = request.headers.get('X-Tenant-Id', None)
-        auth_token = request.headers["X-Auth-Token"]
+        auth_token = request.headers.get("X-Auth-Token", None)
         user_id = request.headers.get('X-User-ID', None)
         user_name = request.headers.get("X-Tenant-Name",None)
         roles = request.headers.get('X-Role', '').split(',')

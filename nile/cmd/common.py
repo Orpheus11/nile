@@ -58,8 +58,10 @@ def launch(port,host='0.0.0.0', backlog=128, threads=1000, workers=None):
 def launch_taskmanager(port,host='0.0.0.0', backlog=128, threads=1000, workers=None):
     from nile.common import service
     from nile.common import base_wsgi
+    from nile.common import wsgi
     from nile.taskmanager import api
-    app = api.API()
+    task_app = api.API()
+    app = wsgi.ContextMiddleware(task_app)
     server = base_wsgi.Service(app, port, host=host,
                                backlog=backlog, threads=threads)
     return service.launch(server, workers)
