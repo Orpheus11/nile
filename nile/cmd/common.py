@@ -43,9 +43,21 @@ def get_worker_count():
     except NotImplementedError:
         return 1
 
-def launch(app, port,host='0.0.0.0', backlog=128, threads=1000, workers=None):
+def launch(port,host='0.0.0.0', backlog=128, threads=1000, workers=None):
     from nile.common import service
     from nile.common import base_wsgi
+    from nile.common import api
+    app = api.API()
+    server = base_wsgi.Service(app, port, host=host,
+                               backlog=backlog, threads=threads)
+    return service.launch(server, workers)
+
+
+def launch_taskmanager(port,host='0.0.0.0', backlog=128, threads=1000, workers=None):
+    from nile.common import service
+    from nile.common import base_wsgi
+    from nile.taskmanager import api
+    app = api.API()
     server = base_wsgi.Service(app, port, host=host,
                                backlog=backlog, threads=threads)
     return service.launch(server, workers)
