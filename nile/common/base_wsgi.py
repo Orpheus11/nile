@@ -126,7 +126,7 @@ class Service(service.Service):
         eventlet.wsgi.server(socket,
                              application,
                              custom_pool=self.tg.pool,
-                             log=loggers.WritableLogger(logger))
+                             log=logging.WritableLogger(logger))
 
 
 class Router(object):
