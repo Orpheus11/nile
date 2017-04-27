@@ -6,15 +6,11 @@ import shutil
 import time
 import types
 import uuid
-
-from eventlet.timeout import Timeout
 import jinja2
-from oslo_concurrency import processutils
-from oslo_log import log as logging
-from oslo_service import loopingcall
-from oslo_utils import importutils
-from oslo_utils import strutils
-from oslo_utils import timeutils
+from nile.common import log as logging
+from nile.common import loopingcall
+from nile.common import importutils
+from nile.common import timeutils
 from passlib import utils as passlib_utils
 import six.moves.urllib.parse as urlparse
 
@@ -28,8 +24,6 @@ LOG = logging.getLogger(__name__)
 import_class = importutils.import_class
 import_object = importutils.import_object
 import_module = importutils.import_module
-bool_from_string = strutils.bool_from_string
-execute = processutils.execute
 isotime = timeutils.isotime
 
 ENV = jinja2.Environment(loader=jinja2.ChoiceLoader([
@@ -199,37 +193,6 @@ def get_id_from_href(href):
     """
     return urlparse.urlsplit("%s" % href).path.split('/')[-1]
 
-
-def execute_with_timeout(*args, **kwargs):
-    time = kwargs.pop('timeout', 30)
-    log_output_on_error = kwargs.pop('log_output_on_error', False)
-
-    timeout = Timeout(time)
-    try:
-        return execute(*args, **kwargs)
-    except exception.ProcessExecutionError as e:
-        if log_output_on_error:
-            LOG.error(
-                _("Command '%(cmd)s' failed. %(description)s "
-                  "Exit code: %(exit_code)s\nstderr: %(stderr)s\n"
-                  "stdout: %(stdout)s") %
-                {'cmd': e.cmd, 'description': e.description or '',
-                 'exit_code': e.exit_code, 'stderr': e.stderr,
-                 'stdout': e.stdout})
-        raise
-    except Timeout as t:
-        if t is not timeout:
-            LOG.error(_("Got a timeout but not the one expected."))
-            raise
-        else:
-            msg = (_("Time out after waiting "
-                     "%(time)s seconds when running proc: %(args)s"
-                     " %(kwargs)s.") % {'time': time, 'args': args,
-                                        'kwargs': kwargs})
-            LOG.error(msg)
-            raise exception.ProcessExecutionError(msg)
-    finally:
-        timeout.cancel()
 
 
 def correct_id_with_req(id, request):

@@ -40,7 +40,7 @@ class Service(service.Service):
     Provides a Service API for wsgi servers.
 
     This gives us the ability to launch wsgi servers with the
-    Launcher classes in oslo_service.service.py.
+    Launcher classes in nile.common.service.py.
     """
 
     def __init__(self, application, port,

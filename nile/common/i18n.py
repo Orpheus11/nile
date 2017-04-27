@@ -60,7 +60,7 @@ class TranslatorFactory(object):
         m = t.gettext if six.PY3 else t.ugettext
 
         def f(msg):
-            """oslo_i18n.gettextutils translation function."""
+            """nile_i18n.gettextutils translation function."""
             return m(msg)
         return f
 
@@ -86,7 +86,7 @@ class TranslatorFactory(object):
         m = t.gettext if six.PY3 else t.ugettext
 
         def f(ctx, msg):
-            """oslo.i18n.gettextutils translation with context function."""
+            """nile.common.i18n.gettextutils translation with context function."""
             msgctx = "%s%s%s" % (ctx, CONTEXT_SEPARATOR, msg)
             s = m(msgctx)
             if CONTEXT_SEPARATOR in s:
@@ -118,7 +118,7 @@ class TranslatorFactory(object):
         m = t.ngettext if six.PY3 else t.ungettext
 
         def f(msgsingle, msgplural, msgcount):
-            """oslo.i18n.gettextutils plural translation function."""
+            """nile.common.i18n.gettextutils plural translation function."""
             return m(msgsingle, msgplural, msgcount)
         return f
 

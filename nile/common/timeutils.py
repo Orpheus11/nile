@@ -123,7 +123,7 @@ def is_newer_than(after, seconds):
 def utcnow_ts(microsecond=False):
     """Timestamp version of our utcnow function.
 
-    See :py:class:`oslo_utils.fixture.TimeFixture`.
+    See :py:class:`nile_utils.fixture.TimeFixture`.
 
     .. versionchanged:: 1.3
        Added optional *microsecond* parameter.
@@ -148,7 +148,7 @@ def utcnow_ts(microsecond=False):
 def utcnow(with_timezone=False):
     """Overridable version of utils.utcnow that can return a TZ-aware datetime.
 
-    See :py:class:`oslo_utils.fixture.TimeFixture`.
+    See :py:class:`nile_utils.fixture.TimeFixture`.
 
     .. versionchanged:: 1.6
        Added *with_timezone* parameter.
@@ -189,7 +189,7 @@ def set_time_override(override_time=None):
 
     Make it return a constant time or a list thereof, one at a time.
 
-    See :py:class:`oslo_utils.fixture.TimeFixture`.
+    See :py:class:`nile_utils.fixture.TimeFixture`.
 
     :param override_time: datetime instance or list thereof. If not
                           given, defaults to the current UTC time.
@@ -200,7 +200,7 @@ def set_time_override(override_time=None):
 def advance_time_delta(timedelta):
     """Advance overridden time using a datetime.timedelta.
 
-    See :py:class:`oslo_utils.fixture.TimeFixture`.
+    See :py:class:`nile_utils.fixture.TimeFixture`.
 
     """
     assert utcnow.override_time is not None  # nosec
@@ -214,7 +214,7 @@ def advance_time_delta(timedelta):
 def advance_time_seconds(seconds):
     """Advance overridden time by seconds.
 
-    See :py:class:`oslo_utils.fixture.TimeFixture`.
+    See :py:class:`nile_utils.fixture.TimeFixture`.
 
     """
     advance_time_delta(datetime.timedelta(0, seconds))
@@ -223,7 +223,7 @@ def advance_time_seconds(seconds):
 def clear_time_override():
     """Remove the overridden time.
 
-    See :py:class:`oslo_utils.fixture.TimeFixture`.
+    See :py:class:`nile_utils.fixture.TimeFixture`.
 
     """
     utcnow.override_time = None

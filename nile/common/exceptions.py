@@ -1,6 +1,6 @@
 import abc
 from xml import etree
-from oslo_log import log as logging
+from nile.common import log as logging
 import routes
 import six
 import stevedore

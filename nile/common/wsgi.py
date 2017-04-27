@@ -3,16 +3,12 @@ import traceback
 import uuid
 import eventlet.wsgi
 import jsonschema
-from oslo_log import log as logging
-from oslo_serialization import jsonutils
-from oslo_service import service
+from nile.common import log as logging
+from nile.common import jsonutils
 import webob
 import webob.dec
 import webob.exc
-
 from nile.common import base_wsgi
-from nile.common import cfg
-# from nile.common import api
 from nile.common import exception
 from nile.common.i18n import _
 from nile.common import utils
@@ -21,11 +17,8 @@ CONTEXT_KEY = 'nile.context'
 Router = base_wsgi.Router
 JSONDictSerializer = base_wsgi.JSONDictSerializer
 RequestDeserializer = base_wsgi.RequestDeserializer
-# CONF = cfg.CONF
 eventlet.wsgi.MAX_HEADER_LINE = 16384
-
 eventlet.patcher.monkey_patch(all=False, socket=True)
-
 LOG = logging.getLogger('nile.common.wsgi')
 
 

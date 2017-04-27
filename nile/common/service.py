@@ -177,7 +177,7 @@ class Launcher(object):
         """Load and start the given service.
 
         :param service: The service you would like to start, must be an
-                        instance of :class:`oslo_service.service.ServiceBase`
+                        instance of :class:`nile.common.service.ServiceBase`
         :param workers: This param makes this method compatible with
                         ProcessLauncher.launch_service. It must be None, 1 or
                         omitted.
@@ -492,7 +492,7 @@ class ProcessLauncher(object):
         """Launch a service with a given number of workers.
 
        :param service: a service to launch, must be an instance of
-              :class:`oslo_service.service.ServiceBase`
+              :class:`nile.common.service.ServiceBase`
        :param workers: a number of processes in which a service
               will be running
         """
@@ -702,7 +702,7 @@ def launch(service, workers=1, restart_method='reload'):
 
     :param conf: an instance of ConfigOpts
     :param service: a service to launch, must be an instance of
-           :class:`oslo_service.service.ServiceBase`
+           :class:`nile.common.service.ServiceBase`
     :param workers: a number of processes in which a service will be running
     :param restart_method: Passed to the constructed launcher. If 'reload', the
         launcher will call reload_config_files on SIGHUP. If 'mutate', it will
