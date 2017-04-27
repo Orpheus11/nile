@@ -46,8 +46,8 @@ class ClusterController(wsgi.Controller):
         LOG.debug("Showing a Cluster for Tenant '%s'" % tenant_id)
         LOG.info(_("req : '%s'\n\n") % req)
         LOG.info(_("id : '%s'\n\n") % id)
-        context = req.environ[wsgi.CONTEXT_KEY]
-        LOG.info(_("context : '%s'\n\n") % context)
+        # context = req.environ[wsgi.CONTEXT_KEY]
+        # LOG.info(_("context : '%s'\n\n") % context)
         LOG.info(_("req.environ : '%s'\n\n") % req.environ)
         return wsgi.Result({"A":12,"B":True,"C":"Connor"}, 200)
     #
