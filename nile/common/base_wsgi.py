@@ -7,9 +7,7 @@ import socket
 import sys
 import time
 import eventlet.wsgi
-from nile.common import cfg
-import logging
-from nile.common import log as loggers
+from nile.common import log as logging
 from nile.common import jsonutils
 from nile.common import service
 import routes

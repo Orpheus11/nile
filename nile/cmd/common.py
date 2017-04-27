@@ -43,12 +43,9 @@ def get_worker_count():
     except NotImplementedError:
         return 1
 
-def launch(app_name, port,
-           host='0.0.0.0', backlog=128, threads=1000, workers=None):
+def launch(app, port,host='0.0.0.0', backlog=128, threads=1000, workers=None):
     from nile.common import service
-    from nile.common import api
     from nile.common import base_wsgi
-    app = api.API()
     server = base_wsgi.Service(app, port, host=host,
                                backlog=backlog, threads=threads)
     return service.launch(server, workers)

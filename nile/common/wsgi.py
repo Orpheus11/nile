@@ -32,7 +32,7 @@ LOG = logging.getLogger('nile.common.wsgi')
 #     return service.launch(CONF, server, workers)
 
 
-# Note: taken from Nova
+# Note: taken
 def serializers(**serializers):
     """Attaches serializers to a method.
 
