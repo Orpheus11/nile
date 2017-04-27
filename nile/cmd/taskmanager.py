@@ -3,7 +3,7 @@ from nile.cmd.common import launch_taskmanager, get_worker_count,with_initialize
 
 @with_initialize
 def main(CONF):
-    workers = get_worker_count()
+    workers = CONF.get('DEFAULT', 'workers') or get_worker_count()
     launcher = launch_taskmanager(CONF.get('DEFAULT', 'bind_port'), host=CONF.get('DEFAULT', 'bind_host'), workers=workers)
     launcher.wait()
 
