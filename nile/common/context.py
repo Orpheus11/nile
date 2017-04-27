@@ -90,12 +90,11 @@ class RequestContext(object):
         :type is_admin_project: bool
         """
         # setting to private variables to avoid triggering subclass properties
-        self._user_id = user
-        self._project_id = tenant
-        self._domain_id = domain
-        self._user_domain_id = user_domain
-        self._project_domain_id = project_domain
-
+        self.user_id = user
+        self.project_id = tenant
+        self.domain_id = domain
+        self.user_domain_id = user_domain
+        self.project_domain_id = project_domain
         self.auth_token = auth_token
         self.user_name = user_name
         self.project_name = project_name
@@ -237,7 +236,7 @@ class NileContext(RequestContext):
         self.auto = kwargs.pop('auto', None)
         self.service_catalog = kwargs.pop('service_catalog', None)
         self.user_identity = kwargs.pop('user_identity', None)
-        self.user_name=kwargs.pop('user_name', None)
+        self.user_name = kwargs.pop('user_name', None)
         self.zone = kwargs.pop('zone', None)
         # TODO(esp): not sure we need this
         self.timeout = kwargs.pop('timeout', None)

@@ -47,7 +47,7 @@ class TaskController(wsgi.Controller):
         LOG.info(_("req : '%s'\n\n") % req)
         LOG.info(_("id : '%s'\n\n") % id)
         context = req.environ[wsgi.CONTEXT_KEY]
-        LOG.info(_("context : '%s'\n\n") % context)
+        LOG.info(_("context : '%s'\n\n") % context.to_dict())
         LOG.info(_("req.environ : '%s'\n\n") % req.environ)
         return wsgi.Result({"A":12,"B":True,"C":"Connor"}, 200)
     #
