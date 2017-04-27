@@ -49,7 +49,7 @@ class RequestContext(object):
 
     user_idt_format = u'{user} {tenant} {domain} {user_domain} {p_domain}'
 
-    @positional(enforcement=positional.WARN)
+    # @positional(enforcement=positional.WARN)
     def __init__(self,
                  auth_token=None,
                  user=None,
