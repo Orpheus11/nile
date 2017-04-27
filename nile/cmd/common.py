@@ -46,8 +46,10 @@ def get_worker_count():
 def launch(port,host='0.0.0.0', backlog=128, threads=1000, workers=None):
     from nile.common import service
     from nile.common import base_wsgi
+    from nile.common import wsgi
     from nile.common import api
-    app = api.API()
+    api_app = api.API()
+    app = wsgi.ContextMiddleware(api_app)
     server = base_wsgi.Service(app, port, host=host,
                                backlog=backlog, threads=threads)
     return service.launch(server, workers)

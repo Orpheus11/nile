@@ -7,7 +7,7 @@ from nile.common import wsgi
 CONF = cfg.CONF
 LOG = logging.getLogger(__name__)
 
-class ClusterController(wsgi.Controller):
+class TaskController(wsgi.Controller):
 
     """Controller for cluster functionality."""
 

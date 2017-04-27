@@ -49,6 +49,49 @@ def serializers(**serializers):
 
     return decorator
 
+class ContextMiddleware(base_wsgi.Middleware):
+    def __init__(self, application):
+        # self.admin_roles = CONF.admin_roles
+        self.admin_roles = "admin"
+        super(ContextMiddleware, self).__init__(application)
+
+    def _extract_limits(self, params):
+        return {key: params[key] for key in params.keys()
+                if key in ["auto", "limit", "marker"]}
+
+    def process_request(self, request):
+        service_catalog = None
+        catalog_header = request.headers.get('X-Service-Catalog', None)
+        if catalog_header:
+            try:
+                service_catalog = jsonutils.loads(catalog_header)
+            except ValueError:
+                raise webob.exc.HTTPInternalServerError(
+                    _('Invalid service catalog json.'))
+        tenant_id = request.headers.get('X-Tenant-Id', None)
+        auth_token = request.headers["X-Auth-Token"]
+        user_id = request.headers.get('X-User-ID', None)
+        user_name = request.headers.get("X-Tenant-Name",None)
+        roles = request.headers.get('X-Role', '').split(',')
+        zone = request.headers.get('X-Zone', None)
+        is_admin = False
+        for role in roles:
+            if role.lower() in self.admin_roles:
+                is_admin = True
+                break
+        limits = self._extract_limits(request.params)
+        from nile.common import context as rd_context
+        context = rd_context.NileContext(auth_token=auth_token,
+                                          tenant=tenant_id,
+                                          user=user_id,
+                                          user_name=user_name,
+                                          zone=zone,
+                                          is_admin=is_admin,
+                                          auto=limits.get('auto'),
+                                          limit=limits.get('limit'),
+                                          marker=limits.get('marker'),
+                                          service_catalog=service_catalog)
+        request.environ[CONTEXT_KEY] = context
 
 class Router(base_wsgi.Router):
     # Original router did not allow for serialization of the 404 error.

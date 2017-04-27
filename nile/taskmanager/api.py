@@ -1,7 +1,7 @@
 import routes
 from nile.common import wsgi
 from nile.versions import VersionsController
-from nile.taskmanager.service import ClusterController
+from nile.taskmanager.service import TaskController
 
 class API(wsgi.Router):
     """Defines the API routes."""
@@ -19,7 +19,7 @@ class API(wsgi.Router):
                        conditions={'method': ['GET']})
 
     def _clusters_resource_router(self, mapper):
-        clusters_resource = ClusterController().create_resource()
+        clusters_resource = TaskController().create_resource()
         mapper.connect("/{tenant_id}/clusters/{id}",
                        controller=clusters_resource,
                        action="show",
