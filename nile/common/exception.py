@@ -43,3 +43,13 @@ class NotFound(NileError):
 
     message = _("Resource %(uuid)s cannot be found.")
 
+class InvalidModelError(NileError):
+
+    message = _("The following values are invalid: %(errors)s.")
+
+class ModelNotFoundError(NileError):
+
+    message = _("Not Found.")
+
+
+

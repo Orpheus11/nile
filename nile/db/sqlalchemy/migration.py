@@ -1,18 +1,13 @@
 import os
-
 from migrate.versioning import api as versioning_api
-# See LP bug #719834. sqlalchemy-migrate changed location of
-# exceptions.py after 0.6.0.
 try:
     from migrate.versioning import exceptions as versioning_exceptions
 except ImportError:
     from migrate import exceptions as versioning_exceptions
-from oslo_log import log as logging
+from nile.common import log as logging
+from nile.common import exception
 
-from trove.common import exception
-
-
-logger = logging.getLogger('trove.db.sqlalchemy.migration')
+logger = logging.getLogger('nile.db.sqlalchemy.migration')
 
 
 def db_version(options, repo_path=None):

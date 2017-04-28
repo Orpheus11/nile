@@ -16,8 +16,10 @@ def initialize(conf_file=None):
     conf = cfg.CONF
     conf_file = get_conf_file()
     conf(conf_file)
-    # from nile.db import get_db_api
-    # get_db_api().configure_db(conf)
+    from nile.db import get_db_api
+    database_conf = {"database":{"connection":conf.get("database","connection"),
+                                 "connection":conf.get("database","idle_timeout")}}
+    get_db_api().configure_db(database_conf)
     return conf
 
 def with_initialize(main_function=None, **kwargs):

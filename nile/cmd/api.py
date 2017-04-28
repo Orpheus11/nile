@@ -1,4 +1,4 @@
-from nile.cmd.common import launch, get_worker_count,with_initialize
+from nile.cmd.common import launch, get_worker_count, with_initialize
 
 
 @with_initialize
