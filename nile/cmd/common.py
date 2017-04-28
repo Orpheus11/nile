@@ -18,7 +18,7 @@ def initialize(conf_file=None):
     conf(conf_file)
     from nile.db import get_db_api
     database_conf = {"database":{"connection":conf.get("database","connection"),
-                                 "connection":conf.get("database","idle_timeout")}}
+                                 "idle_timeout":int(conf.get("database","idle_timeout"))}}
     get_db_api().configure_db(database_conf)
     return conf
 
