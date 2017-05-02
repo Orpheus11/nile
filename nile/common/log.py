@@ -6,7 +6,6 @@ fmt = '%(asctime)s %(levelname)s %(name)s [-] %(message)s from (pid=%(process)d)
 logging.basicConfig(
                 level=logging.DEBUG,
                 format=fmt,
-                datefmt='%m-%d %H:%M',
                 filename=LOG_FILE,
                 filemode='w')
 console = logging.StreamHandler()
