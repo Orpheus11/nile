@@ -1,7 +1,7 @@
 import logging
 from nile.common import cfg
 CONF = cfg.CONF
-LOG_FILE = CONF.get('DEFAULT', 'log_dir') + "/" + CONF.get('DEFAULT', 'log_file')
+LOG_FILE = CONF.log_dir + "/" + CONF.log_file
 fmt = '%(asctime)s %(levelname)s %(name)s [-] %(message)s from (pid=%(process)d) %(funcName)s %(pathname)s:%(lineno)s'
 logging.basicConfig(
                 level=logging.DEBUG,

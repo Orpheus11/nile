@@ -51,5 +51,14 @@ class ModelNotFoundError(NileError):
 
     message = _("Not Found.")
 
+class ApplicationNotFound(NileError):
+
+     message = _("Application '%(application)s' cannot be found.")
+
+
+class UnprocessableEntity(NileError):
+
+    message = _("Unable to process the contained request.")
+
 
 

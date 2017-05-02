@@ -12,7 +12,7 @@ CREATE TABLE `applications` (
   `slb` varchar(64) DEFAULT NULL,
   `slb_ports` varchar(255) DEFAULT NULL,
   `autorollback` tinyint(1) DEFAULT NULL,
-  `type` varchar(32) NOT NULL,
+  `app_manager` varchar(32) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   `deleted` tinyint(1) DEFAULT NULL,

@@ -1,2 +1,2 @@
-#application type
-APP_TYPE_DEFAULT = "default"
+#application manager
+APP_MANAGER_FABRIC = "fabric"

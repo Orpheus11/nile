@@ -3,8 +3,8 @@ from nile.cmd.common import launch, get_worker_count, with_initialize
 
 @with_initialize
 def main(CONF):
-    workers = int(CONF.get('DEFAULT', 'workers')) or get_worker_count()
-    launcher = launch(CONF.get('DEFAULT', 'bind_port'), host=CONF.get('DEFAULT', 'bind_host'), workers=workers)
+    workers = int(CONF.workers) or get_worker_count()
+    launcher = launch(CONF.bind_port, host=CONF.bind_host, workers=workers)
     launcher.wait()
 
 import sys
