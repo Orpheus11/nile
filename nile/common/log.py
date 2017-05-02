@@ -1,18 +1,22 @@
 import logging
-import logging.handlers
 from nile.common import cfg
 CONF = cfg.CONF
 LOG_FILE = CONF.get('DEFAULT', 'log_dir') + "/" + CONF.get('DEFAULT', 'log_file')
-handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes = 1024*1024, backupCount = 5)
 fmt = '%(asctime)s %(levelname)s %(name)s [-] %(message)s from (pid=%(process)d) %(funcName)s %(pathname)s:%(lineno)s'
-
+logging.basicConfig(
+                level=logging.DEBUG,
+                format=fmt,
+                datefmt='%m-%d %H:%M',
+                filename=LOG_FILE,
+                filemode='w')
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
 formatter = logging.Formatter(fmt)
-handler.setFormatter(formatter)
-
+console.setFormatter(formatter)
 
 def getLogger(name):
     logger = logging.getLogger(name)
-    logger.addHandler(handler)
+    logger.addHandler(console)
     logger.setLevel(logging.DEBUG)
     return logger
 
