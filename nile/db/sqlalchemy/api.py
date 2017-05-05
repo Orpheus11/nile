@@ -31,6 +31,9 @@ def find_all_by_limit(query_func, model, conditions, limit, marker=None,
     return _limits(query_func, model, conditions, limit, marker,
                    marker_column).all()
 
+def find_all_by_page(query_func, model, conditions, order_by=None, page_size=200, page_index=0):
+    return _limits_by_page(query_func, model, conditions, order_by, page_size, page_index).all()
+
 
 def find_by(model, **kwargs):
     return _query_by(model, **kwargs).first()
@@ -151,3 +154,10 @@ def _limits(query_func, model, conditions, limit, marker, marker_column=None):
     if marker:
         query = query.filter(marker_column > marker)
     return query.order_by(marker_column).limit(limit)
+
+def _limits_by_page(query_func, model, conditions, order_by, page_size, page_index):
+    query = query_func(model, **conditions)
+    if order_by is not None:
+        query = query.order_by(order_by)
+    query = query.offset(page_size*page_index)
+    return query.limit(page_size)

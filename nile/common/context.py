@@ -19,7 +19,7 @@ _ENVIRON_HEADERS = {
                      'HTTP_X_TENANT_NAME'],
     'user_domain_name': ['HTTP_X_USER_DOMAIN_NAME'],
     'project_domain_name': ['HTTP_X_PROJECT_DOMAIN_NAME'],
-    'request_id': ['openstack.request_id'],
+    'request_id': ['nile.request_id'],
 
 
     'service_token': ['HTTP_X_SERVICE_TOKEN'],
@@ -192,11 +192,6 @@ class RequestContext(object):
         :param environ: The environment dictionary associated with a request.
         :type environ: dict
         """
-        # Load a new context object from the environment variables set by
-        # auth_token middleware. See:
-        # http://docs.openstack.org/developer/keystonemiddleware/api/keystonemiddleware.auth_token.html#what-auth-token-adds-to-the-request-for-use-by-the-openstack-service
-
-        # add kwarg if not specified by user from a list of possible headers
         for k, v_list in _ENVIRON_HEADERS.items():
             if k in kwargs:
                 continue
@@ -217,9 +212,6 @@ class RequestContext(object):
             kwargs['service_roles'] = roles
 
         if 'is_admin_project' not in kwargs:
-            # NOTE(jamielennox): we default is_admin_project to true because if
-            # nothing is provided we have to assume it is the admin project to
-            # make old policy continue to work.
             is_admin_proj_str = environ.get('HTTP_X_IS_ADMIN_PROJECT', 'true')
             kwargs['is_admin_project'] = is_admin_proj_str.lower() == 'true'
 
@@ -231,21 +223,19 @@ class NileContext(RequestContext):
     accesses the system, as well as additional request information.
     """
     def __init__(self, **kwargs):
-        self.limit = kwargs.pop('limit', None)
-        self.marker = kwargs.pop('marker', None)
-        self.auto = kwargs.pop('auto', None)
+        self.page_index = kwargs.pop('page_index', 0)
+        self.page_size = kwargs.pop('page_size', None)
         self.service_catalog = kwargs.pop('service_catalog', None)
         self.user_identity = kwargs.pop('user_identity', None)
         self.user_name = kwargs.pop('user_name', None)
-        self.zone = kwargs.pop('zone', None)
         # TODO(esp): not sure we need this
         self.timeout = kwargs.pop('timeout', None)
         super(NileContext, self).__init__(**kwargs)
 
     def to_dict(self):
         parent_dict = super(NileContext, self).to_dict()
-        parent_dict.update({'limit': self.limit,
-                            'marker': self.marker,
+        parent_dict.update({'page_index': self.page_index,
+                            'page_size': self.page_size,
                             'service_catalog': self.service_catalog
                             })
         return parent_dict

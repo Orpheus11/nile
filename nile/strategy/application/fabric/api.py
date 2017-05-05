@@ -1,8 +1,9 @@
 import nile.common.log as logging
 from nile.application import models
 from nile.application.views import ApplicationView
-# from nile.application.tasks import ApplicationTasks
+from nile.application.tasks import ApplicationTasks
 # from nile.taskmanager import api as task_api
+from nile.common import const
 from nile.common import cfg
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
@@ -30,8 +31,8 @@ class FABRICApplication(models.Application):
     @classmethod
     def create(cls, context, name):
         LOG.debug("Initiating FABRIC Application creation.")
-        db_info = models.DBApplication.create(
-            name=name, user_id=context.user,)
+        db_info = models.DBApplication.create(task_status=ApplicationTasks.BUILDING_INITIAL,
+            name=name, user_id=context.user_id, app_manager=const.APP_MANAGER_FABRIC)
         return FABRICApplication(context, db_info)
 
     def test_application(self):

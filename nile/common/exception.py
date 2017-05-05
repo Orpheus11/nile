@@ -60,5 +60,9 @@ class UnprocessableEntity(NileError):
 
     message = _("Unable to process the contained request.")
 
+class NileOperationAuthError(NileError):
+
+     message = _("Operation not allowed for tenant %(user_id)s.")
+
 
 

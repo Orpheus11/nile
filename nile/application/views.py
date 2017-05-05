@@ -16,7 +16,7 @@ class ApplicationView(object):
             "task": {"id": self.application.task_id,
                      "name": self.application.task_name,
                      "description": self.application.task_description},
-            "status": self.application.task_name,
+            # "status": self.application.task_name,
             "created": self.application.created,
             "updated": self.application.updated
         }
@@ -32,13 +32,13 @@ class ApplicationsView(object):
         data = []
         for application in self.applications:
             data.append(self.data_for_application(application))
-        return {'Applications': data}
+        return {'applications': data}
 
     def data_for_application(self, application):
         view = load_view(application, req=self.req)
-        return view.data()['Application']
+        return view.data()['application']
 
 def load_view(application, req):
     manager = "fabric"
-    return strategy.load_api_strategy(manager).Application_view_class(
+    return strategy.load_api_strategy(manager).application_view_class(
         application, req)

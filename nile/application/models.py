@@ -6,7 +6,7 @@ from nile import strategy
 from nile.common.i18n import _
 import nile.common.log as logging
 # from nile.common import const
-from nile.taskmanager import api as task_api
+from sqlalchemy import desc
 CONF = cfg.CONF
 LOG = logging.getLogger(__name__)
 def persisted_models():
@@ -19,6 +19,8 @@ class DBApplication(dbmodels.DatabaseModelBase):
 
     def __init__(self, task_status, **kwargs):
         kwargs["task_id"] = task_status.code
+        kwargs["task_name"] = task_status.name
+        kwargs["task_desc"] = task_status.description
         kwargs["deleted"] = False
         super(DBApplication, self).__init__(**kwargs)
         self.task_status = task_status
@@ -52,15 +54,14 @@ class Application(object):
         else:
             db_infos = DBApplication.find_all(deleted=False)
 
-        limit = int(context.limit or Application.DEFAULT_LIMIT)
-        if limit > Application.DEFAULT_LIMIT:
-            limit = Application.DEFAULT_LIMIT
-        data_view = DBApplication.find_by_pagination('applications', db_infos, "foo",
-                                                 limit=limit,
-                                                 marker=context.marker)
-        next_marker = data_view.next_page_marker
+        page_size = int(context.page_size or Application.DEFAULT_LIMIT)
+        if page_size > Application.DEFAULT_LIMIT:
+            page_size = Application.DEFAULT_LIMIT
+        data_view = DBApplication.find_by_pagination('applications', db_infos, order_by=desc(DBApplication.updated),
+                                                 page_index=context.page_index, page_size=page_size)
+        page_info = data_view.page_info()
         ret = [cls(context, db_info) for db_info in data_view.collection]
-        return ret, next_marker
+        return ret, page_info
 
     @classmethod
     def load(cls, context, application_id, clazz=None):
@@ -117,14 +118,6 @@ class Application(object):
         return self.db_info.user_id
 
     @property
-    def datastore(self):
-        return self.ds
-
-    @property
-    def datastore_version(self):
-        return self.ds_version
-
-    @property
     def deleted(self):
         return self.db_info.deleted
 
@@ -132,14 +125,10 @@ class Application(object):
     def deleted_at(self):
         return self.db_info.deleted_at
 
-    @property
-    def dns_domain(self):
-        return self.db_info.dns_domain
-
     @classmethod
-    def create(cls, context, name,users,app_manager=None):
+    def create(cls, context, name, app_manager=None):
         api_strategy = strategy.load_api_strategy(app_manager)
-        return api_strategy.application_class.create(context, name, users, app_manager)
+        return api_strategy.application_class.create(context, name)
 
     def validate_application_available(self, valid_states=[ApplicationTasks.NONE]):
         if self.db_info.task_status not in valid_states:
@@ -156,5 +145,6 @@ class Application(object):
                                          ApplicationTasks.BUILDING_ERROR,
                                          ApplicationTasks.BUILDING_TIMEOUT,
                                          ApplicationTasks.DELETING_TIMEOUT])
-        self.update_db(task_status=ApplicationTasks.DELETING)
-        task_api.API(self.context).delete_application(self.id)
+        # self.update_db(task_status=ApplicationTasks.DELETING)
+        # task_api.API(self.context).delete_application(self.id)
+        self.update_db(deleted=True, task_status=ApplicationTasks.DELETED)

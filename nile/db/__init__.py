@@ -54,11 +54,24 @@ class Query(object):
             marker=marker,
             marker_column=marker_column)
 
-    def paginated_collection(self, limit=200, marker=None, marker_column=None):
-        collection = self.limit(int(limit) + 1, marker, marker_column)
-        if len(collection) > int(limit):
-            return (collection[0:-1], collection[-2]['id'])
-        return (collection, None)
+    # def paginated_collection(self, limit=200, marker=None, marker_column=None):
+    #     collection = self.limit(int(limit) + 1, marker, marker_column)
+    #     if len(collection) > int(limit):
+    #         return (collection[0:-1], collection[-2]['id'])
+    #     return (collection, None)
+
+    def limit_by_page(self, order_by=None, page_size=200, page_index=0):
+        return self.db_api.find_all_by_page(
+            self._query_func,
+            self._model,
+            self._conditions,
+            order_by=order_by,
+            page_size=page_size,
+            page_index=page_index)
+
+    def paginated_collection(self, order_by=None, page_size=200, page_index=0):
+        collection = self.limit_by_page(order_by, page_size, page_index)
+        return (collection, self.count())
 
 
 class Queryable(object):

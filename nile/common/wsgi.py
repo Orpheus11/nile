@@ -52,12 +52,12 @@ def serializers(**serializers):
 class ContextMiddleware(base_wsgi.Middleware):
     def __init__(self, application):
         # self.admin_roles = CONF.admin_roles
-        self.admin_roles = "admin"
+        self.admin_roles = ["admin"]
         super(ContextMiddleware, self).__init__(application)
 
-    def _extract_limits(self, params):
-        return {key: params[key] for key in params.keys()
-                if key in ["auto", "limit", "marker"]}
+    def _extract_pageinfos(self, params):
+        return {key: int(params[key]) for key in params.keys()
+                if key in ["page_index", "page_size"]}
 
     def process_request(self, request):
         service_catalog = None
@@ -68,28 +68,24 @@ class ContextMiddleware(base_wsgi.Middleware):
             except ValueError:
                 raise webob.exc.HTTPInternalServerError(
                     _('Invalid service catalog json.'))
-        tenant_id = request.headers.get('X-Tenant-Id', None)
         auth_token = request.headers.get("X-Auth-Token", None)
         user_id = request.headers.get('X-User-ID', None)
-        user_name = request.headers.get("X-Tenant-Name",None)
+        user_name = request.headers.get("X-User-Name", None)
         roles = request.headers.get('X-Role', '').split(',')
-        zone = request.headers.get('X-Zone', None)
         is_admin = False
         for role in roles:
             if role.lower() in self.admin_roles:
                 is_admin = True
                 break
-        limits = self._extract_limits(request.params)
+        pageinfos = self._extract_pageinfos(request.params)
+        LOG.debug("pageinfos:%s" % pageinfos)
         from nile.common import context as rd_context
         context = rd_context.NileContext(auth_token=auth_token,
-                                          tenant=tenant_id,
                                           user=user_id,
                                           user_name=user_name,
-                                          zone=zone,
                                           is_admin=is_admin,
-                                          auto=limits.get('auto'),
-                                          limit=limits.get('limit'),
-                                          marker=limits.get('marker'),
+                                          page_index=pageinfos.get('page_index', 0),
+                                          page_size=pageinfos.get('page_size', None),
                                           service_catalog=service_catalog)
         request.environ[CONTEXT_KEY] = context
 
