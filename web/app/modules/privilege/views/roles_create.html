@@ -1,0 +1,80 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"> {{getWord('New Role')}}</h4>
+</div>
+<div class="modal-body  form-group">
+    <form class="smart-form" name="depForm">
+        <label class="label"> {{getWord('Role Name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newRole.Name" placeholder="{{getWord('Role Name')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Role Description')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newRole.Description" placeholder="{{getWord('Role Description')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Entities of Role')}} </label>
+        <div class="row">
+
+            <div class="col-md-6">
+                <ul>
+                    <li><div js-tree="treeConfig" tree="treeInstance" ng-model="entitiesTreeNodes" ></div></li>
+                   <!--  <li ng-repeat="entity in newRole.entities">
+                        {{entity.Name}}
+                        <button class="btn btn-default btn-xs" data-ng-click="removeFromRole($index)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </li> -->
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>  {{getWord('Not_Include')}}  </li>
+                    <li ng-repeat="entity in entities" ng-show="!used(entity)">
+                        <button class="btn btn-default btn-xs" data-ng-click="addToRole(entity)">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        {{entity.Name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+<!--         <label class="label"> {{getWord('Entities of Role')}} </label>
+        <div class="row">
+
+            <div class="col-md-6">
+                <ul>
+                    <li>  {{getWord('Include')}}  </li>
+                    <li ng-repeat="entity in newRole.entities">
+                        {{entity.Name}}
+                        <button class="btn btn-default btn-xs" data-ng-click="removeFromRole($index)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>  {{getWord('Not_Include')}}  </li>
+                    <li ng-repeat="entity in entities" ng-show="!used(entity)">
+                        <button class="btn btn-default btn-xs" data-ng-click="addToRole(entity)">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        {{entity.Name}}
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary"  ng-click="formSubmit()" ng-disabled="depForm.$$invalid">
+        {{getWord('Create Role')}}
+    </button>
+</div>

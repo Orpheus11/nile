@@ -1,0 +1,80 @@
+<!-- HEADER -->
+<div data-smart-include="app/layout/partials/header.tpl.html" class="placeholder-header"></div>
+<!-- END HEADER -->
+
+
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+
+
+<div data-smart-include="app/layout/partials/navigation.tpl.html" class="placeholder-left-panel"></div>
+
+<!-- END NAVIGATION -->
+
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+
+
+    <demo-states></demo-states>
+
+    <!-- RIBBON -->
+    <div id="ribbon">
+
+				<span class="ribbon-button-alignment">
+					<span id="refresh" class="btn btn-ribbon" reset-widgets
+                          tooltip-placement="bottom"
+                          tooltip-html-unsafe="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.">
+						<i class="fa fa-refresh"></i>
+					</span>
+				</span>
+
+        <!-- breadcrumb -->
+        <state-breadcrumbs></state-breadcrumbs>
+        <!-- end breadcrumb -->
+
+
+    </div>
+
+    <!-- END RIBBON -->
+    <div class="modal in" id="modal-layout" role="dialog" data-ng-controller="popupController" data-ng-class="{'popupOn': showPopup}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="closePopup()">
+                        ×
+                    </button>
+                    <h4 class="modal-title"> {{title}}</h4>
+                </div>
+                <div class="modal-body"  data-ng-include="popupTemplateUrl">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closePopup()">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary"  ng-click="popupSubmit()" >
+                        {{getWord(' Submit ')}}
+                    </button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+
+    <div data-smart-router-animation-wrap="content content@app" data-wrap-for="#content">
+        <div data-ui-view="content" data-autoscroll="false"></div>
+    </div>
+
+
+</div>
+<!-- END MAIN PANEL -->
+
+<!-- PAGE FOOTER -->
+<div data-smart-include="app/layout/partials/footer.tpl.html"></div>
+
+<div data-smart-include="app/components/shortcut/shortcut.tpl.html"></div>
+
+<!-- END PAGE FOOTER -->
+
+

@@ -1,0 +1,29 @@
+<table
+        class="display projects-table table table-striped table-bordered table-hover"
+        cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th></th>
+        <th>{{getWord("Name")}}</th>
+        <th>{{getWord("CPU")}}</th>
+        <th>{{getWord("Memory")}}</th>
+        <th>{{getWord("Status")}}</th>
+        <th>{{getWord("Last Health Check")}}</th>
+        <th>{{getWord("Description")}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="vm in server_vms">
+        <td></td>
+        <td><a href="#/VM/{{vm.Id}}">{{vm.Name}}</a></td>
+        <td>{{vm.CPU}}</td>
+        <td>{{vm.Memory}}</td>
+        <td ng-if="vm.Status == 'running'"><span class='label label-success'>Running</span></td>
+        <td ng-if="vm.Status == ''"><span class='label label-warning'>Provision</span></td>
+        <td ng-if="vm.Status == 'unknown'"><span class='label label-default'>Unknown</span></td>
+        <td ng-if="vm.Status == 'shutdown'"><span class='label label-default'>Shutdown</span></td>
+        <td>{{vm.LastCheck}}</td>
+        <td>{{vm.Description}}</td>
+    </tr>
+    </tbody>
+</table>

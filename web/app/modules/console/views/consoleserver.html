@@ -1,0 +1,57 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Console Server', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+<!--
+        <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+-->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <div jarvis-widget id="normal-table-widget"  data-widget-editbutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+
+                    <h2>Console Ports</h2>
+                </header>
+                <div>
+                    <div class="widget-body">
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Mtime</th>
+                                    <th>URL</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="image in vm_images">
+                                    <td>{{image.Name}}</td>
+                                    <td>{{image.Size}}</td>
+                                    <td>{{image.Type}}</td>
+                                    <td>{{image.Status}}</td>
+                                    <td>{{image.Mtime}}</td>
+                                    <td>{{image.Url}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

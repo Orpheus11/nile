@@ -1,0 +1,36 @@
+<!-- MAIN CONTENT -->
+<div id="content"  ng-controller="DashboardCtrl">
+
+	<!--<div class="row">
+		<big-breadcrumbs items="['Dashboard', 'My Dashboard']" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+		<div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+	</div>-->
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- row -->
+		<div class="row" id="dashboardInfo">
+			<div class="col-xs-12 col-sm-12 col-md-8">
+
+				<div smart-include="app/dashboard/total.tpl.html"></div>
+                <div smart-include="app/dashboard/datacenter.tpl.html"></div>
+
+			</div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+
+                <div smart-include="app/dashboard/timeline.tpl.html"></div>
+
+            </div>
+		</div>
+
+		<!-- end row -->
+
+		<!-- row -->
+
+		<!-- end row -->
+
+	</section>
+	<!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->

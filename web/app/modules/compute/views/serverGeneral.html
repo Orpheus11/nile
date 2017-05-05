@@ -1,0 +1,181 @@
+<!--
+
+    <div class="row no-space">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats">
+            <table class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{server.Name}}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{server.Description}}</td>
+                </tr>
+                <tr>
+                    <td>Hypervisor</td>
+                    <td>{{server.NodeInfo.types}}</td>
+                </tr>
+                <tr>
+                    <td>CPU Core</td>
+                    <td>{{server.NodeInfo.core}}</td>
+                </tr>
+                <tr>
+                    <td>Memory Size</td>
+                    <td>{{server.NodeInfo.memory}}KB</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{server.Status}}</td>
+                </tr>
+                <tr>
+                    <td>Last Health Check</td>
+                    <td>{{server.LastCheck}}</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <span class="onOffSwitch">
+                                            <span>CPU:</span>
+                                            <input type="radio" name="monitor_show" class="cpu_show" checked data-size="mini" data-on-text="ON" data-off-text="OFF"/>
+                                            <span class="showInfo">MEM:</span>
+                                            <input type="radio" name="monitor_show" class="mem_show" data-size="mini" data-on-text="ON" data-off-text="OFF"/>
+                                            <span class="showInfo">DISK:</span>
+                                            <input type="radio" name="monitor_show" class="disk_show" data-size="mini" data-on-text="ON" data-off-text="OFF"/>
+                                            <span class="showInfo">NET:</span>
+                                            <input type="radio" name="monitor_show" class="net_show" data-size="mini" data-on-text="ON" data-off-text="OFF"/>
+                                    </span>
+            <div id="monitor-chart" class="chart-large txt-color-blue" flot-basic flot-data="liveStats" flot-options="liveStatsOptions"></div>
+
+        </div>
+
+    </div>
+
+    <div class="show-stat-microcharts col-xs-12" data-sparkline-container data-easy-pie-chart-container>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+
+            <div id="server_cpu" class="easy-pie-chart txt-color-blue" data-percent="0" data-pie-size="50">
+                <span class="percent percent-sign">35</span>
+            </div>
+            <span class="easy-pie-title"> CPU <i ng-if="cpu_up" class="fa fa-caret-up icon-color-bad"></i> <i ng-if="!cpu_up" class="fa fa-caret-down icon-color-good"></i> </span>
+            <ul class="smaller-stat hidden-sm-2 pull-right">
+                <li>
+                    <span class="label bg-color-blue"><i class="fa fa-caret-up"></i>{{cpu_max}}%</span>
+                </li>
+                <li>
+                    <span class="label bg-color-blueLight"><i class="fa fa-caret-down"></i>{{cpu_min}}%</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="server_disk_r" class="easy-pie-chart txt-color-greenDark" data-percent="0" data-pie-size="50">
+                <span class="percent">35</span>
+            </div>
+            <span class="easy-pie-title">Disk_r <i ng-if="disk_r_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!disk_r_up" class="fa fa-caret-down icon-color-good"></i></span>
+            <ul class="smaller-stat hidden-sm pull-right">
+                <li>
+                    <span class="label bg-color-greenDark"><i class="fa fa-caret-up"></i>{{disk_r_max}}kb/s</span>
+                </li>
+                <li>
+                    <span class="label bg-color-green"><i class="fa fa-caret-down"></i>{{disk_r_min}}kb/s</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="server_net_in" class="easy-pie-chart txt-color-orangeDark" data-percent="0" data-pie-size="50">
+                <span class="percent">78.9 </span>
+            </div>
+            <span class="easy-pie-title"> Net_in <i ng-if="net_in_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!net_in_up" class="fa fa-caret-down icon-color-good"></i></span>
+            <ul class="smaller-stat hidden-sm pull-right">
+                <li>
+                    <span class="label bg-color-orangeDark"><i class="fa fa-caret-up"></i>{{net_in_max}}kb/s</span>
+                </li>
+                <li>
+                    <span class="label bg-color-orange"><i class="fa fa-caret-down"></i>{{net_in_min}}kb/s</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="show-stat-microcharts col-xs-12" data-sparkline-container data-easy-pie-chart-container>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="server_mem" class="easy-pie-chart txt-color-red" data-percent="0" data-pie-size="50">
+                <span class="percent percent-sign">78.9 </span>
+            </div>
+            <span class="easy-pie-title"> Memory <i ng-if="mem_up" class="fa fa-caret-up icon-color-bad"></i> <i ng-if="!mem_up" class="fa fa-caret-down icon-color-good"></i></span>
+            <ul class="smaller-stat hidden-sm pull-right">
+                <li>
+                    <span class="label bg-color-red"><i class="fa fa-caret-up"></i>{{mem_max}}%</span>
+                </li>
+                <li>
+                    <span class="label bg-color-redLight"><i class="fa fa-caret-down"></i>{{mem_min}}%</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+
+            <div id="server_disk_w" class="easy-pie-chart txt-color-greenLight" data-percent="0" data-pie-size="50">
+                <span class="percent">35</span>
+            </div>
+            <span class="easy-pie-title"> Disk_w <i ng-if="disk_w_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!disk_w_up" class="fa fa-caret-down icon-color-good"></i> </span>
+            <ul class="smaller-stat hidden-sm pull-right">
+                <li>
+                    <span class="label bg-color-greenDark"><i class="fa fa-caret-up"></i>{{disk_w_max}}kb/s</span>
+                </li>
+                <li>
+                    <span class="label bg-color-green"><i class="fa fa-caret-down"></i>{{disk_w_min}}kb/s</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="server_net_out" class="easy-pie-chart txt-color-orange" data-percent="0" data-pie-size="50">
+                <span class="percent">35</span>
+            </div>
+            <span class="easy-pie-title">Net_out <i ng-if="net_out_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!net_out_up" class="fa fa-caret-down icon-color-good"></i></span>
+            <ul class="smaller-stat hidden-sm pull-right">
+                <li>
+                    <span class="label bg-color-orangeDark"><i class="fa fa-caret-up"></i>{{net_out_max}}kb/s</span>
+                </li>
+                <li>
+                    <span class="label bg-color-orange"><i class="fa fa-caret-down"></i>{{net_out_min}}kb/s</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <table
+            class="display projects-table table table-striped table-bordered table-hover"
+            cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>CPU</th>
+            <th>Memory</th>
+            <th>Status</th>
+            <th>Last Check</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="vm in server_vms">
+            <td></td>
+            <td>{{vm.Name}}</td>
+            <td>{{vm.CPU}}</td>
+            <td>{{vm.Memory}}</td>
+            <td ng-if="vm.Status == 'running'"><span class='label label-success'>Running</span></td>
+            <td ng-if="vm.Status == ''"><span class='label label-warning'>Provision</span></td>
+            <td ng-if="vm.Status == 'unknown'"><span class='label label-default'>Unknown</span></td>
+            <td>{{vm.LastCheck}}</td>
+            <td>{{vm.Description}}</td>
+        </tr>
+        </tbody>
+    </table>-->

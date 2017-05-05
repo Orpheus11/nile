@@ -1,0 +1,25 @@
+<div id="time-line-history">
+    <div>
+        <h4><strong>{{getWord("History")}}</strong>
+            <span class="historyDeatil" ng-click="showHistory()">more</span>
+        </h4>
+        <hr/>
+    </div>
+    <!-- widget div-->
+    <div class="historyContent">
+        <div ng-repeat="h in history" class="historyInfo">
+            <div class="headInfo">
+                <span>{{h.time | timeLineDate}}</span>
+                <span>{{h.time | timeLineTime}}</span>
+                <span>{{h.name}}</span>
+            </div>
+            <div class="historyDes">
+                <span>{{h.short_des}}</span><br/>
+                <span>{{h.status}}</span><br/>
+                <span>{{h.user}}</span>
+            </div>
+        </div>
+    </div>
+        <!-- end widget content -->
+    <!-- end widget div -->
+</div>

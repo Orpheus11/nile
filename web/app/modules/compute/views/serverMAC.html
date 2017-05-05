@@ -1,0 +1,20 @@
+<table
+       class="display project-table table table-striped table-bordered table-hover"
+       cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th></th>
+        <th>{{getWord("MAC Addr")}}</th>
+        <th>{{getWord("IPv4 Addr")}}</th>
+        <th>{{getWord("Name")}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="mac in server_macs">
+        <td></td>
+        <td>{{mac.MAC}}</td>
+        <td>{{mac.ipv4_addr}}</td>
+        <td>{{mac.name}}</td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-asterisk"></i>&nbsp;{{getWord('Even Distribution')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+    <div class="row">
+        <form novalidate="novalidate" data-smart-validate-form>
+            <div class="col-sm-12">
+                <!-- Widget Div -->
+                <div class="no-padding">
+                    <div class="form-group">
+                        <button data-ng-click="SetFrequency()">添加</button>
+                        <button data-ng-click="SetFrequency()">编辑</button>
+                        <button data-ng-click="removeFrequency()">移除</button>{{dwmTimeList}}
+                    </div>
+                    <table class="table table-hover table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox"/></th>
+                            <!--<th>频率</th>-->
+                            <th>星期</th>
+                            <th>开始时间</th>
+                            <th>持续时间</th>
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="time in timeList">
+                        <tr>
+                            <td><input type="checkbox" data-ng-model="isChoosen" data-ng-click="getTimeList(time,isChoosen)"/></td>
+                            <!--<td></td>-->
+                            <td data-ng-if="time.frequency == 'Weekly'">{{time.weeks | showWeeks}}</td>
+                            <td data-ng-if="time.frequency == 'Daily'">Daily</td>
+                            <td>{{time.startTime}}</td>
+                            <td>{{time.holdTime}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

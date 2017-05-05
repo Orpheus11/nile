@@ -1,0 +1,368 @@
+
+<div id="tabs-pills-widget-widget" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-jarvis-widget="" ng-init="demoShowTabs = true" class="jarviswidget jarviswidget-sortable" role="widget">
+<div class="row">
+        <big-breadcrumbs items="['Storage', 'Octopus']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+<!--
+        <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+-->
+    </div>
+    <header role="heading" class="ui-sortable-handle">
+         <span class="widget-icon"> <i class="fa fa-lg fa-fw fa-database txt-color-darken"></i> </span>
+
+                        <h2></h2>
+        <ul id="widget-tab-1" class="nav pull-right nav-tabs" ng-class="{'nav-tabs' : !!demoShowTabs, 'nav-pills': !demoShowTabs }">
+            <li class="active">
+                <a data-toggle="tab" href="#Volume"><i class="fa fa-clock-o"></i> <span class="hidden-mobile hidden-tablet"> Volume </span></a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" href="#Brick"><i class="fa fa-facebook"></i> <span class="hidden-mobile hidden-tablet"> Brick </span></a>
+            </li>
+        </ul>
+        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+    <!-- widget div-->
+    <div role="content">
+        <!-- widget content -->
+        <div class="widget-body no-padding"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+            <!-- widget body text-->
+            <div class="tab-content padding-10">
+                <div class="tab-pane fade in active" id="Volume">
+                    <div data-ng-controller="storageListVolumeCtrl" class="overflow">
+                        <h3>Volumes</h3>
+                        <div class="widget-body no-padding"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+
+                            <div class="panel-group smart-accordion-default" >
+                                <div class="panel panel-default" ng-repeat="volume in volumes">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseOne-{{$index}}" aria-expanded="true" class=""> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{volume.name}}    </a> </h4>
+                                        <button class="volume-delete btn btn-xs btn-danger pull-right" ng-click="deleteVolume(volume)"><i class="fa fa-trash-o"></i></button>
+
+                                    </div>
+                                    <div id="collapseOne-{{$index}}" class="panel-collapse collapse in" aria-expanded="true">
+                                        <div class="panel-body row">
+
+                                            <div class="col-md-2">
+                                                {{volume.name}}
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <dl>
+                                                    <dt>Mode:</dt> <dd>{{volume.mode}}</dd>
+                                                    <dt>Status:</dt> <dd>{{volume.status | upperCase }}</dd>
+                                                    <dt>Total Size:</dt> <dd>{{volume.total_space}}</dd>
+                                                    <dt>Used Size:</dt> <dd>{{volume.used_space}}</dd>
+                                                </dl>
+                                            </div>
+
+                                            <!-- <div class="col-md-3">
+                                                <ul>
+                                                    <li class="title"> {{getWord('Centers')}}</li>
+                                                    <li ng-repeat="center in volume.centers">
+                                                        <a> <i class="fa fa-sm fa-desktop"></i> {{center.center_id}} </a>
+                                                    </li>
+                                                </ul>
+                                            </div> -->
+
+                                            <div class="col-md-3">
+                                                <ul>
+                                                    <li class="title"> {{getWord('Centers')}}</li>
+                                                    <li ng-repeat="center in volume.centers">
+                                                        <a>
+                                                            <button class="btn btn-success" ng-click="editCenter(volume, center)"> {{center.center_name}} </button>
+                                                            <button class="btn btn-primary" ng-click="unbind(volume, center)"> Unbind </button>
+                                                        </a>
+                                                    </li>
+                                                    <li><button class="btn btn-primary" ng-click="AddCenter(volume)"> {{getWord("+ Add Center")}} </button></li>
+                                                </ul>
+                                            </div>
+
+
+
+                                            <div class="col-md-3">
+                                                <ul>
+                                                    <li class="title"> {{getWord('Bricks')}}</li>
+                                                    <li ng-repeat="brick in volume.bricks">
+                                                        <a> <i class="fa fa-sm fa-database"></i> {{brick.brick_name}} </a>
+                                                        <button class="btn btn-info btn-xs" ng-click="replaceVolume(brick, volume.bricks)">{{getWord('replace')}}</button>
+                                                    </li>
+                                                    <li><button class="btn btn-primary" ng-click="AddVolumeBrick(volume)"> {{getWord("+ Add Brick")}} </button></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <ul>
+                                                    <li><button class="btn btn-info" href-void="" href="#" ng-click="openVolume(volume)"><i class="fa fa-play"></i></button></li>
+                                                    <li><button class="btn btn-info" href-void="" href="#" ng-click="closeVolume(volume)"><i class="fa fa-stop"></i></button></li>
+                                                    <li><button class="btn btn-info" href-void="" href="#" ng-click="deleteVolume(volume)"><i class="fa fa-trash-o"></i></button></li>
+                                                    <li><button class="btn btn-info" href-void="" href="#" ng-click="rebalanceVolume(volume)"><i class="fa fa-refresh"></i></button></li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                            <div class="row secoundary-row" ng-class="{'on': replaceShow}">
+                                                <button class="btn btn-default" ng-click="closeReplace()">X</button>
+                                                <div class="col-md-12">
+                                                    <ul>
+                                                        <li ng-repeat="brick in validBricks" ng-show="notUsed(brick)">
+                                                            <button class="btn btn-xs" ng-click="wrapVolume(volume, brick)"><i class="fa fa-random"></i></button>{{brick.dir}} [ {{brick.ip}} ]
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row secoundary-row" ng-class="{'on': unbindShow}">
+                                            <button class="btn btn-default" ng-click="closeUnbind()">X</button>
+                                    <div class="col-md-12">
+                                        <ul>
+                                        <li ng-repeat="server in currentCenter.servers">
+            
+                                            {{server.server_name}} {{server.status}}
+                                    
+                                            <button class="btn btn-primary" ng-click="mountServer(server)" ng-show="server.status == 'umount success' || server.status == 'mount faild'"> mount </button>
+                                            <button class="btn btn-primary" ng-click="unmountServer(server)" ng-show="server.status == 'mount success' || server.status == 'umount faild'"> unmount </button>
+                                
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#AddVolume">
+                                        {{getWord(' + Volume ')}}
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal" id="AddVolume" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×
+                                        </button>
+                                        <h4 class="modal-title"> {{getWord('New Volume')}}</h4>
+                                    </div>
+                                    <div class="modal-body form-group speical">
+                                        <form class="smart-form" name="brickForm">
+                                            <label class="label"> {{getWord('Name')}} </label>
+                                            <label class="input"><input type="text" ng-model="newVolume.name" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/></label>
+
+                                            <label class="label"> {{getWord('Mode')}} </label>
+                                            <label class="select">
+
+                                                <select ng-model="newVolume.mode">
+                                                    <option value="Replica"> {{getWord('Replica')}} </option>
+                                                    <option value="Distribute"> {{getWord('Distribute')}} </option>
+                                                </select>
+                                            </label>
+                                            <label class="label" ng-show="newVolume.mode == 'Replica'"> {{getWord('Number')}} </label>
+                                            <label class="input" ng-show="newVolume.mode == 'Replica'"><input type="number" ng-model="newVolume.number" placeholder="{{getWord('Number')}}" class="input-sm" ng-required/></label>
+
+                                            <label class="label" > {{getWord('Bricks')}} </label>
+                                            <button class="btn btn-primary btn-block btn-lg" ng-click="showBricks()">  {{getWord('Edit Bricks')}}  </button>
+                                        </form>
+                                        <div ng-class="{on :editBricksMode }" class="editBricksMode">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h3>{{getWord('Included Bricks')}}</h3>
+                                                    <ul>
+                                                        <li ng-repeat="brick in newVolume.bricks">
+                                                             {{brick.dir}} [ {{brick.ip}} ] <button class="btn btn-xs" ng-click="deleteBrick($index)"> <i class="fa fa-trash-o"></i> </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <h3>{{getWord('Valid Bricks')}}</h3>
+                                                    <ul>
+                                                        <li ng-repeat="brick in validBricks" ng-show="isValid(brick)">
+                                                           <button class="btn btn-xs" ng-click="addBrick(brick)"> + </button> {{brick.dir}} [ {{brick.ip}} ]
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <button class="btn btn-success" ng-click="editBricksMode = false">   {{getWord('Complete')}}  </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary"  ng-click="createNewVolume()" ng-disabled="brickForm.$$invalid">
+                                            {{getWord('Create Volume')}}
+                                        </button>
+                                    </div>
+
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </div>
+                                    <div class="modal" id="AddCenter" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                ×
+                            </button>
+                            <h4 class="modal-title"> {{getWord('New Center')}}</h4>
+                        </div>
+                        <div class="modal-body  form-group">
+                            <form class="smart-form" name="brickForm">
+                                <label class="label"> {{getWord('Center')}} </label>
+                                <label class="select">
+
+                                    <select ng-model="newCenter.center_id">
+                                        <option ng-repeat="center in centers" value={{center.id}}> {{center.name}}</option>
+                                    </select>
+                                </label>
+
+                                <!--<label class="label"> {{getWord('Mount Dir')}} </label>
+                                <label class="input"><input type="text" ng-model="newCenter.dir" placeholder="{{getWord('Mount Dir')}}" class="input-sm" ng-required/></label>
+-->
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary"  ng-click="createNewCenter()" ng-disabled="brickForm.$$invalid">
+                                {{getWord('Complete')}}
+                            </button>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div>
+            </div>
+                <div class="modal" id="AddVolumeBrick" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                ×
+                            </button>
+                            <h4 class="modal-title"> {{getWord('Valid Bricks')}}</h4>
+                        </div>
+                        <div class="modal-body  form-group">
+                            <form class="smart-form" name="brickForm">
+                               <div class="row">
+                                <div class="col-md-6">
+                                    <h3>{{getWord('Included Bricks')}}</h3>
+                                    <ul>
+                                        <li ng-repeat="brick in newVolume.bricks">
+                                             {{brick.dir}} [ {{brick.ip}} ] <button class="btn btn-xs" ng-click="deleteBrick($index)"> <i class="fa fa-trash-o"></i> </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h3>{{getWord('Valid Bricks')}}</h3>
+                                    <ul>
+                                        <li ng-repeat="brick in validBricks" ng-show="isValid(brick)">
+                                           <button class="btn btn-xs" ng-click="addBrick(brick)"> + </button> {{brick.dir}} [ {{brick.ip}} ]
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary"  ng-click="addVolumeBrickFinal()" ng-disabled="brickForm.$$invalid">
+                                {{getWord('Complete')}}
+                            </button>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div>
+            </div>
+
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="Brick">
+                    <div data-ng-controller="storageListBricksCtrl">
+                        <h3> Bricks </h3>
+
+                        <div ng-repeat="brick in bricks" class="row">
+<!--
+                            <div class="col-md-2"> Brick {{brick.id}} </div>
+
+-->
+                            <div class="col-md-2"> {{brick.name}} </div>
+                            <div class="col-md-1"> {{brick.brick_connect_status | upperCase}} </div>
+                            <div class="col-md-2"> {{brick.use_status | upperCase}} </div>
+                            <div class="col-md-2"> {{brick.volume_id}} </div>
+                            <div class="col-md-2"> {{brick.ip}} </div>
+                            <div class="col-md-2"> {{brick.dir}} </div>
+                            <div class="col-md-1"> <button class="btn btn-danger btn-small" ng-click="deleteBrick(brick)"> <i class="fa fa-trash-o"></i></button></div>
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#AddBrick">
+                                {{getWord(' + Bricks ')}}
+                            </button>
+                        </div>
+
+
+                        <div class="modal" id="AddBrick" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×
+                                        </button>
+                                        <h4 class="modal-title"> {{getWord('New Brick')}}</h4>
+                                    </div>
+                                    <div class="modal-body  form-group">
+                                        <form class="smart-form" name="brickForm">
+                                            <label class="label"> {{getWord('Name')}} </label>
+                                            <label class="input"><input type="text" ng-model="newBrick.name" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/></label>
+
+                                            <label class="label"> {{getWord('IP')}} </label>
+                                            <label class="input"><input type="text" ng-model="newBrick.ip" placeholder="{{getWord('IP')}}" class="input-sm" ng-required/></label>
+
+                                            <label class="label"> {{getWord('Path')}} </label>
+                                            <label class="input"><input type="text" ng-model="newBrick.dir" placeholder="{{getWord('Path')}}" class="input-sm" ng-required/></label>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary"  ng-click="createNewBrick()" ng-disabled="brickForm.$$invalid">
+                                            {{getWord('Create Brick')}}
+                                        </button>
+                                    </div>
+
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end widget body text-->
+
+        </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget div -->
+</div>
+
+
+
+
+

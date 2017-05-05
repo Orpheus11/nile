@@ -1,0 +1,82 @@
+<div class="dropdown position-fixed" id="context-vm"  ng-controller="NavVMCtrl">
+    <!--<ul class="dropdown-menu position-fixed bg-color-white " role="menu" >
+        <li>
+            <a role="menuitem" tabindex="1"
+               ng-click="panel.highlight = true" class="txt-color-blue">Select Center {{$index+1}}</a>
+        </li>
+
+    </ul>-->
+    <ul class="dropdown-menu pull-right bg-color-white">
+        <li>
+            <a data-href-void data-ng-click="StartVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-power-off txt-color-green"></i>{{getWord('Start VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-href-void data-ng-click="ConsoleVM(entity.id,entity.name)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-desktop"></i>{{getWord('VM Console')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-href-void data-ng-click="ShutdownVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-power-off txt-color-red"></i>{{getWord('Shutdown VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-href-void data-ng-click="ForceShutdownVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-bolt  txt-color-red"></i>{{getWord('Force Shutdown VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-href-void data-ng-click="EditVM(entity.id,entity)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-edit"></i>{{getWord('Edit VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-href-void data-ng-click="SuspendVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-pause"></i>{{getWord('Suspend VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-href-void data-ng-click="ResumeVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-play"></i>{{getWord('Resume VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-href-void data-ng-click="DeleteVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-minus-circle"></i>{{getWord('Delete VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="MigrateVM(entity.id,entity.name,entity.description,servers)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-retweet"></i>{{getWord('Migrate VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="SnapshotVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-camera"></i>{{getWord('Snapshot VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="BackupVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-file"></i>{{getWord('Backup VM')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="TemplateVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-file"></i>{{getWord('VM to Template')}}
+            </a>
+        </li>
+    </ul>
+</div>

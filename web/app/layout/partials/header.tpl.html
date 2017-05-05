@@ -1,0 +1,285 @@
+<header id="header">
+
+<div id="logo-group">
+
+    <!-- PLACE YOUR LOGO HERE -->
+    <span id="logo"> <img src="styles/img/logo.png" alt="SmartAdmin"> </span>
+    <!-- END LOGO PLACEHOLDER -->
+
+    <!-- Note: The activity badge color changes when clicked and resets the number to 0
+    Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
+    <span id="activity" class="activity-dropdown" activities-dropdown-toggle> 
+        <i class="fa fa-user"></i> 
+        <b class="badge bg-color-red">0</b>
+    </span>
+    <!--<div smart-include="app/components/activities/activities.html"></div>-->
+</div>
+
+
+<!--<recent-projects></recent-projects>-->
+
+    <div><br>&nbsp;版本号：1.0.1.10</div>
+
+
+<!-- pulled right: nav area -->
+<div class="pull-right">
+
+    <!-- collapse menu button -->
+    <div id="hide-menu" class="btn-header pull-right">
+        <span> <a toggle-menu title="Collapse Menu"><i
+                class="fa fa-reorder"></i></a> </span>
+    </div>
+    <!-- end collapse menu -->
+
+    <!-- #MOBILE -->
+    <!-- Top menu profile link : this shows only when top menu is active -->
+    <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+        <li class="">
+            <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+                <img ng-src="{{user.picture}}" title="{{user.username}}" class="online">
+            </a>
+            <ul class="dropdown-menu pull-right">
+                <li>
+                    <!-- <a ui-sref="app.appViews.setting" class="padding-10 padding-top-0 padding-bottom-0"><i -->
+                    <a class="padding-10 padding-top-0 padding-bottom-0" data-toggle="modal" data-target="#General"><i
+                            class="fa fa-cog"></i> Setting</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a class="padding-10 padding-top-0 padding-bottom-0" data-toggle="modal" data-target="#Password"><i
+                            class="fa fa-lock"></i> Password</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a  full-screen class="padding-10 padding-top-0 padding-bottom-0"
+                       data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                   <!--  <a href="#/login" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i
+                            class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a> -->
+                    <a class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout" ng-click="logout()"><i
+                            class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- General Setting -->
+    <div class="modal" id="General" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title"> {{getWord('General Setting')}}</h4>
+                </div>
+                <div class="modal-body form-group speical">
+                    <form class="smart-form" name="brickForm">
+                        <fieldset>
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="username" placeholder="Username" ng-model="loginUser.username">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+                            </section>
+
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-phone"></i>
+                                    <input type="telephone" name="phone" placeholder="Phone Number" ng-model="loginUser.phonenumber">
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                            </section>
+
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                                    <input disabled="true" type="email" name="email" placeholder="Email address" ng-model="loginUser.email">
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                            </section>
+
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-users"></i>
+                                    <input disabled="true" type="text" name="department" placeholder="Department" ng-model="loginUser.depname">
+                                    <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary"  ng-click="settingBase()" ng-disabled="brickForm.$$invalid">
+                        {{getWord('Submit')}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+     <!-- General Setting end-->
+
+    <!-- Password Setting -->
+    <div class="modal" id="Password" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title"> {{getWord('Password Setting')}}</h4>
+                </div>
+                <div class="modal-body form-group speical">
+                    <form class="smart-form" name="brickForm">
+                        <fieldset>
+                            <section>
+                                <label class="label">当前密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                   <input type="password" name="password" data-ng-model="password"
+                                          data-smart-validate-input
+                                          data-required
+                                          data-minlength="3"
+                                          data-maxnlength="20"
+                                          data-message="Please enter your email password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                                        your password</b> </label>
+
+                            </section>
+
+                            <section>
+                                <label class="label">新密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                   <input type="password" name="password" data-ng-model="newpassword"
+                                          data-smart-validate-input
+                                          data-required
+                                          data-minlength="3"
+                                          data-maxnlength="20"
+                                          data-message="Please enter your email password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                                        your password</b> </label>
+
+                            </section>
+
+                            <section>
+                                <label class="label">确认密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                   <input type="password" name="password" data-ng-model="confirmpassword"
+                                          data-smart-validate-input
+                                          data-required
+                                          data-minlength="3"
+                                          data-maxnlength="20"
+                                          data-message="Please enter your email password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                                        your password</b> </label>
+
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary"  ng-click="settingPwd()" ng-disabled="brickForm.$$invalid">
+                        {{getWord('Submit')}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+     <!-- Password Setting end-->
+
+    <!-- logout button -->
+    <div id="logout" class="btn-header transparent pull-right">
+     <!--    <span> <a ui-sref="login" title="Sign Out" data-action="userLogout"
+                  data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
+                class="fa fa-sign-out"></i></a> </span> -->
+        <span> <a  title="Sign Out" data-action="userLogout" ng-click="logout()"
+                  data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
+                class="fa fa-sign-out"></i></a> </span>
+    </div>
+    <!-- end logout button -->
+
+    <!-- search mobile button (this is hidden till mobile view port) -->
+    <div id="search-mobile" class="btn-header transparent pull-right" data-search-mobile>
+        <span> <a href="#" title="Search"><i class="fa fa-search"></i></a> </span>
+    </div>
+    <!-- end search mobile button -->
+
+    <!-- input: search field -->
+    <!--<form action="#/search" class="header-search pull-right">
+        <input id="search-fld" type="text" name="param" placeholder="Find reports and more" data-autocomplete='[
+					"ActionScript",
+					"AppleScript",
+					"Asp",
+					"BASIC",
+					"C",
+					"C++",
+					"Clojure",
+					"COBOL",
+					"ColdFusion",
+					"Erlang",
+					"Fortran",
+					"Groovy",
+					"Haskell",
+					"Java",
+					"JavaScript",
+					"Lisp",
+					"Perl",
+					"PHP",
+					"Python",
+					"Ruby",
+					"Scala",
+					"Scheme"]'>
+        <button type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+        <a href="$" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+    </form>-->
+    <!-- end input: search field -->
+
+    <!-- fullscreen button -->
+    <div id="fullscreen" class="btn-header transparent pull-right">
+        <span> <a full-screen title="Full Screen"><i
+                class="fa fa-arrows-alt"></i></a> </span>
+    </div>
+    <!-- end fullscreen button -->
+
+    <!-- #Voice Command: Start Speech -->
+    <!--<div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
+        <div>
+            <a title="Voice Command" id="voice-command-btn" speech-recognition><i class="fa fa-microphone"></i></a>
+
+            <div class="popover bottom">
+                <div class="arrow"></div>
+                <div class="popover-content">
+                    <h4 class="vc-title">Voice command activated <br>
+                        <small>Please speak clearly into the mic</small>
+                    </h4>
+                    <h4 class="vc-title-error text-center">
+                        <i class="fa fa-microphone-slash"></i> Voice command failed
+                        <br>
+                        <small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
+                        <br>
+                        <small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
+                    </h4>
+                    <a href-void class="btn btn-success" id="speech-help-btn">See Commands</a>
+                    <a href-void class="btn bg-color-purple txt-color-white"
+                       onclick="$('#speech-btn .popover').fadeOut(50);">Close Popup</a>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- end voice command -->
+
+
+
+    <!-- multiple lang dropdown : find all flags in the flags page -->
+    <language-selector></language-selector>
+    <!-- end multiple lang -->
+
+</div>
+<!-- end pulled right: nav area -->
+
+</header>

@@ -1,0 +1,163 @@
+<div id="content">
+
+
+<div class="row">
+    <big-breadcrumbs items="['Settings', 'User Setting']" icon="file-o"
+                     class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+</div>
+
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+
+                        <h2></h2>
+
+                        <ul class="nav nav-tabs pull-right in" id="vmTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#base"><i class="fa fa-bar-chart-o"></i> <span class="hidden-mobile hidden-tablet">{{getWord('General')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#pwd"><i class="fa fa-eye"></i> <span class="hidden-mobile hidden-tablet">{{getWord('Password')}}</span></a>
+                            </li>
+                        </ul>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in padding-10 no-padding-bottom" id="base">
+                            
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                <div class="well no-padding">
+
+                    <form action="#" id="smart-form-register" class="smart-form client-form">
+                        <fieldset>
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="username" placeholder="Username" ng-model="loginUser.username">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+                            </section>
+
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-phone"></i>
+                                    <input type="telephone" name="phone" placeholder="Phone Number" ng-model="loginUser.phonenumber">
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                            </section>
+
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                                    <input disabled="true" type="email" name="email" placeholder="Email address" ng-model="loginUser.email">
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                            </section>
+
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-users"></i>
+                                    <input disabled="true" type="text" name="department" placeholder="Department" ng-model="loginUser.depname">
+                                    <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button type="button" ng-click="settingBase()" class="btn btn-primary ng-bingding">
+                                Submit
+                            </button>
+                        </footer>
+                    </form>
+
+
+                     </div>
+                     </div>
+                     </div>
+                                <!-- end pwd tab pane -->
+
+                                <div class="tab-pane fade in padding-10 no-padding-bottom" id="pwd">
+                  
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                <div class="well no-padding">
+
+                    <form action="#" id="smart-form-register" class="smart-form client-form">
+                        <fieldset>
+                            <section>
+                                <label class="label">当前密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                   <input type="password" name="password" data-ng-model="password"
+                                          data-smart-validate-input
+                                          data-required
+                                          data-minlength="3"
+                                          data-maxnlength="20"
+                                          data-message="Please enter your email password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                                        your password</b> </label>
+
+                            </section>
+
+                            <section>
+                                <label class="label">新密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                   <input type="password" name="password" data-ng-model="newpassword"
+                                          data-smart-validate-input
+                                          data-required
+                                          data-minlength="3"
+                                          data-maxnlength="20"
+                                          data-message="Please enter your email password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                                        your password</b> </label>
+
+                            </section>
+
+                            <section>
+                                <label class="label">确认密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                   <input type="password" name="password" data-ng-model="confirmpassword"
+                                          data-smart-validate-input
+                                          data-required
+                                          data-minlength="3"
+                                          data-maxnlength="20"
+                                          data-message="Please enter your email password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                                        your password</b> </label>
+
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button type="button" ng-click="settingPwd()" class="btn btn-primary ng-bingding">
+                                Submit
+                            </button>
+                        </footer>
+                    </form>
+
+
+                     </div>
+
+                                    </div>
+
+                                </div>
+                                <!-- end pwd tab pane -->
+                            </div>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+
+            </article>
+        </div>
+
+    </section>
+
+
+</div>

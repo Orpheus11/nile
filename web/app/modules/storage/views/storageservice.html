@@ -1,0 +1,110 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['StorageService', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+<!--
+        <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+-->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+
+                    <div class="importServer col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <header class="outside">
+                            <strong class="ng-binding">{{getWord('Outside')}}</strong>&nbsp&nbsp
+                            <a id="importArea">
+                                <i class="fa fa-tasks">
+                                    <span ng-if="outsideStorageServersInfo == 0" class="numberInfo label label-success">{{outsideStorageServersInfo}}</span>
+                                    <span ng-if="outsideStorageServersInfo != 0" class="numberInfo label label-danger">{{outsideStorageServersInfo}}</span>
+                                </i>
+                            </a>
+                        </header>
+                        <div id="importServerList">
+                            <table
+                                    class="display projects-table table table-striped table-bordered table-hover"
+                                    cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>IP</th>
+                                    <th>HOST NAME</th>
+                                    <th>IMPORT</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="server in outsideStorageServers">
+                                    <td></td>
+                                    <td>{{server.id}}</td>
+                                    <td>{{server.ip}}</td>
+                                    <td>{{server.hostname}}</td>
+                                    <td><button class="btn btn-xs  btn-success" data-ng-click="ImportStorageServer(server.id)">Import Server</button></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                            <h1 align="center" data-ng-if="outsideStorageServers.length==0">{{getWord('There\'s No Outside Server')}}</h1>
+                        </div>
+                    </div>
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="row" id="dataCenter">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <header class="outside">
+                                            <strong class="ng-binding">{{getWord('General')}}</strong>&nbsp&nbsp<i class="fa fa-bar-chart-o"></i>
+                                        </header>
+                                    </div>
+                                    <div class="tab-pane fade active in padding-10 no-padding-bottom">
+                                        <table class="table table-bordered table-hover" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <!--<th>Id</th>-->
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <!-- <th>Physical Interfaces</th> -->
+                                                <th>Status</th>
+                                                <th>LastCheck</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="storage in storageServers">
+                                                <!--<td>{{storage.id}}</td>-->
+                                                <td>{{storage.name}}</td>
+                                                <td>{{storage.description}}</td>
+                                                <!-- <td>{{storage.Physical_interfaces}}</td> -->
+                                                <td>{{storage.status}}</td>
+                                                <td>{{storage.last_check}}</td>
+                                                <!-- <td><button class="btn btn-xs  btn-success" data-ng-click="ImportNetworkServer(outside.id)">Import NetworkServer</button></td> -->
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <h1 align="center" data-ng-if="storageServers.length==0">{{getWord('There\'s No StorageServers')}}</h1>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+
+            </article>
+        </div>
+
+    </section>
+</div>

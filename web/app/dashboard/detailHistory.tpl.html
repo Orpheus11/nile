@@ -1,0 +1,112 @@
+<div tab-tag class="modal-header row no-space" id="history-header">
+    <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4 choosen week-history">{{getWord('Week')}}</span>
+    <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4 month-history">{{getWord('Month')}}</span>
+    <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4 all-history">{{getWord('All')}}</span>
+</div>
+<div class="modal-body no-padding" id="history-content">
+    <div id="week-history" class="history-detail">
+        <img src="styles/img/loadingWait.gif" alt="Loading"/>
+        <table class="table table-hover table-bordered">
+            <colgroup>
+                <col/>
+                <col/>
+                <col style="width: 20%"/>
+                <col/>
+                <col/>
+                <col/>
+            </colgroup>
+            <theader>
+                <tr>
+                    <th>name</th>
+                    <th>entity_name</th>
+                    <!--<th>id</th>-->
+                    <th>time</th>
+                    <th>status</th>
+                    <th>user</th>
+                    <th>des</th>
+                </tr>
+            </theader>
+            <tbody>
+            <tr data-ng-repeat="weeks in weekHistory">
+                <td>{{weeks.name}}</td>
+                <td>{{weeks.entity_name}}</td>
+                <!--<td>{{weeks.id}}</td>-->
+                <td>{{weeks.time | newTime}}</td>
+                <td>{{weeks.status}}</td>
+                <td>{{weeks.user}}</td>
+                <td>{{weeks.short_des}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="month-history" class="history-detail">
+        <img src="styles/img/loadingWait.gif" alt="Loading"/>
+        <table class="table table-hover table-bordered">
+            <colgroup>
+                <col/>
+                <col/>
+                <col style="width: 20%"/>
+                <col/>
+                <col/>
+                <col/>
+            </colgroup>
+            <theader>
+                <tr>
+                    <th>name</th>
+                    <th>entity_name</th>
+                    <!--<th>id</th>-->
+                    <th>time</th>
+                    <th>status</th>
+                    <th>user</th>
+                    <th>des</th>
+                </tr>
+            </theader>
+            <tbody>
+            <tr data-ng-repeat="months in monthHistory">
+                <td>{{months.name}}</td>
+                <td>{{months.entity_name}}</td>
+                <!--<td>{{months.id}}</td>-->
+                <td>{{months.time | newTime}}</td>
+                <td>{{months.status}}</td>
+                <td>{{months.user}}</td>
+                <td>{{months.short_des}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="all-history" class="history-detail">
+        <img src="styles/img/loadingWait.gif" alt="Loading"/>
+        <table class="table table-hover table-bordered">
+            <colgroup>
+                <col/>
+                <col/>
+                <col style="width: 20%"/>
+                <col/>
+                <col/>
+                <col/>
+            </colgroup>
+            <theader>
+                <tr>
+                    <th>name</th>
+                    <th>entity_name</th>
+                    <!--<th>id</th>-->
+                    <th>time</th>
+                    <th>status</th>
+                    <th>user</th>
+                    <th>des</th>
+                </tr>
+            </theader>
+            <tbody>
+            <tr data-ng-repeat="all in allHistory">
+                <td>{{all.name}}</td>
+                <td>{{all.entity_name}}</td>
+                <!--<td>{{months.id}}</td>-->
+                <td>{{all.time | newTime}}</td>
+                <td>{{all.status}}</td>
+                <td>{{all.user}}</td>
+                <td>{{all.short_des}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

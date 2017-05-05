@@ -1,0 +1,40 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-plus"></i>{{getWord('Binding Console Server')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+
+    <form class="smart-form">
+
+        <fieldset>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="display projects-table table table-striped table-bordered table-hover" >
+                            <tbody>
+                                <tr ng-repeat="consoleserver in consoleservers track by $index"
+                                    data-ng-click="SetSelectedConsole(consoleserver)"
+                                    ng-class="{highlight:selected_consoleserver.id==consoleserver.id}">
+                                    <td>{{consoleserver.name}}</td>
+                                    <td>{{consoleserver.description}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </fieldset>
+
+        <footer>
+            <button data-ng-click="bindingConsoleServer()" class="btn btn-primary">
+                {{getWord('Submit')}}
+            </button>
+            <button type="button" class="btn btn-default" data-ng-click="closeModal()">
+                {{getWord('Cancel')}}
+            </button>
+
+        </footer>
+    </form>
+
+
+</div>

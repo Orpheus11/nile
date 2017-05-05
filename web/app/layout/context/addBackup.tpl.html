@@ -1,0 +1,35 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-asterisk"></i>&nbsp;{{getWord('Add Backup')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+    <div class="row">
+        <form novalidate="novalidate" data-smart-validate-form>
+            <div class="col-sm-12">
+                <!-- Widget Div -->
+                <div class="no-padding form-group">
+                    <label class="col-md-offset-2">
+                        备份名称：<input type="text" data-ng-model="backup_filename"/>
+                    </label>
+                    <br/>
+                    <label class="col-md-offset-2">
+                        备份类型:
+                        <select data-ng-model="backupType" ng-options="backupTypes.name for backupTypes in backupTypeList" ng-change="getBackupType(backupType)">
+                            <option value="">请选择</option>
+                        </select>
+                    </label>
+                    <br/>
+                    <label class="col-md-offset-2">描述：</label>
+                    <br/>
+                    <textarea cols="30" rows="10" class="col-md-offset-2" data-ng-model="backupDes"></textarea>
+                    <div class="col-md-offset-2">
+                        <button type="button" class="btn btn-primary" data-ng-click="submitBackup(backup_filename,backupDes)">确定</button>
+                        <button type="button" class="btn btn-primary" data-ng-click="cancelAdd()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

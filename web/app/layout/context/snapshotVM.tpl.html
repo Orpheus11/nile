@@ -1,0 +1,50 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-asterisk"></i>&nbsp;{{getWord('Snapshot VM')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+    <div class="row">
+        <form novalidate="novalidate" data-smart-validate-form>
+            <div class="col-sm-12">
+                <!-- Widget Div -->
+                <div class="no-padding">
+                    <div class="col-md-offset-8">
+                        <button type="button" class="btn btn-primary snapshotBtn btnControl" data-ng-click="addSnapshot()">新增</button>
+                        <button type="button" class="btn btn-primary snapshotBtn" data-ng-click="restoreSnapshot()" disabled>恢复</button>
+                        <button type="button" class="btn btn-primary snapshotBtn" data-ng-click="deleteSnapshot()" disabled>删除</button>
+                    </div>
+                    <table class="table table-hover table-striped table-bordered">
+                        <caption>快照列表</caption>
+                        <thead>
+                        <tr>
+                            <th>是否选中</th>
+                            <th>快照ID</th>
+                            <th>快照名称</th>
+                            <th>虚拟机ID</th>
+                            <th>虚拟机名称</th>
+                            <th>快照时间</th>
+                            <th>快照状态</th>
+                            <th>快照历史位置</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="snapshot in snapshot_list">
+                            <td><input type="radio" name="restoreVM" data-ng-click="getSnapshotId(snapshot.snapshot_id)"/></td>
+                            <td>{{snapshot.snapshot_id}}</td>
+                            <td>{{snapshot.snapshot_name}}</td>
+                            <td>{{snapshot.vm_id}}</td>
+                            <td>{{snapshot.vm_name}}</td>
+                            <td>{{snapshot.snapshot_time}}</td>
+                            <td>{{snapshot.snapshot_status}}</td>
+                            <td data-ng-if="snapshot.vm_position == 'false'"></td>
+                            <td data-ng-if="snapshot.vm_position == 'true'"><i class="fa fa-check txt-color-greenDark"></i></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

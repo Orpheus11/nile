@@ -1,0 +1,165 @@
+
+<section id="loginMain">
+    <div class="container" id="loginContent">
+
+        <div id="login-wraper">
+            <form class="form login-form">
+                <div class="logoInfo">
+                    <img src="styles/img/logoImgs.png" alt="LOGO" class="loginLogo"/>
+                </div>
+
+                <div class="body input-group">
+                    <input type="email" name="email"  data-ng-model="email" id="loginName"
+                           class="form-control"
+                           placeholder="邮箱"
+                           data-smart-validate-input
+                           data-required
+                           data-email
+                           data-message-required="Please enter your email address"
+                           data-message-email="Please enter a VALID email address">
+                    <!--<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>-->
+                        <!--Please enter email address/username</b>-->
+                    <br>
+                    <input type="password" name="password" data-ng-model="password" id="loginPassword"
+                           class="form-control"
+                           placeholder="密码"
+                           data-smart-validate-input
+                           data-required
+                           data-minlength="3"
+                           data-maxnlength="20"
+                           data-message="Please enter your email password">
+                    <!--<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter-->
+                        <!--your password</b>-->
+                    <br/>
+                    <button type="button" data-ng-click="loginFn()" class="btn btn-primary btn-lg btn-block"
+                            id="loginSubmit">登录</button>
+                    <br/>
+                    <!--<span class="downloadCA" id="downloadCA">
+                        CA证书
+                        <a href="javascript: void 0" data-ng-click="saveCA('CA/test.txt')">CA证书</a>
+                    </span>
+			-->
+		<span class="downloadCA">
+			<a href="CA/ca.crt">CA证书</a>
+		</span>
+                    <span class="forgetPassword">忘记密码？</span>
+                </div>
+                <div class="footer">
+                    <span>北京中云之翼科技有限公司</span>
+                </div>
+
+                <!--<div class="footer">-->
+                    <!--&lt;!&ndash;<label class="checkbox inline">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="checkbox" id="inlineCheckbox1" value="option1"> 记住我&ndash;&gt;-->
+                    <!--&lt;!&ndash;</label>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<button type="button" data-ng-click="loginFn()" class="btn btn-success">登陆</button>&ndash;&gt;-->
+                <!--</div>-->
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+<!--<header id="header"  class="" >
+
+    <div id="logo-group">
+        <span id="logo"> <img src="styles/img/logo-pale.png" alt="HoldingCenter"> </span>
+    </div>
+
+    &lt;!&ndash;<span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a
+           ui-sref="register" class="btn btn-danger">Create account</a> </span>&ndash;&gt;
+
+</header>-->
+<!--
+<div  >
+
+    <div id="content" class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                <h1 class="txt-color-red login-header-big">Holding Cloud</h1>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">我们的产品</h5>
+
+                        <p>
+                            中云之翼HoldingCloud系列产品致力于为用户提供一整套完整的IaaS私有云平台产品解决方案，
+                            从逻辑功能上划分，包括了物理层、网络层、物理资源层、虚拟资源层、
+                            资源管理调度层、业务层、运营管理层7大逻辑功能实现层。
+                            HoldingCloud云平台架构于x86架构服务器基础之上，实现对服务器资源的虚拟化整合与管理，
+                            包括服务器虚拟化、网络虚拟化、存储虚拟化和功能强大的统计监控等功能实现。
+                        </p>
+                        <h5 class="about-heading">我们的服务</h5>
+
+                        <p>
+                            HoldingCloud云管理平台的功能实现追求标准化、开放性、完备性、健壮性、灵活性、可监控、安全性、
+                            运营性和可维护性等要求，同时遵循松耦合、模块化、可复用、可配置的原则，
+                            以B/S架构设计并保持可扩展性，为客户提供可度量的标准服务。
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <br><br><br>
+                        <img src="styles/img/loginpage_pic.png" class="pull-right display-image" alt style="width:310px">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                <div class="well no-padding">
+                    <form action="#" id="login-form" class="smart-form client-form"  data-smart-validate-form>
+                        <header>
+                            Sign In
+                        </header>
+                        <fieldset>
+                            <section>
+                                <label class="label">E-mail</label>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <input type="email" name="email"  data-ng-model="email"
+                                           data-smart-validate-input
+                                           data-required
+                                           data-email
+                                           data-message-required="Please enter your email address"
+                                           data-message-email="Please enter a VALID email address">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
+                                        Please enter email address/username</b></label>
+                            </section>
+                            <section>
+                                <label class="label">Password</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                   <input type="password" name="password" data-ng-model="password"
+                                          data-smart-validate-input
+                                          data-required
+                                          data-minlength="3"
+                                          data-maxnlength="20"
+                                          data-message="Please enter your email password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+                                        your password</b> </label>
+
+                                &lt;!&ndash;<div class="note">
+                                    <a ui-sref="forgotPassword">Forgot password?</a>
+                                </div>&ndash;&gt;
+                            </section>
+                            <section>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="remember" checked>
+                                    <i></i>Stay signed in</label>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button type="button" data-ng-click="loginFn()" class="btn btn-primary">
+                                Sign in
+                            </button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>-->
+</section>

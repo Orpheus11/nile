@@ -1,0 +1,23 @@
+<div class="dropdown position-fixed" id="networkserver-context" ng-controller="NavNetworkCtrl">
+    <!--<ul class="dropdown-menu position-fixed bg-color-white " role="menu" >
+        <li>
+            <a role="menuitem" tabindex="1"
+               ng-click="panel.highlight = true" class="txt-color-blue">Select Center {{$index+1}}</a>
+        </li>
+
+    </ul>-->
+    <ul class="dropdown-menu pull-right bg-color-white">
+        <li>
+            <a data-ng-click="EditNetworkServer(entity.Id,entity.Name,entity.Description)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-edit"></i>{{getWord('Edit Network Server')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="DeleteNetworkServer(entity.Id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-minus-circle"></i>{{getWord('Delete Network Server')}}
+            </a>
+        </li>
+
+    </ul>
+</div>

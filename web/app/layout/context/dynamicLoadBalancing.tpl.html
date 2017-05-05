@@ -1,0 +1,79 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-asterisk"></i>&nbsp;{{getWord('Dynamic Load Balance')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+    <div class="row">
+        <form novalidate="novalidate" data-smart-validate-form>
+            <div class="col-sm-12" data-smart-wizard
+                 data-smart-wizard-callback="setHighAvailableCallback">
+                <!-- Widget Div -->
+                <div class="no-padding">
+                    <div class="form-group col-md-offset-1">
+                        <label>
+                            <input type="checkbox"  ng-model="enable_dwm"/>启用动态工作负载管理
+                        </label>
+                    </div>
+                    <div class="form-group col-md-offset-1">
+                        <!-- <label>选择动态工作负载管理策略</label>
+                        <br/> -->
+                        <!-- <label> -->
+                            <!-- <input type="radio" ng-model="loadBalance" /> -->
+                            <!-- 启用 -->
+                          <!--   均匀分布策略
+                        </label> -->
+                        <div class="form-group col-md-offset-1">
+                            <label>分发负载当服务器CPU大于</label>
+                            <label><input type="number" ng-model="threshold" min="1" max="100" style="width: 50px"/>%&nbsp&nbsp超过&nbsp&nbsp</label>
+                            <label><input type="number" ng-model="data_period" min="1" style="width: 50px"/>分钟</label>
+                            <br/>
+                            <label>重新评估每<input type="number" ng-model="frequency" min="1" style="width: 50px;margin-left: 96px"/>分钟</label>
+                            <br/>
+                            <label>策略运行在以下期间</label>
+                            <!-- <button data-ng-click="GetDynamicTime()">时间选择</button> -->
+                                <div class="col-sm-12">
+                                    <!-- Widget Div -->
+                                    <div class="no-padding">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" data-ng-click="setFrequency()">添加</button>
+                                            <button class="btn btn-primary" data-ng-click="editFrequency()" ng-disabled="editFrequencyFlag">编辑</button>
+                                            <button class="btn btn-primary" data-ng-click="removeFrequency()"  ng-disabled="removeFrequencyFlag">移除</button>
+                                        </div>
+                                        <table class="table table-hover table-striped table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                <!-- <input type="checkbox"/> -->
+                                                </th>
+                                                <!--<th>频率</th>-->
+                                                <th>星期</th>
+                                                <th>开始时间</th>
+                                                <th>持续时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody ng-repeat="time in timeList">
+                                            <tr>
+                                                <td><input type="checkbox" data-ng-click="selectTimeList(time)"/></td>
+                                                <!--<td></td>-->
+                                                <!-- <td data-ng-if="time.timeType == 'Weekly'">{{time.weeks | showWeeks}}</td> -->
+                                                <td data-ng-if="time.timeType == 'Weekly'">{{time.weeks}}</td>
+                                                <td data-ng-if="time.timeType == 'Daily'">Daily</td>
+                                                <td>{{time.startTime}}</td>
+                                                <td>{{time.holdTime}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-offset-10">
+                <button type="button" class="btn btn-primary" data-ng-click="setDwm()">确定</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row" id="serverDetail">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h4>NodeInfo:</h4>
+        <table class="table table-hover">
+            <tbody>
+            <tr data-ng-repeat="(key,value) in server.NodeInfo">
+                <td>{{key}}</td>
+                <td class="values">{{value}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h4>Processor Info:</h4>
+        <table class="table table-hover">
+            <tbody>
+            <tr data-ng-repeat="(key,value) in server.SystemInfo.Processor">
+                <td>{{key}}</td>
+                <td class="values">{{value}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h4>System Info:</h4>
+        <table class="table table-hover">
+            <tbody>
+            <tr data-ng-repeat="(key,value) in server.SystemInfo.System">
+                <td>{{key}}</td>
+                <td class="values">{{value}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h4>Bois Info:</h4>
+        <table class="table table-hover">
+            <tbody>
+            <tr data-ng-repeat="(key,value) in server.SystemInfo.Bios">
+                <td>{{key}}</td>
+                <td class="values">{{value}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

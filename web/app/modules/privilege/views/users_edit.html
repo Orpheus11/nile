@@ -1,0 +1,53 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"> {{getWord('Edit User')}}</h4>
+</div>
+<div class="modal-body  form-group">
+    <form class="smart-form" name="depForm">
+        <label class="label"> {{getWord('Name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newUser.Username" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Email')}} </label>
+        <label class="input">
+            <input type="email" data-ng-model="newUser.Email" placeholder="{{getWord('Email')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Password')}} </label>
+        <label class="input">
+            <input type="password" name="password" data-ng-model="newUser.Password" placeholder="{{getWord('Password')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Confirm password')}} </label>
+        <label class="input">
+            <input type="password" name="passwordConfirm" data-ng-model="newUser.Confirm_password" placeholder="{{getWord('Confirm password')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Phone Number')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newUser.Phone_numer" placeholder="{{getWord('Phone Number')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Department')}} </label>
+        <label class="select">
+            <select data-ng-model="newUser.Department_id">
+                <option ng-repeat="dep in deps" value="{{dep.Id}}" ng-selected="dep.Id == newUser.Department_id"> {{dep.Name}}</option>
+            </select>
+        </label>
+        <label class="label"> {{getWord('User Type')}} </label>
+        <label class="select">
+            <select data-ng-model="newUser.User_type">
+                <option ng-repeat="userType in userTypes" value="{{userType.Type_id}}" ng-selected="userType.Type_id == newUser.User_type"> {{userType.Name}}</option>
+            </select>
+        </label>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary"  ng-click="formSubmit()" ng-disabled="depForm.$$invalid">
+        {{getWord('Edit User')}}
+    </button>
+</div>

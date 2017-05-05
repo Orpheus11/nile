@@ -1,0 +1,23 @@
+<div class="dropdown position-fixed" id="imageserver-context" ng-controller="NavImageCtrl">
+    <!--<ul class="dropdown-menu position-fixed bg-color-white " role="menu" >
+        <li>
+            <a role="menuitem" tabindex="1"
+               ng-click="panel.highlight = true" class="txt-color-blue">Select Center {{$index+1}}</a>
+        </li>
+
+    </ul>-->
+    <ul class="dropdown-menu pull-right bg-color-white">
+        <li>
+            <a data-ng-click="EditImageServer(entity.id,entity.name,entity.ip,entity.description)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-edit"></i>{{getWord('Edit Image Server')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="DeleteImageServer(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-minus-circle"></i>{{getWord('Delete Image Server')}}
+            </a>
+        </li>
+
+    </ul>
+</div>

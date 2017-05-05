@@ -1,0 +1,46 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Table', 'Data Tables']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+        <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+    </div>
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="export-to-xls-pdf-datatable-widget" data-widget-color="blueDark" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Export to PDF / Excel</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <table nettable-table-tools  data-table-options="ipsOptions"
+                                           class="display projects-table table table-striped table-bordered table-hover"
+                                           cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>IpAddr</th>
+                                            <th>Mac</th>
+                                            <th>Vlan_id</th>
+                                            <th>Vm_id</th>
+                                            <th>Allocated</th>
+                                        </tr>
+                                        </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </article>
+
+
+        </div>
+
+    </section>
+</div>

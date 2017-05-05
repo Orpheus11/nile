@@ -1,0 +1,149 @@
+<div class="overflow">
+    <h3> NFS </h3>
+    <div class="widget-body no-padding"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+
+        <div class="panel-group smart-accordion-default" >
+            <div class="panel panel-default" ng-repeat="n in nfs">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseOne-{{$index}}" aria-expanded="true" class=""> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> {{volume.name}}    </a> </h4>
+                    <button class="volume-delete btn btn-xs btn-danger pull-right" ng-click="deleteNfs(n)"><i class="fa fa-trash-o"></i></button>
+
+                </div>
+                <div id="collapseOne-{{$index}}" class="panel-collapse collapse in" aria-expanded="true">
+                    <div class="panel-body row">
+
+                        <div class="col-md-2">
+                            {{n.name}}
+                        </div>
+
+                        <div class="col-md-2">
+                            <dl>
+                                <dt>Status:</dt> <dd>{{n.status | upperCase }}</dd>
+                                <dt>Total Space:</dt> <dd>{{n.total_space}}</dd>
+                                <dt>Used Space:</dt> <dd>{{n.used_space}}</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-3">
+                            <ul>
+                                <li class="title"> {{getWord('Centers')}}</li>
+                                <li ng-repeat="center in n.centers">
+                                    <a>
+                                        <button class="btn btn-success" ng-click="editCenter(n, center)"> {{center.center_name}} </button>
+                                        <button class="btn btn-primary" ng-click="unbind(n, center)"> Unbind </button>
+                                    </a>
+                                </li>
+                                <li><button class="btn btn-primary" ng-click="AddCenter(n)"> {{getWord("+ Add Center")}} </button></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="row secoundary-row" ng-class="{'on': unbindShow}">
+                        <button class="btn btn-default" ng-click="closeUnbind()">X</button>
+                        <div class="col-md-12">
+                            <ul>
+                                <li ng-repeat="server in currentCenter.servers">
+            
+                                    {{server.server_name}} {{server.status}}
+                                    
+                                    <button class="btn btn-primary" ng-click="mountServer(n ,server)" ng-show="server.status == 'umount success' || server.status == 'mount faild'"> mount </button>
+                                    <button class="btn btn-primary" ng-click="unmountServer(n, server)" ng-show="server.status == 'mount success' || server.status == 'umount faild'"> unmount </button>
+                                
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#AddNfs">
+                    {{getWord(' + NFS ')}}
+                </button>
+            </div>
+
+
+            <div class="modal" id="AddNfs" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title"> {{getWord('New Nfs')}}</h4>
+                    </div>
+                    <div class="modal-body  form-group">
+                        <form class="smart-form" name="brickForm">
+                            <label class="label"> {{getWord('Name')}} </label>
+                            <label class="input"><input type="text" ng-model="newNfs.name" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/></label>
+
+                            <label class="label"> {{getWord('IP')}} </label>
+                            <label class="input"><input type="text" ng-model="newNfs.ip" placeholder="{{getWord('IP')}}" class="input-sm" ng-required/></label>
+
+                            <label class="label"> {{getWord('Path')}} </label>
+                            <label class="input"><input type="text" ng-model="newNfs.dir" placeholder="{{getWord('Path')}}" class="input-sm" ng-required/></label>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary"  ng-click="createNewNfs()" ng-disabled="brickForm.$$invalid">
+                            {{getWord('Create Nfs')}}
+                        </button>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div>
+        </div>
+
+            <div class="modal" id="AddCenter" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                ×
+                            </button>
+                            <h4 class="modal-title"> {{getWord('New Center')}}</h4>
+                        </div>
+                        <div class="modal-body  form-group">
+                            <form class="smart-form" name="brickForm">
+                                <label class="label"> {{getWord('Center')}} </label>
+                                <label class="select">
+
+                                    <select ng-model="newCenter.center_id">
+                                        <option ng-repeat="center in centers" value={{center.id}}> {{center.name}}</option>
+                                    </select>
+                                </label>
+
+                                <label class="label"> {{getWord('Mount Dir')}} </label>
+                                <label class="input"><input type="text" ng-model="newCenter.dir" placeholder="{{getWord('Mount Dir')}}" class="input-sm" ng-required/></label>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary"  ng-click="createNewCenter()" ng-disabled="brickForm.$$invalid">
+                                {{getWord('Create Nfs')}}
+                            </button>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

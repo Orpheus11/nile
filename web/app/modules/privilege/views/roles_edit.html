@@ -1,0 +1,25 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"> {{getWord('Edit Role')}}</h4>
+</div>
+<div class="modal-body  form-group">
+    <form class="smart-form" name="depForm">
+        <label class="label"> {{getWord('Role Name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="currentRole.Name" placeholder="{{getWord('Role Name')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Role Description')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="currentRole.Description" placeholder="{{getWord('Role Description')}}" class="input-sm" ng-required/>
+        </label>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary"  ng-click="formSubmit()" ng-disabled="depForm.$$invalid">
+        {{getWord('Edit Role')}}
+    </button>
+</div>

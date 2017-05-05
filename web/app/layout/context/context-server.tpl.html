@@ -1,0 +1,67 @@
+<div class="dropdown position-fixed" id="context-server" ng-controller="NavServerCtrl">
+    <!--<ul class="dropdown-menu position-fixed bg-color-white " role="menu" >
+        <li>
+            <a role="menuitem" tabindex="1"
+               ng-click="panel.highlight = true" class="txt-color-blue">Select Center {{$index+1}}</a>
+        </li>
+
+    </ul>-->
+    <ul class="dropdown-menu pull-right bg-color-white">
+        <li ng-controller="NavVMCtrl">
+            <a data-ng-click="CreateVM(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken"><i
+                    class="fa fa-plus-circle"></i>{{getWord('Create VM')}}</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="EditServer(entity.id,entity.name,entity.description)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-edit"></i>{{getWord('Edit Server')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="DeleteServer(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-minus-circle"></i>{{getWord('Delete Server')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="MigrateServer(entity.id,entity.name,entity.description,centers)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-retweet"></i>{{getWord('Migrate Server')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="RefreshServer(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-link"></i>{{getWord('Refresh Server')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="StartVMs(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-power-off txt-color-green"></i>{{getWord('Start VMs')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="ShutdownVMs(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa  fa-power-off txt-color-red"></i>{{getWord('Shutdown VMs')}}
+            </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a data-ng-click="ForceShutdownVMs(entity.id)" class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken">
+                <i class="fa   fa-bolt  txt-color-red"></i>{{getWord('Force Shutdown VMs')}}
+            </a>
+        </li>
+        <!--<li class="divider"></li>
+        <li>
+            <a href-void class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken"
+               data-action="toggleShortcut"><i class="fa fa-sitemap"></i>{{getWord('Manage Network')}}</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a href-void class="padding-10 padding-top-0 padding-bottom-0  txt-color-darken"
+               data-action="launchFullscreen"><i class="fa fa-database"></i> {{getWord('Manage Storage')}}</a>
+        </li>-->
+    </ul>
+</div>

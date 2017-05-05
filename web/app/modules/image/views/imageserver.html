@@ -1,0 +1,74 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Image Server', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+<!--
+        <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+-->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <div jarvis-widget id="normal-table-widget"  data-widget-editbutton="false">
+            <!--<form id="uploadForm" method="POST" enctype="multipart/form-data" action={{image_server_ip}}>
+            <p>Golang upload</p>
+            <input type="FILE" id="files" name="file" />
+            <input type="SUBMIT" value="upload">
+            </form>-->
+
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+
+                    <h2>Images</h2>
+
+                </header>
+                <div>
+                    <div class="widget-body">
+                        <button type="button" class="btn btn-labeled btn-success" data-ng-click="showupload()">
+                            <span class="btn-label">
+                            <i class="glyphicon glyphicon-file"></i>
+                            </span>{{getWord("Upload")}}
+                        </button>
+                        <div class="table-responsive">
+                            <form id="uploadimage" ng-show="showupload_ctl"  class="dropzone" data-smart-dropzone ></form>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Mtime</th>
+                                    <th>URL</th>
+                                    <th>Operate</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="image in vm_images">
+                                    <td>{{image.Name}}</td>
+                                    <td>{{image.Size}}</td>
+                                    <td>{{image.Type}}</td>
+                                    <td>{{image.Status}}</td>
+                                    <td>{{image.Mtime}}</td>
+                                    <td>{{image.Url}}</td>
+                                    <td><button type="button" class="btn btn-labeled btn-success" ng-click="deleteimagefile(image.Image_server_name,image.Id)">
+                                        {{getWord('Delete')}}
+                                    </button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <h1 align="center" data-ng-if="vm_images.error">{{vm_images.error}}</h1>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</div>

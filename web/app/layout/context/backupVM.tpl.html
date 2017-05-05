@@ -1,0 +1,52 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-asterisk"></i>&nbsp;{{getWord('Backup VM')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+    <div class="row">
+        <form novalidate="novalidate" data-smart-validate-form>
+            <div class="col-sm-12">
+                <!-- Widget Div -->
+                <div class="no-padding">
+                    <div class="col-md-offset-8">
+                        <button type="button" class="btn btn-primary backupBtn backupControl" data-ng-click="addBackup()">新增</button>
+                        <button type="button" class="btn btn-primary backupBtn" data-ng-click="restoreBackup()" disabled>恢复</button>
+                        <button type="button" class="btn btn-primary backupBtn" data-ng-click="deleteBackup()" disabled>删除</button>
+                    </div>
+                    <table class="table table-hover table-striped table-bordered">
+                        <caption>备份列表</caption>
+                        <thead>
+                        <tr>
+                            <th>是否选中</th>
+                            <th>备份ID</th>
+                            <th>备份名称</th>
+                            <th>备份类型</th>
+                            <th>虚拟机ID</th>
+                            <th>虚拟机名称</th>
+                            <th>备份时间</th>
+                            <th>备份状态</th>
+                            <th>备份历史位置</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="backupVM in backupVM_list">
+                            <td><input type="radio" name="restoreVM" data-ng-click="getBackupVMId(backupVM.backup_id)"/></td>
+                            <td>{{backupVM.backup_id}}</td>
+                            <td>{{backupVM.backup_name}}</td>
+                            <td>{{backupVM.backup_type}}</td>
+                            <td>{{backupVM.vm_id}}</td>
+                            <td>{{backupVM.vm_name}}</td>
+                            <td>{{backupVM.backup_time}}</td>
+                            <td>{{backupVM.backup_status}}</td>
+                            <td data-ng-if="backupVM.vm_position == 'false'"></td>
+                            <td data-ng-if="backupVM.vm_position == 'true'"><i class="fa fa-check txt-color-greenDark"></i></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

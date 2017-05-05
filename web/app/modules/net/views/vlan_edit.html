@@ -1,0 +1,26 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"> Edit Vlan</h4>
+</div>
+<div class="modal-body  form-group">
+    <form class="smart-form" name="vlanForm">
+        <label class="label"> {{getWord('Name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Name" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Description')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Description" placeholder="{{getWord('Description')}}" class="input-sm" ng-required/>
+        </label>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary"  ng-click="formSubmit()" ng-disabled="vlanForm.$$invalid">
+        Edit Vlan
+    </button>
+</div>

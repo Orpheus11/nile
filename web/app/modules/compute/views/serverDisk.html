@@ -1,0 +1,26 @@
+<table
+       class="display project-table table table-striped table-bordered table-hover"
+       cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th></th>
+        <th>{{getWord("Mount Point")}}</th>
+        <th>{{getWord("Files System")}}</th>
+        <th>{{getWord("Total Space")}}</th>
+        <th>{{getWord("Available Space")}}</th>
+        <th>{{getWord("Used Space")}}</th>
+        <th>{{getWord("Used Rate")}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="disk in server_disks">
+        <td></td>
+        <td>{{disk.mount_on}}</td>
+        <td>{{disk.files_system}}</td>
+        <td>{{disk.total_space}}</td>
+        <td>{{disk.avail_space}}</td>
+        <td>{{disk.used_space}}</td>
+        <td>{{disk.used_rate}}</td>
+    </tr>
+    </tbody>
+</table>

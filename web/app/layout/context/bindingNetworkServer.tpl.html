@@ -1,0 +1,40 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-plus"></i>{{getWord('Binding Network Server')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+
+    <form class="smart-form">
+
+        <fieldset>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="display projects-table table table-striped table-bordered table-hover" >
+                            <tbody>
+                                <tr ng-repeat="networkserver in networkServers track by $index"
+                                    data-ng-click="SetSelectedNetwork(networkserver)"
+                                    ng-class="{highlight:selected_networkserver.Id==networkserver.Id}">
+                                    <td>{{networkserver.Name}}</td>
+                                    <td>{{networkserver.Description}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </fieldset>
+
+        <footer>
+            <button data-ng-click="bindingNetworkServer()" class="btn btn-primary">
+                {{getWord('Submit')}}
+            </button>
+            <button type="button" class="btn btn-default" data-ng-click="closeModal()">
+                {{getWord('Cancel')}}
+            </button>
+
+        </footer>
+    </form>
+
+
+</div>

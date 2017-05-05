@@ -1,0 +1,62 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Network', 'Network Server']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+<!--
+        <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+-->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+
+                        <h2></h2>
+                        <ul class="nav nav-tabs pull-right in" id="vmTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#general"><i class="fa fa-bar-chart-o"></i> <span class="hidden-mobile hidden-tablet">{{getWord('General')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#vlan"><i class="fa fa-bar-chart-o"></i> <span class="hidden-mobile hidden-tablet">{{getWord('Vlan')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" ng-click="listIps()" href="#ip"><i class="fa fa-list-alt"></i> <span class="hidden-mobile hidden-tablet">{{getWord('Ip List')}}</span></a>
+                            </li>
+                        </ul>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade in active" id="general" data-ng-include="'app/modules/net/views/networkServerInfo.html'"></div>
+                                <div class="tab-pane fade" id="vlan" data-ng-include="'app/modules/net/views/vlanList.html'"></div>
+                                <div class="tab-pane fade" id="ip" data-ng-include="'app/modules/net/views/ipList.html'"></div>
+                                
+                            </div>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+
+            </article>
+        </div>
+
+    </section>
+</div>

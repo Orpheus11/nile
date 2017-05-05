@@ -1,0 +1,36 @@
+<div id="tabs-pills-widget-widget" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-jarvis-widget="" ng-init="demoShowTabs = true" class="jarviswidget jarviswidget-sortable" role="widget">
+    <header role="heading" class="ui-sortable-handle">
+        <h2> Privileges </h2>
+        <ul id="widget-tab-1" class="nav pull-right nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#roles"><i class="fa fa-clock-o"></i> <span class="hidden-mobile hidden-tablet"> Roles </span></a>
+            </li>
+
+            <li>
+                <a data-toggle="tab" ng-click="showEntities()" href="#entities"><i class="fa fa-facebook"></i> <span class="hidden-mobile hidden-tablet"> Entities </span></a>
+            </li>
+
+        </ul>
+        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+    <!-- widget div-->
+    <div role="content">
+        <!-- widget content -->
+        <div class="widget-body no-padding"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+            <!-- widget body text-->
+            <div class="tab-content padding-10">
+                <!--roles-->
+                <div class="tab-pane fade in active" id="roles" data-ng-include="'app/modules/privilege/views/rolesList.html'"></div>
+                <!--end roles-->
+                <!--entities-->
+                <div class="tab-pane fade" id="entities" data-ng-include="'app/modules/privilege/views/entitiesList.html'"></div>
+                <!--end entities-->
+
+            </div>
+
+            <!-- end widget body text-->
+
+        </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget div -->
+</div>

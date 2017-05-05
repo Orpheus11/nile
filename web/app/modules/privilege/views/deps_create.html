@@ -1,0 +1,37 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"> {{getWord('New Department')}}</h4>
+</div>
+<div class="modal-body  form-group">
+    <form class="smart-form" name="depForm">
+        <label class="label"> {{getWord('Name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newDep.Name" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/>
+        </label>
+
+        <!-- <label class="label"> {{getWord('Grade')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newDep.Grade" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/>
+        </label> -->
+        <label class="label"> {{getWord('Parent')}} </label>
+        <label class="select">
+            <select ng-model="newDep.Parent_id">
+                <option ng-repeat="dep in deps" ng-value="dep.Id"> {{dep.Name}} </option>
+            </select>
+        </label>
+
+        <label class="label"> {{getWord('Description')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newDep.Description" placeholder="{{getWord('Description')}}" class="input-sm" ng-required/>
+        </label>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary"  ng-click="formSubmit()" ng-disabled="depForm.$$invalid">
+        {{getWord('Create Dep')}}
+    </button>
+</div>

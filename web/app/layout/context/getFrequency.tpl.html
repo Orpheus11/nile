@@ -1,0 +1,47 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-asterisk"></i>&nbsp;{{getWord('Set Frequency')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+    <div class="row">
+        <form novalidate="novalidate" data-smart-validate-form>
+            <div class="col-sm-12">
+                <!-- Widget Div -->
+                <div class="no-padding">
+                    <div class="form-group col-md-offset-1">
+                        <label>频率：</label>
+                        <select data-ng-model="timeType" ng-options="timeType for timeType in timeTypeList" ng-change="getTimeType(timeType)">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset-1">
+                        <label>开始时间:</label>
+                        <select data-ng-model="startTime" ng-options="timeVal for timeVal in timeValList" ng-change="getStartTime(startTime)">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset-1">
+                        <label>持续时间(Hours):</label>
+                        <select data-ng-model="holdTime" ng-options="timeHold for timeHold in timeHoldList" ng-change="getHoldTime(holdTime)">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset-1">
+                        <label data-ng-if="weekdays.length != 0">星期:</label>
+                        <ul>
+                            <li ng-repeat="weekday in weekdays">
+                                <input type="checkbox" name="weakdayCheck" ng-checked="weekday.checked" ng-click="getWeekDays(weekday)"/>{{weekday.name}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group col-md-offset-10">
+                        <button class="btn btn-primary" data-ng-click="cancelFrequency()">取消</button>
+                        <button class="btn btn-primary" data-ng-click="submitFrequency()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

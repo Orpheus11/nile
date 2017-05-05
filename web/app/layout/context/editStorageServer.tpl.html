@@ -1,0 +1,59 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-plus"></i>{{getWord('Edit Storage Server')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+
+    <form class="smart-form">
+
+        <fieldset>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Storage Server ID')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="server_id" value="{{server_id}}" disabled="true">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Name')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="server_name" value="{{server_name}}">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Description')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="description" value="{{description}}">
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </fieldset>
+
+        <footer>
+            <button data-ng-click="EditStorageServer()" class="btn btn-primary">
+                {{getWord('Submit')}}
+            </button>
+            <button type="button" class="btn btn-default" data-ng-click="closeModal()">
+                {{getWord('Cancel')}}
+            </button>
+
+        </footer>
+    </form>
+
+
+</div>

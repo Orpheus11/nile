@@ -1,0 +1,420 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-plus"></i>&nbsp;{{getWord('Create VM')}}
+    </h4>
+</div>
+<div class="modal-body">
+            <div class="row">
+                <form novalidate="novalidate" data-smart-validate-form>
+                    <div class="col-sm-12" data-smart-wizard
+                         data-smart-wizard-callback="CreateVMCompleteCallback">
+                        <div class="form-bootstrapWizard clearfix">
+                            <ul class="bootstrapWizard">
+                                <li data-smart-wizard-tab="1" style="width: 14%;">
+                                    <a href="#"> <span class="step">1</span> <span class="title">{{getWord('VM Type')}}</span>
+                                    </a>
+                                </li>
+                                <li data-smart-wizard-tab="2" style="width: 14%;">
+                                    <a href="#"> <span class="step">2</span> <span class="title">{{getWord('Image')}}</span>
+                                    </a>
+                                </li>
+                                <li data-smart-wizard-tab="3" style="width: 14%;">
+                                    <a href="#"> <span class="step">3</span> <span class="title">{{getWord('Configuration')}}</span>
+                                    </a>
+                                </li>
+                                <li data-smart-wizard-tab="4" style="width: 14%;">
+                                    <a href="#"> <span class="step">4</span> <span class="title">{{getWord('Network')}}</span>
+                                    </a>
+                                </li>
+                                <li data-smart-wizard-tab="5" style="width: 14%;">
+                                    <a href="#"> <span class="step">5</span> <span class="title">{{getWord('Storage')}}</span>
+                                    </a>
+                                </li>
+                                <li data-smart-wizard-tab="6" style="width: 14%;">
+                                    <a href="#"> <span class="step">6</span> <span class="title">{{getWord('Basic')}}</span>
+                                    </a>
+                                </li>
+                                <li data-smart-wizard-tab="7" style="width: 14%;">
+                                    <a href="#"> <span class="step">7</span> <span class="title">{{getWord('Complete')}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane" data-smart-wizard-pane="1">
+                                <br>
+                                <h3><strong>Step 1</strong> - {{getWord('Select VM Type')}} </h3>
+                                <div class="row wel">
+                                    <div class="col-sm-10 col-md-offset-1">
+                                        <div>
+                                            <button type="button" class="btn btn-success btn-lg btn-block"
+                                                    data-ng-click="SetVMTypeImage()" data-smart-wizard-next>
+                                                {{getWord('Create VM From Image')}}
+                                            </button>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <button type="button" class="btn btn-success btn-lg btn-block"
+                                                    data-ng-click="SetVMTypeISO()" data-smart-wizard-next>
+                                                {{getWord('Create VM From ISO')}}
+                                            </button>
+                                        </div>
+                                        <input class="vmType"
+                                               name="vmType"
+                                               type="text"
+                                               data-smart-validate-input
+                                               data-required
+                                               data-message-required="We need VM Type">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" data-smart-wizard-pane="2">
+                                <br>
+                                <div class="col-sm-12">
+                                    <input type="hidden"
+                                           name="vm_type"
+                                           value="{{vm_type}}">
+                                </div>
+                                <div ng-show="vm_type=='image'">
+                                    <h3><strong>Step 2</strong> - {{getWord('Select Image')}} </h3>
+                                    <div class="row wel">
+                                        <div class="col-sm-12">
+                                                    <input type="hidden"
+                                                           name="selected_image"
+                                                           value="{{selected_image.Id}}">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="hidden"
+                                                   name="selected_image_server"
+                                                   value="{{selected_imageserver_id}}">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div>
+                                                <button ng-repeat="image_server in image_servers" type="button"
+                                                        class="btn btn-success btn-sm btn-block" data-ng-click="GetImageServerDetailImage(image_server.id)">
+                                                    {{image_server.name}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <table class="display projects-table table table-striped table-bordered table-hover" >
+
+                                                <tbody>
+                                                <div ng-if="vm_images.length != 0 ">
+                                                    <tr ng-repeat="image in vm_images track by $index"
+                                                        data-ng-click="SetSelectedImage(image)"
+                                                        ng-class="{highlight:selected_image.Id==image.Id}">
+                                                        <td>{{image.Name}}</td>
+                                                        <td>{{image.Size}}</td>
+                                                        <td>{{image.Type}}</td>
+                                                        <td>{{image.Status}}</td>
+                                                    </tr>
+                                                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <input class="selectImage"
+                                                   name="selectImage"
+                                                   type="text"
+                                                   data-smart-validate-input
+                                                   data-required
+                                                   data-message-required="We need Image">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-show="vm_type=='iso'">
+                                    <h3><strong>Step 2</strong> - {{getWord('Select Image')}} </h3>
+                                    <div class="row wel">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Disk Size(GB)</span>
+                                                    <input class="form-control input-lg"
+                                                           placeholder="Size(GB)"
+                                                           type="text"
+                                                           name="disk_size"
+                                                           data-smart-validate-input
+                                                           data-required
+                                                           data-message-required="We need disk size">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="hidden"
+                                                   name="selected_image"
+                                                   value="{{selected_image.Id}}">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="hidden"
+                                                   name="selected_image_server"
+                                                   value="{{selected_imageserver_id}}">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div>
+                                                <button ng-repeat="image_server in image_servers" type="button"
+                                                        class="btn btn-success btn-sm btn-block" data-ng-click="GetImageServerDetailISO(image_server.id)">
+                                                    {{image_server.name}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <table class="display projects-table table table-striped table-bordered table-hover" >
+
+                                                <tbody>
+                                                <div ng-if="vm_isos.length != 0 ">
+                                                    <tr ng-repeat="iso in vm_isos track by $index"
+                                                        data-ng-click="SetSelectedISO(iso)"
+                                                        ng-class="{highlight:selected_image.Id==iso.Id}">
+                                                        <td>{{iso.Name}}</td>
+                                                        <td>{{iso.Size}}</td>
+                                                        <td>{{iso.Type}}</td>
+                                                        <td>{{iso.Status}}</td>
+                                                    </tr>
+                                                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <input class="selectIso"
+                                                   name="selectIso"
+                                                   type="text"
+                                                   data-smart-validate-input
+                                                   data-required
+                                                   data-message-required="We need ISO">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" data-smart-wizard-pane="3">
+                                <br>
+                                <h3><strong>Step 3</strong> - {{getWord('Set Configuration')}}</h3>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input type="hidden" name="cpu_num" value="{{vm_cpu}}">
+                                        <input type="hidden" name="memory" value="{{vm_memory}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label>{{getWord("CPU Count")}}:</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <li data-ng-click="SetVMCPU(1)" ng-class="{'btn btn-success':vm_cpu==1,'btn btn-primary':vm_cpu!=1}" style="width:15%">1CPU</li>
+                                            <li data-ng-click="SetVMCPU(2)" ng-class="{'btn btn-success':vm_cpu==2,'btn btn-primary':vm_cpu!=2}" style="width:15%">2CPU</li>
+                                            <li data-ng-click="SetVMCPU(4)" ng-class="{'btn btn-success':vm_cpu==4,'btn btn-primary':vm_cpu!=4}" style="width:15%">4CPU</li>
+                                            <li data-ng-click="SetVMCPU(8)" ng-class="{'btn btn-success':vm_cpu==8,'btn btn-primary':vm_cpu!=8}" style="width:15%">8CPU</li>
+                                            <li data-ng-click="SetVMCPU(16)" ng-class="{'btn btn-success':vm_cpu==16,'btn btn-primary':vm_cpu!=16}" style="width:15%">16CPU</li>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label>{{getWord("Memory Size")}}:</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <li data-ng-click="SetVMMemory(1024)" ng-class="{'btn btn-success':vm_memory==1024,'btn btn-primary':vm_memory!=1024}" style="width:15%">1GB</li>
+                                            <li data-ng-click="SetVMMemory(2048)" ng-class="{'btn btn-success':vm_memory==2048,'btn btn-primary':vm_memory!=2048}" style="width:15%">2GB</li>
+                                            <li data-ng-click="SetVMMemory(4096)" ng-class="{'btn btn-success':vm_memory==4096,'btn btn-primary':vm_memory!=4096}" style="width:15%">4GB</li>
+                                            <li data-ng-click="SetVMMemory(8192)" ng-class="{'btn btn-success':vm_memory==8192,'btn btn-primary':vm_memory!=8192}" style="width:15%">8GB</li>
+                                            <li data-ng-click="SetVMMemory(16384)" ng-class="{'btn btn-success':vm_memory==16384,'btn btn-primary':vm_memory!=16384}" style="width:15%">16GB</li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" data-smart-wizard-pane="4">
+                                <br>
+
+                                <h3><strong>Step 4</strong> - {{getWord('Set Network')}}</h3>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-12">
+                                            <input type="hidden"
+                                                   name="selected_vlan"
+                                                   value="{{selected_vlan.Id}}">
+                                        </div>
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Vlan ID</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Cidr</th>
+                                                <th>DHCP Range</th>
+                                                <th>Bridge</th>
+                                                <!-- <th>Interface</th> -->
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="vlan in vlans track by $index"
+                                                data-ng-click="SetSelectedVlan(vlan)"
+                                                ng-class="{highlight:selected_vlan.Id==vlan.Id}">
+                                                <td>{{vlan.Vlan_id}}</td>
+                                                <td>{{vlan.Name}}</td>
+                                                <td>{{vlan.Description}}</td>
+                                                <td>{{vlan.Cidr}}</td>
+                                                <td>{{vlan.Dhcp_range}}</td>
+                                                <td>
+                                                    <select ng-model="ovsbr" ng-change="selectBr(ovsbr)">
+                                                        <option ng-repeat="br in ovsBrs" ng-value="br" ng-selected="ovsbr == br"> {{br}} </option>
+                                                    </select>
+                                                </td>
+                                                <!-- <td>{{vlan.Interface}}</td> -->
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <input class="selectBr"
+                                               name="selectBr"
+                                               type="text"
+                                               data-smart-validate-input
+                                               data-required
+                                               data-message-required="We need Brick">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" data-smart-wizard-pane="5">
+                                <br>
+
+                                <h3><strong>Step 5</strong> - {{getWord('Set Storage')}}</h3>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-12">
+                                            <input type="hidden"
+                                                   name="selected_storage"
+                                                   value="{{selected_storage.mount_dir}}">
+                                            <input type="hidden"
+                                                   name="selected_storage_volume_id"
+                                                   value="{{selected_storage.volume_id}}">
+                                        </div>
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>VolumeName</th>
+                                                <th>TotalSize</th>
+                                                <th>UsedSize</th>
+                                                <th>MountDir</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="storage in server_storage track by $index"
+                                                data-ng-click="SetSelectedStorage(storage)"
+                                                ng-class="{highlight:selected_storage.volume_id==storage.volume_id}"
+                                                    ng-if="storage.status=='mount success'">
+                                                <td>{{storage.volume_name}}</td>
+                                                <td>{{storage.volume_totalspace}}</td>
+                                                <td>{{storage.volume_usedspace}}</td>
+                                                <td>{{storage.mount_dir}}</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <input class="selectStorage"
+                                               name="selectStorage"
+                                               type="text"
+                                               data-smart-validate-input
+                                               data-required
+                                               data-message-required="We need Storage">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" data-smart-wizard-pane="6">
+                                <br>
+                                <h3><strong>Step 6</strong> - {{getWord('Set Basic')}}</h3>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">{{getWord('VM Name')}}</span>
+                                                <input class="form-control input-lg"
+                                                       placeholder="" type="text"
+                                                       name="vm_name"
+                                                       data-smart-validate-input
+                                                       data-required
+                                                       data-message-required="We need VM Name" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group" >
+                                                <span class="input-group-addon">{{getWord('VM Description')}}</span>
+                                                <input class="form-control input-lg"
+                                                       placeholder="Description" type="text"
+                                                       name="description" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">{{getWord('Console Password')}}</span>
+                                                <input class="form-control input-lg"
+                                                       placeholder="passwd" type="password"
+                                                       name="console_password" value="passwd" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                            <div>
+                                                <input type="hidden"
+                                                       name="server_id"
+                                                       value="{{server_id}}">
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" data-smart-wizard-pane="7">
+                                <br>
+
+                                <h3><strong>Step 7</strong> - {{getWord('Save Form')}}</h3>
+                                <br>
+
+                                <h1 class="text-center text-success"><strong><i
+                                        class="fa fa-check fa-lg"></i> {{getWord('Complete')}}</strong></h1>
+                                <h4 class="text-center">{{getWord('Click next to finish')}}</h4>
+
+
+                                <br>
+                                <br>
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <ul class="pager wizard no-margin">
+                                            <li class="previous" data-smart-wizard-prev>
+                                                <a href="#" class="btn btn-default">
+                                                    {{getWord('Previous')}} </a>
+                                            </li>
+                                            <li class="next" data-smart-wizard-next>
+                                                <a href="#" class="btn txt-color-darken">
+                                                    {{getWord('Next')}} </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+</div>

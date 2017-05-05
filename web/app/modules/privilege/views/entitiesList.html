@@ -1,0 +1,71 @@
+<table class="table table-striped table-hover table-condensed">
+    <thead>
+    <tr>
+        <th > {{getWord('Name')}} </th>
+        <th class="text-align-center"> {{getWord('Entity_id')}}</th>
+        <th class="text-align-center"> {{getWord('Entity_type')}}</th>
+       <!--  <th class="text-align-center"> {{getWord('Created User')}}</th>
+        <th class="text-align-center"> {{getWord('Created Date')}}</th> -->
+       <!--  <th class="text-align-center"> {{getWord('Modified User')}}</th>
+        <th class="text-align-center"> {{getWord('Modified Date')}}</th> -->
+        <!-- <th></th> -->
+    </tr>
+    </thead>
+    <tbody data-sparkline-container="">
+    <tr ng-repeat="entity in entities | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+        <td> {{entity.Name}}</td>
+        <td class="text-align-center"> {{entity.Entity_id}}</td>
+        <td class="text-align-center"> {{entity.Type.Display_name}}</td>
+      <!--   <td class="text-align-center"> {{entity.Created_by}}</td>
+        <td class="text-align-center"> {{entity.Created_date}}</td>
+        <td class="text-align-center"> {{entity.Modified_by}}</td>
+        <td class="text-align-center"> {{entity.Modified_date}}</td> -->
+      <!--   <td>
+            <button data-ng-click="editEntity(entity)" class="btn btn-xs btn-default"><i class="fa fa-edit fa-lg"></i></button>
+            <button data-ng-click="deleteEntity(entity)" class="btn btn-xs btn-default"><i class="fa fa-trash-o fa-lg"></i></button>
+        </td> -->
+    </tr>
+
+    </tbody>
+<!--     <tfoot>
+    <ul class="pagination pagination-xs no-margin">
+        <li >
+            <button type="button"
+                    class="btn btn-default btn-primary btn-xs"
+                    ng-showClose="true"
+                    ng-dialog="app/modules/privilege/views/entities_create.html"
+                    ng-dialog-controller="entitiesCreateController" >
+                <i class="fa fa-xs fa-plus"></i>
+            </button>
+
+        </li>
+    </ul>
+    </tfoot> -->
+</table>
+
+<h1 align="center" data-ng-if="entities.length==0">{{getWord('There\'s No entities')}}</h1>
+
+
+<div class="dt-toolbar-footer">
+    <div class="col-sm-6 hidden-xs">
+        <div class="dataTables_info">Showing {{fromCount}} to {{toCount}} of {{entities.length}} entries</div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <div class="dataTables_paginate paging_simple_numbers">
+            <ul class="pagination">
+                <li ng-class="prevPageDisabled()"><a href ng-click="prevPage()">Previous</a></li>
+
+                <li ng-if="preShow" ng-class="{active: 0 == currentPage}"><a href ng-click="setPage(0)">1</a> </li>
+                <li ng-if="preShow" ng-class="{active: 1 == currentPage}"><a href ng-click="setPage(1)">2</a> </li>
+                <li ng-if="preShow"><a href>...</a> </li>
+                <li ng-repeat="n in range"
+                    ng-class="{active: n == currentPage}"><a href ng-click="setPage(n)">{{n+1}}</a> </li>
+                <li ng-if="endShow"><a href>...</a> </li>
+                <li ng-if="endShow"><a href ng-click="setPage(pageCount-1)">{{pageCount}}</a> </li>
+                <li ng-if="endShow"><a href ng-click="setPage(pageCount)">{{pageCount+1}}</a> </li>
+
+                <li ng-class="nextPageDisabled()"><a href ng-click="nextPage()">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

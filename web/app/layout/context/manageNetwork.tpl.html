@@ -1,0 +1,144 @@
+<div id="content">
+    <section >
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12" >
+
+                <div jarvis-widget id="live-feeds-widget" data-widget-color="blueLight" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-plus txt-color-darken"></i> </span>
+
+                        <h2>{{getWord('Manage Network')}}</h2>
+
+                        <ul class="nav nav-tabs pull-right in" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#snet1"> <span class="hidden-mobile hidden-tablet">{{getWord("Allocated Vlan")}}</span></a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#snet2"><span class="hidden-mobile hidden-tablet">{{getWord("Vlan list")}}</span></a>
+                            </li>
+                        </ul>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+
+                                <div class="tab-pane fade  active in" id="snet1">
+
+                                    <div class="widget-body-toolbar bg-color-white smart-form" id="rev-toggles">
+
+                                        <div class="inline-group">
+                                            <button type="button" class="btn btn-sm btn-primary" ng-click="dividVlan()">
+                                                {{getWord('Divid Vlan')}}
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-primary" ng-click="closeModal()">
+                                                {{getWord('Cancel')}}
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="padding-10">
+                                        <div id="flotcontainer" class="chart-large has-legend-unique" >
+                                            <form name="allocatedForm" class="smart-form">
+                                                <table class="table table-bordered table-hover" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th ><input type="checkbox" id="selectallocatedCheckbox" ng-click="SelectallocatedCheckbox();"></th>
+                                                        <th>VlanId</th>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                        <th>Cidr</th>
+                                                        <th>DhcpRange</th>
+                                                        <th>Interface</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="vxnet in allocatedVxnets">
+                                                        <td><input type="checkbox" name="allocatedCheckbox" value="{{vxnet.id}}"></td>
+                                                        <td>{{vxnet.vlan_id}}</td>
+                                                        <td>{{vxnet.name}}</td>
+                                                        <td>{{vxnet.description}}</td>
+                                                        <td>{{vxnet.cidr}}</td>
+                                                        <td>{{vxnet.dhcp_range}}</td>
+                                                        <td>{{vxnet.interface}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end s1 tab pane -->
+
+                                <div class="tab-pane fade" id="snet2">
+                                    <div class="widget-body-toolbar bg-color-white smart-form" id="rev-toggles">
+
+                                        <div class="inline-group">
+                                            <button type="button" class="btn btn-sm btn-primary" ng-click="allocateVlan()">
+                                                {{getWord('Allocate Vlan')}}
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-primary" ng-click="closeModal()">
+                                                {{getWord('Cancel')}}
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="padding-10">
+                                        <div class="chart-large has-legend-unique" >
+                                            <form name="alllistForm" class="smart-form">
+                                                <table class="table table-bordered table-hover" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th ><input type="checkbox" id="selectCheckbox" ng-click="CheckSelect();"></th>
+                                                        <th>VlanId</th>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                        <th>Cidr</th>
+                                                        <th>DhcpRange</th>
+                                                        <th>Interface</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="vxnet in vxnets">
+                                                        <td><input type="checkbox" name="groupCheckbox" value="{{vxnet.id}}"></td>
+                                                        <td>{{vxnet.vlan_id}}</td>
+                                                        <td>{{vxnet.name}}</td>
+                                                        <td>{{vxnet.description}}</td>
+                                                        <td>{{vxnet.cidr}}</td>
+                                                        <td>{{vxnet.dhcp_range}}</td>
+                                                        <td>{{vxnet.interface}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end s2 tab pane -->
+                            </div>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+
+                    <!-- end widget div -->
+                </div>
+
+
+            </article>
+        </div>
+
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>

@@ -1,0 +1,278 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Server', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-4 col-md-2 col-lg-2"></big-breadcrumbs>
+        <div class="col-xs-12 col-sm-8 col-md-10 col-lg-10" data-sparkline-container>
+            <div class="sparkInfo">
+                <h5>{{getWord("VM Count")}}</h5>
+                <span class="txt-color-white">{{server_vms.length}}</span>
+            </div>
+            <div class="sparkInfo">
+                <h5>{{getWord("Memory Usage")}}(%)</h5>
+                <span ng-if="monitor_mem.length != 0" class="txt-color-white">{{monitor_mem[0][1]}}</span>
+                <span ng-if="monitor_mem.length == 0" class="txt-color-white">0</span>
+            </div>
+            <div class="sparkInfo">
+                <h5>{{getWord("CPU Usage")}}(%)</h5>
+                <span ng-if="monitor_cpu.length != 0" class="txt-color-white">{{monitor_cpu[0][1]}}</span>
+                <span ng-if="monitor_cpu.length == 0" class="txt-color-white">0</span>
+            </div>
+        </div>
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+
+                        <h2></h2>
+                        <ul class="nav nav-tabs pull-right in" id="vmTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#s1"><i class="fa fa-bar-chart-o"></i> <span class="hidden-mobile hidden-tablet">{{getWord('General')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s2"><i class="fa fa-eye"></i> <span class="hidden-mobile hidden-tablet">{{getWord('Detail')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s3"><i class="fa fa-list-alt"></i> <span class="hidden-mobile hidden-tablet">{{getWord('VMs')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s4"><i class="fa fa-th-large"></i><span class="hidden-mobile hidden-tablet">{{getWord('MAC')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s5"><i class="fa fa-circle"></i><span class="hidden-mobile hidden-tablet">{{getWord('Disk')}}</span></a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" ng-click="monitorShow()" href="#s6"><i class="fa fa-bullseye"></i><span class="hidden-mobile hidden-tablet">{{getWord('monitor')}}</span></a>
+                            </li>
+                        </ul>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <!--general-->
+                                <!--<div class="tab-pane fade in active" id="s1" data-ng-include="'app/modules/compute/views/serverGeneral.html'"></div>-->
+                                <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
+                                <div class="row no-space">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats">
+                                        <table class="table table-hover table-striped">
+                                            <tbody>
+                                            <tr>
+                                                <td>{{getWord("Name")}}</td>
+                                                <td>{{server.Name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{getWord("Description")}}</td>
+                                                <td>{{server.Description}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{getWord("Hypervisor")}}</td>
+                                                <td>{{server.NodeInfo.types}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{getWord("CPU Core")}}</td>
+                                                <td>{{server.NodeInfo.core}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{getWord("Memory Size")}}</td>
+                                                <td>{{server.NodeInfo.memory}}KB</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{getWord("Status")}}</td>
+                                                <td>{{server.Status}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{getWord("Last Health Check")}}</td>
+                                                <td>{{server.LastCheck}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <span class="onOffSwitch">
+                                            <span>CPU:</span>
+                                            <input type="radio" name="monitor_show" class="cpu_show" checked data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                            <span class="showInfo">{{getWord("Memory")}}:</span>
+                                            <input type="radio" name="monitor_show" class="mem_show" data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                            <span class="showInfo">{{getWord("Disk")}}:</span>
+                                            <input type="radio" name="monitor_show" class="disk_show" data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                            <span class="showInfo">{{getWord("Network")}}:</span>
+                                            <input type="radio" name="monitor_show" class="net_show" data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                    </span>
+                                        <div id="monitor-chart" class="chart-large txt-color-blue" flot-basic flot-data="liveStats" flot-options="liveStatsOptions"></div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="show-stat-microcharts col-xs-12" data-sparkline-container data-easy-pie-chart-container>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+
+                                        <div id="server_cpu" class="easy-pie-chart txt-color-blue" data-percent="0" data-pie-size="50">
+                                            <span class="percent percent-sign">35</span>
+                                        </div>
+                                        <span class="easy-pie-title"> CPU <i ng-if="cpu_up" class="fa fa-caret-up icon-color-bad"></i> <i ng-if="!cpu_up" class="fa fa-caret-down icon-color-good"></i> </span>
+                                        <ul class="smaller-stat hidden-sm-2 pull-right">
+                                            <li>
+                                                <span class="label bg-color-blue"><i class="fa fa-caret-up"></i>{{cpu_max}}%</span>
+                                            </li>
+                                            <li>
+                                                <span class="label bg-color-blueLight"><i class="fa fa-caret-down"></i>{{cpu_min}}%</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div id="server_disk_r" class="easy-pie-chart txt-color-greenDark" data-percent="0" data-pie-size="50">
+                                            <span class="percent">35</span>
+                                        </div>
+                                        <span class="easy-pie-title">{{getWord("Disk_R")}} <i ng-if="disk_r_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!disk_r_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                        <ul class="smaller-stat hidden-sm pull-right">
+                                            <li>
+                                                <span class="label bg-color-greenDark"><i class="fa fa-caret-up"></i>{{disk_r_max}}kb/s</span>
+                                            </li>
+                                            <li>
+                                                <span class="label bg-color-green"><i class="fa fa-caret-down"></i>{{disk_r_min}}kb/s</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div id="server_net_in" class="easy-pie-chart txt-color-orangeDark" data-percent="0" data-pie-size="50">
+                                            <span class="percent">78.9 </span>
+                                        </div>
+                                        <span class="easy-pie-title"> {{getWord("Net_In")}} <i ng-if="net_in_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!net_in_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                        <ul class="smaller-stat hidden-sm pull-right">
+                                            <li>
+                                                <span class="label bg-color-orangeDark"><i class="fa fa-caret-up"></i>{{net_in_max}}kb/s</span>
+                                            </li>
+                                            <li>
+                                                <span class="label bg-color-orange"><i class="fa fa-caret-down"></i>{{net_in_min}}kb/s</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="show-stat-microcharts col-xs-12" data-sparkline-container data-easy-pie-chart-container>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div id="server_mem" class="easy-pie-chart txt-color-red" data-percent="0" data-pie-size="50">
+                                            <span class="percent percent-sign">78.9 </span>
+                                        </div>
+                                        <span class="easy-pie-title"> {{getWord("Memory")}} <i ng-if="mem_up" class="fa fa-caret-up icon-color-bad"></i> <i ng-if="!mem_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                        <ul class="smaller-stat hidden-sm pull-right">
+                                            <li>
+                                                <span class="label bg-color-red"><i class="fa fa-caret-up"></i>{{mem_max}}%</span>
+                                            </li>
+                                            <li>
+                                                <span class="label bg-color-redLight"><i class="fa fa-caret-down"></i>{{mem_min}}%</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+
+                                        <div id="server_disk_w" class="easy-pie-chart txt-color-greenLight" data-percent="0" data-pie-size="50">
+                                            <span class="percent">35</span>
+                                        </div>
+                                        <span class="easy-pie-title"> {{getWord("Disk_W")}} <i ng-if="disk_w_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!disk_w_up" class="fa fa-caret-down icon-color-good"></i> </span>
+                                        <ul class="smaller-stat hidden-sm pull-right">
+                                            <li>
+                                                <span class="label bg-color-greenDark"><i class="fa fa-caret-up"></i>{{disk_w_max}}kb/s</span>
+                                            </li>
+                                            <li>
+                                                <span class="label bg-color-green"><i class="fa fa-caret-down"></i>{{disk_w_min}}kb/s</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <div id="server_net_out" class="easy-pie-chart txt-color-orange" data-percent="0" data-pie-size="50">
+                                            <span class="percent">35</span>
+                                        </div>
+                                        <span class="easy-pie-title">{{getWord("Net_Out")}} <i ng-if="net_out_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!net_out_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                        <ul class="smaller-stat hidden-sm pull-right">
+                                            <li>
+                                                <span class="label bg-color-orangeDark"><i class="fa fa-caret-up"></i>{{net_out_max}}kb/s</span>
+                                            </li>
+                                            <li>
+                                                <span class="label bg-color-orange"><i class="fa fa-caret-down"></i>{{net_out_min}}kb/s</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <br>
+                                <table
+                                        class="display projects-table table table-striped table-bordered table-hover"
+                                        cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>{{getWord("Name")}}</th>
+                                        <th>{{getWord("CPU")}}</th>
+                                        <th>{{getWord("Memory")}}</th>
+                                        <th>{{getWord("Status")}}</th>
+                                        <th>{{getWord("Last Health Check")}}</th>
+                                        <th>{{getWord("Description")}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr data-ng-repeat="vm in server_vms">
+                                        <td></td>
+                                        <td>{{vm.Name}}</td>
+                                        <td>{{vm.CPU}}</td>
+                                        <td>{{vm.Memory}}</td>
+                                        <td ng-if="vm.Status == 'running'"><span class='label label-success'>Running</span></td>
+                                        <td ng-if="vm.Status == ''"><span class='label label-warning'>Provision</span></td>
+                                        <td ng-if="vm.Status == 'unknown'"><span class='label label-default'>Unknown</span></td>
+                                        <td ng-if="vm.Status == 'shutdown'"><span class='label label-default'>Shutdown</span></td>
+                                        <td>{{vm.LastCheck}}</td>
+                                        <td>{{vm.Description}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                <!--end general-->
+                                <!--detail-->
+                                <div class="tab-pane fade" id="s2" data-ng-include="'app/modules/compute/views/serverDetail.html'"></div>
+                                <!--end detail-->
+                                <!--Vms-->
+                                <div class="tab-pane fade" id="s3" data-ng-include="'app/modules/compute/views/serverVMs.html'"></div>
+                                <!--end Vms-->
+                                <!--MAC-->
+                                <div class="tab-pane fade" id="s4" data-ng-include="'app/modules/compute/views/serverMAC.html'"></div>
+                                <!--end MAC-->
+                                <!--Disk-->
+                                <div class="tab-pane fade" id="s5" data-ng-include="'app/modules/compute/views/serverDisk.html'"></div>
+                                <!--end Disk-->
+                                <!--monitor-->
+                                <div class="tab-pane fade" id="s6" data-ng-include="'app/modules/compute/views/serverMonitor.html'"></div>
+                                <!--end monitor-->
+                            </div>
+                            <!-- end content -->
+                        </div>
+                    </div>
+                    <!-- end widget div -->
+                </div>
+            </article>
+        </div>
+
+    </section>
+</div>

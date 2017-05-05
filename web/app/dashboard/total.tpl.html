@@ -1,0 +1,50 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentInfo">
+    <h4>{{getWord("General")}}</h4>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td width="30%">{{getWord("API Platform Status")}}</td>
+            <td><span class="label label-success">Running</span></td>
+        </tr>
+        <tr>
+            <td >{{getWord("Message Queen Status")}}</td>
+
+            <td ng-if="dashboard_info.rabbitmq=='Running'"><span class="label label-success">Running</span></td>
+            <td ng-if="dashboard_info.rabbitmq!='Running'"><span class="label label-warning">{{dashboard_info.rabbitmq}}</span></td>
+        </tr>
+        <tr>
+            <td>{{getWord("Database Status")}}</td>
+            <td ng-if="dashboard_info.mariadb=='Running'"><span class="label label-success">Running</span></td>
+            <td ng-if="dashboard_info.mariadb!='Running'"><span class="label label-warning">{{dashboard_info.mariadb}}</span></td>
+        </tr>
+        <tr>
+            <td>{{getWord("Storage Server Status")}}</td>
+            <td><span ng-repeat="storageserver in dashboard_info.storage_servers" >{{storageserver.Name}} : <span ng-class=" storageserver.Status=='Active'?'label label-success':'label label-warning'">{{storageserver.Status}}</span><br><br></span></td>
+        </tr>
+        <tr>
+            <td>{{getWord("Image Server Status")}}</td>
+            <td><span ng-repeat="imageserver in dashboard_info.image_servers" >{{imageserver.Name}} : <span ng-class=" imageserver.Status=='Active'?'label label-success':'label label-warning'">{{imageserver.Status}}</span><br><br></span></td>
+        </tr>
+
+        <tr>
+            <td>{{getWord("Datacenter Count")}}</td>
+            <td>{{dashboard_info.centers}}</td>
+        </tr>
+        <tr>
+            <td>{{getWord("Server Count")}}</td>
+            <td>{{dashboard_info.servers}}</td>
+        </tr>
+        <tr>
+            <td>{{getWord("VM Count")}}</td>
+            <td>{{dashboard_info.vms}}</td>
+        </tr>
+
+        <tr>
+            <td>{{getWord("OutSide Server Count")}}</td>
+            <td>{{dashboard_info.outside_servers}}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>

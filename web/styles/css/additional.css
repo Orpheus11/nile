@@ -1,0 +1,392 @@
+/*
+ * It is advised not to edit the smartadmin_production.css
+ * as this will override any changes you make in the 
+ * later versions of this theme. 
+ * 
+ * We advise that you use use this CSS to override 
+ * SmartAdmin styles. 
+ * 
+ * Rename the stylesheet to whatever your liking so it will stay
+ * unique to you with each update of SmartAdmin.
+ */
+
+/*
+ * INDEX
+ * 
+ * - HTML
+ * - BODY
+ * - CUSTOM STYLES
+ */
+.onOffSwitch{
+    margin-left: 26px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+}
+.onOffSwitch span{
+    vertical-align: middle;
+}
+.onOffSwitch .showInfo{
+    margin-left: 15px;
+}
+#loginMain{
+    background-color: #2d2d3a;
+}
+#loginMain .logoInfo{
+    margin: 0 auto;
+    width: 195px;
+    padding-top: 200px;
+    padding-bottom: 25px;
+}
+#loginMain .body{
+    width: 355px;
+    height: 240px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding-top: 35px;
+}
+#loginMain div #loginName,#loginMain div #loginPassword{
+    width: 220px;
+    height: 30px;
+    background-color: rgb(204,204,204);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 12px;
+    margin-left: 65px;
+    font-family: 'Microsoft YaHei';
+}
+#loginMain div #loginPassword{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#loginMain div #loginSubmit{
+    width: 220px;
+    height: 30px;
+    margin-left: 65px;
+    background-color: #1dbec6;
+    font-size: 12px;
+    font-family: 'Microsoft YaHei';
+}
+#loginMain div span.forgetPassword,#loginMain div span.downloadCA{
+    font-size: 12px;
+    color: rgb(204,204,204);
+    font-family: 'Microsoft YaHei';
+    cursor: pointer;
+}
+#loginMain div span.downloadCA{
+    margin-left: 65px;
+}
+#loginMain div span.forgetPassword{
+    margin-left: 125px;
+}
+#loginMain .footer{
+    width: 160px;
+    text-alingn: center;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+#loginMain .footer span{
+    font-size: 12px;
+    color: #ffffff;
+    font-family: 'Microsoft YaHei';
+}
+#loginMain .logoInfo img.loginLogo{
+    width: 191px;
+}
+
+.jarviswidget>div.no-padding{
+    margin-top: 13px;
+    border-style: none !important;
+}
+.jarviswidget div.widget-body{
+    padding-bottom: 0 !important;
+}
+div#serverDetail,div#dataCenter{
+    background-color: rgb(239,239,239);
+}
+div#serverDetail h4,div#serverDetail table,div#dataCenter h4,div#dataCenter table,
+div#content div#dashboardInfo table,div#content div#dashboardInfo h4,div#time-line-history{
+    background-color: #ffffff;
+}
+div#content div#dashboardInfo div.contentInfo{
+    padding: 0;
+}
+div#content div#dashboardInfo h4{
+    text-indent: 8px;
+}
+div#content div#dashboardInfo table tr td:nth-child(2){
+    text-align: center;
+}
+div#content div#dashboardInfo table{
+    border-left: none;
+    border-right: none;
+}
+div#serverDetail h4,div#dataCenter h4,div#content div#dashboardInfo h4{
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+}
+div#serverDetail table tr td,div#dataCenter table tr td{
+    height: 20px;
+    font-size: 12px;
+    padding: 3px 0;
+}
+div#serverDetail h4,div#serverDetail table tr td,div#dataCenter h4,div#dataCenter table tr td{
+    text-indent: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+div#serverDetail table tr td.values,div#dataCenter table tr td.values{
+    text-align: right;
+    padding-right: 20px;
+}
+div#dataCenter table tr td{
+    height: 25px !important;
+}
+header.outside{
+    border-radius: 0;
+    line-height: normal;
+    -webkit-box-shadow: inset 0 -2px 0 rgba(0,0,0,.05);
+    color: #333;
+    border: 1px solid #C2C2C2;
+    background: #fafafa;
+    height: 34px;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+header.outside strong{
+    margin-left: 10px;
+}
+header.outside strong,header.outside i{
+    /*vertical-align: -webkit-baseline-middle;*/
+    margin-top: 10px;
+}
+div#dataCenter div.importServer table tr  td {
+    text-indent: 0;
+}
+header.outside span.numberInfo{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    left: 74px;
+    top: 1px;
+    padding: 3px 0;
+}
+header.outside a{
+    cursor: pointer;
+    color: #000000;
+}
+div.importServer div#importServerList{
+    display: none;
+}
+.jarviswidget>div.importServer{
+    padding: 0;
+    border: none;
+    background-color: rgb(239,239,239) !important;
+}
+.smart-style-4 div#content > div.row:first-child{
+    background-color: #ffffff;
+}
+.smart-style-4 .page-title{
+    font-size: 20px !important;
+}
+.smart-style-4 div#content > div.row:first-child div.sparkInfo{
+    float: right;
+    margin-right: 25px;
+}
+.smart-style-4 div#content > div.row:first-child h5{
+    font-size: 14px;
+    display: inline-block;
+}
+.smart-style-4 div#content > div.row:first-child div.sparkInfo span{
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-color: #1dd2b3;
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border-radius: 24px;
+    font-size: 16px;
+    text-align: center;
+    padding-top: 14px;
+}
+.smart-style-4 div#content > div.row:first-child div.warnInfo span{
+    background-color: #ea635f;
+}
+/*div.smart-timeline-time{*/
+    /*word-wrap: break-word;*/
+    /*-ms-word-break: normal;*/
+    /*word-break: normal;*/
+/*}*/
+div#time-line-history{
+    overflow: auto;
+    max-height: 699px;
+}
+div#time-line-history div:first-child span.historyDeatil{
+    display: inline-block;
+    background-color: #1aa2a2;
+    position: absolute;
+    line-height: 20px;
+    color: #ffffff;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    right: 40px;
+    margin-top: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+}
+div#time-line-history div:first-child hr{
+    margin: 0;
+    border-color: rgb(221,221,221);
+}
+div#time-line-history div.historyContent div.historyInfo:first-child{
+    margin-top: 20px;
+}
+div#time-line-history div.historyContent div.historyInfo div.headInfo span{
+    margin-left: 10px;
+    color: #1aa2a2;
+}
+div#time-line-history div.historyContent div.historyInfo div.headInfo span:nth-child(2){
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding: 10px 0;
+    border: 2px solid #1aa2a2;
+}
+div#time-line-history div.historyContent div.historyInfo div.headInfo span:nth-child(3){
+    color: rgb(136,136,136);
+}
+div#time-line-history div.historyContent div.historyInfo div.historyDes{
+    margin-left: 90px;
+    border-left: 2px solid #1aa2a2;
+    padding: 10px;
+}
+div#time-line-history div.historyContent div.historyInfo:last-child div.historyDes{
+    border: 0;
+}
+div#time-line-history div.historyContent div.historyInfo div.historyDes span{
+    margin-left: 25px;
+}
+div#time-line-history div.historyContent div.historyInfo:last-child div.historyDes span{
+    margin-left: 27px;
+}
+
+div#history-header.modal-header{
+    padding: 0;
+    background-color: #3f90c7;
+}
+div#history-header.modal-header span{
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+}
+div#history-header.modal-header span:hover{
+    cursor: pointer;
+    background-color: #87d4c4;
+}
+div#history-header.modal-header span.choosen{
+    background-color: #57b3dc;
+}
+div.modal-dialog div.modal-content div#history-content.modal-body.no-padding div#week-history,
+div.modal-dialog div.modal-content div#history-content.modal-body.no-padding div#month-history,
+div.modal-dialog div.modal-content div#history-content.modal-body.no-padding div#all-history{
+    height: 600px !important;
+    overflow: auto;
+    text-align: center;
+}
+div.modal-dialog div.modal-content div#history-content.modal-body.no-padding div table tbody{
+    text-align: left;
+}
+div#history-content div#month-history,div#history-content div#all-history{
+    display: none;
+}
+div#history-content div img{
+    /*position: absolute;*/
+    /*top: 220px;*/
+    /*z-index: 1;*/
+    margin-top: 220px;
+}
+div#history-content div table{
+    display: none;
+}
+
+div#main div#content section#widget-grid div#server-chart-cpu header h2{
+    font-size: 13px;
+}
+div#server-chart-cpu header span.custom-monitor,div#server-chart-mem header span.custom-monitor,
+div#server-chart-disk header span.custom-monitor,div#server-chart-net header span.custom-monitor{
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+div.page-footer{
+    position: fixed;
+    z-index: 901;
+}
+#header{
+    position: fixed;
+    width: 100%;
+    z-index: 905;
+    top: 0;
+    border-bottom: 1px solid rgba(0,0,0,.3);
+}
+.smart-style-4:not(.menu-on-top) #left-panel {
+    padding-top: 49px;
+}
+#left-panel {
+    height: 100%;
+    position: fixed;
+}
+nav{
+    overflow-y: auto;
+    height: 100%;
+    padding-bottom: 49px;
+}
+.ngdialog.ngdialog-theme-default .ngdialog-content{
+    margin-top: -110px;
+}
+#left-panel nav{
+    overflow-x: hidden;
+}
+div#main.ng-scope{
+    margin-top: 49px !important;
+}
+div.modal-body div.row form div div.tab-content div input.vmType,div.modal-body div.row form div div.tab-content div div div input.selectBr,
+div.modal-body div.row form div div.tab-content div div div input.selectStorage,div.modal-body div.row form div div.tab-content div div div input.selectImage,
+div.modal-body div.row form div div.tab-content div div div div input.selectIso{
+    width: 0;
+    height: 0;
+    border: 0;
+}
+div#preview-template{
+    position: absolute;
+    top: 200px;
+    left: 235px;
+    display: none;
+}
+/*div#preview-template.smallScreen{*/
+    /*left: -220px;*/
+/*}*/
+/*div.monitorView div div.widget-body div{*/
+    /*text-align: center;*/
+/*}*/
+/*div.monitorView div div.widget-body div img{*/
+    /*margin-top: 70px;*/
+/*}*/

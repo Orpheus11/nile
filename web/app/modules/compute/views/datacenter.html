@@ -1,0 +1,125 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['DataCenter', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+        <!--<div smart-include="app/layout/partials/sub-header.tpl.html"></div>-->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+
+                    <div class="importServer col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <header class="outside">
+                            <strong class="ng-binding">{{getWord('Outside')}}</strong>&nbsp&nbsp
+                            <a id="importArea">
+                            <i class="fa fa-tasks">
+                                <span ng-if="outsideServersInfo == 0" class="numberInfo label label-success">{{outsideServersInfo}}</span>
+                                <span ng-if="outsideServersInfo != 0" class="numberInfo label label-danger">{{outsideServersInfo}}</span>
+                            </i>
+                            </a>
+                        </header>
+                        <div id="importServerList">
+                            <table
+                                    class="display projects-table table table-striped table-bordered table-hover"
+                                    cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>IP</th>
+                                    <th>HOST NAME</th>
+                                    <th>HOST NAME IN LIBVIRT</th>
+                                    <th>IMPORT</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="server in outsideServers">
+                                    <td></td>
+                                    <td>{{server.id}}</td>
+                                    <td>{{server.ip}}</td>
+                                    <td>{{server.hostname}}</td>
+                                    <td>{{server.hostname_libvirt}}</td>
+                                    <td><button class="btn btn-xs  btn-success" data-ng-click="ImportServer(server.id)">Import Server</button></td>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+                            <h1 align="center" data-ng-if="outsideServers.length==0">{{getWord("There's No Outside Server")}}</h1>
+                        </div>
+
+                    </div>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                            <div class="row" id="dataCenter">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <header class="outside">
+                                        <strong class="ng-binding">{{getWord('General')}}</strong>&nbsp&nbsp<i class="fa fa-bar-chart-o"></i>
+                                    </header>
+                                </div>
+                                <div ng-repeat="center in centers" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <h4><strong>{{center.name}}</strong></h4>
+
+                                    <table class="table table-hover">
+
+                                        <tbody>
+                                        <tr>
+                                            <td>{{getWord("Center Name")}}</td>
+                                            <td class="values">{{center.name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{getWord("Network Server Status")}}</td>
+                                            <td ng-if="center.network_server=='no network server'" class="values">{{getWord("Network Server Not Bound")}}</td>
+                                            <td ng-if="center.network_server[0].Status=='Active'" class="values">{{center.network_server[0].Name}}<span class="label label-success">Running</span></td>
+                                            <td ng-if="center.network_server !='no network server'&&center.network_server[0].Status!='Active'" class="values">{{center.network_server[0].Name}}<span class="label label-warning">{{center.network_server[0].Status}}</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>{{getWord("Console Server Status")}}</td>
+                                            <td ng-if="center.spice_server=='no spiceserver'" class="values">{{getWord("Console Server Not Bound")}}</td>
+                                            <td ng-if="center.spice_server.Status=='Active'" class="values">{{center.spice_server.Name}}<span class="label label-success">Running</span></td>
+                                            <td ng-if="center.spice_server !='no spiceserver'&&center.spice_server.Status!='Active'" class="values">{{center.spice_server.Name}}<span class="label label-warning">{{center.spice_server.Status}}</span></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>{{getWord("Server Count")}}</td>
+                                            <td class="values">{{center.servers_count}}</td>
+                                        </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                    <h1 align="center" data-ng-if="centers.length==0">{{getWord('There\'s No Centers')}}</h1>
+                                </div>
+
+                                <!--<div class="tab-pane fade" id="s2">-->
+                                    <!--<div class="row">-->
+
+                                    <!--</div>-->
+
+                                <!--</div>-->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+        </div>
+
+    </section>
+</div>

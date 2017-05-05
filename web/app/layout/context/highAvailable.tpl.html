@@ -1,0 +1,129 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-asterisk"></i>&nbsp;{{getWord('High Available')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+    <div class="row">
+        <form novalidate="novalidate" data-smart-validate-form>
+            <div class="col-sm-12" data-smart-wizard
+                 data-smart-wizard-callback="setHighAvailableCallback">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                    <header>
+                        <!--<span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>-->
+
+                        <!--<h2></h2>-->
+
+                        <ul class="nav nav-tabs pull-left in" id="availableTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#h1"><i class="fa fa-cogs"></i><span class="hidden-mobile hidden-tablet">{{getWord('Convention')}}</span></a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#h2"><i class="fa fa-caret-square-o-up"></i><span class="hidden-mobile hidden-tablet">{{getWord('VM Priority')}}</span></a>
+                            </li>
+                           <!--  <li>
+                                <a data-toggle="tab" href="#h3"><i class="fa fa-sun-o"></i><span class="hidden-mobile hidden-tablet">{{getWord('Advanced Options')}}</span></a>
+                            </li> -->
+                        </ul>
+                    </header>
+                </div>
+                <!-- Widget Div -->
+                <div class="no-padding">
+                    <div class="widget-body">
+                        <div id="availableTabContent" class="tab-content">
+
+                            <div class="tab-pane" data-smart-wizard-pane="1" id="h1">
+                                <div class="form-group col-md-offset-1">
+                                    <label>
+                                        <input type="checkbox" ng-model="enable_ha" />启动高可用
+                                    </label>
+                                    <br/>
+                                    <label>
+                                        <input type="radio" name="failover" ng-checked="!failover" data-ng-click="unSetFailover()"/>同一台机器上的虚拟机故障转移.
+                                        <br/>
+                                        <input type="radio" name="failover" ng-checked="failover" data-ng-click="setFailover()"/>虚拟机和服务器故障转移.
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-offset-1">
+                                    <label for="setMigrate">在服务器发生故障时:</label>
+                                    <br/>
+                                    <label>
+                                        <input id="migrate_back" type="checkbox" ng-model="migrate_back" />当服务器启动时虚拟机迁回.
+                                        <br/>
+                                        <input type="radio" name="isMigrateBack" ng-checked="!use_standby"  data-ng-click="migrateAll()"/>虚拟机迁移到其他服务器.
+                                        <br/>
+                                        <input type="radio" name="isMigrateBack" ng-checked="use_standby" data-ng-click="migrateChoose()"/>虚拟机迁移到下列备用服务器：
+                                    </label>
+                                    <table class="table table-hover table-striped table-bordered">
+                                        <caption>服务器</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>名称</th>
+                                                <!-- <th>ID</th> -->
+                                                <th>是否备用</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="server in servers">
+                                            <tr>
+                                                <td>{{server.name}}</td>
+                                                <!-- <td ng-model="server.id">{{server.id}}</td> -->
+                                                <td><input type="checkbox" ng-model="server.standby_status" data-ng-click="getServerList(serverChecked,server.id)"/></td>
+                                                <!-- data-ng-click="getServerList(serverChecked,server.id)"/></td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" data-smart-wizard-pane="2" id="h2">
+                                <div class="form-group col-md-offset-1">
+                                    <table class="table table-hover table-striped table-bordered">
+                                        <caption>虚拟机</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>名称</th>
+                                                <!-- <th>ID</th> -->
+                                                <th>优先级</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="vm in vm_priority_list">
+                                                <td>{{vm.Name}}</td>
+                                                <!-- <td>vm.Id</td> -->
+                                                <td>
+                                                    <select class="selectpicker" ng-model="vm.Ha_priority" data-style="btn-primary">
+                                                        <option value="0">Low</option>
+                                                        <option value="1">Medium</option>
+                                                        <option value="2">High</option>
+                                                        <option value="3">Critical</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                          <!--   <div class="tab-pane" data-smart-wizard-pane="3" id="h3">
+                                <div class="form-group col-md-offset-1">
+                                    <label for="advancedSettings">高级配置.</label>
+                                    <br/>
+                                    <label>等待间隔:<input type="number" data-ng-model="waitTime" required ng-change="getWaitTime()"/></label>
+                                    <br/>
+                                    <label>重试计数:<input type="number" data-ng-model="retryCount" required ng-change="getRetryCount()"/></label>
+                                </div>
+                            </div> -->
+
+                            <div class="form-group col-md-offset-10">
+                                <button type="button" class="btn btn-primary" data-ng-click="setHighAvailable()">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end Widget Div -->
+            </div>
+        </form>
+    </div>
+</div>

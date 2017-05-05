@@ -1,0 +1,158 @@
+<div class="modal-header">
+
+    <h4 class="modal-title">
+        <i class=" fa fa-plus"></i>{{getWord('Edit VM')}}
+    </h4>
+</div>
+<div class="modal-body no-padding">
+
+    <form class="smart-form">
+
+        <fieldset>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('VM Type')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.vm_type" value="{{vmDetail.vm_type}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Name')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.vm_name" value="{{vmDetail.vm_name}}">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Description')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.description" value="{{vmDetail.description}}">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Memory')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.memory" value="{{vmDetail.memory}}">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('CPU NUMBER')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.cpu_num" value="{{vmDetail.cpu_num}}">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Console Password')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="password" ng-model="vmDetail.console_password" value="{{vmDetail.console_password}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Dir')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.dir" value="{{vmDetail.dir}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Image Path')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.image_path" value="{{vmDetail.image_path}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('IP')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-mode="vmDetail.ip" value="{{vmDetail.ip}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('MAC')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.mac" value="{{vmDetail.mac}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Ovsbr')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.ovsbr" value="{{vmDetail.ovsbr}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Vlan')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="vmDetail.vlan" value="{{vmDetail.vlan}}" disabled="true" class="form-control">
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </fieldset>
+
+        <footer>
+            <button data-ng-click="editVM()" class="btn btn-primary">
+                {{getWord('Submit')}}
+            </button>
+            <button type="button" class="btn btn-default" ng-click="closeModal()">
+                {{getWord('Cancel')}}
+            </button>
+
+        </footer>
+    </form>
+
+
+</div>

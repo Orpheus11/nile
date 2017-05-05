@@ -1,0 +1,56 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"> Create Vlan</h4>
+</div>
+<div class="modal-body  form-group">
+    <form class="smart-form" name="vlanForm">
+        <label class="label"> {{getWord('Name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Name" placeholder="Name" class="input-sm" ng-required/>
+        </label>
+        <label class="label"> {{getWord('Description')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Description" placeholder="Description" class="input-sm" ng-required/>
+        </label>
+        <label class="label"> {{getWord('Vlan Id')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Vlan_id" placeholder="Vlan Id(例如:100)" class="input-sm" ng-required/>
+        </label>
+        <label class="label"> {{getWord('Interface')}} </label>
+      <!--   <label class="input">
+            <select ng-model="newVlan.Interface">
+                <option ng-repeat="physical_interface in physical_interfaces" ng-value="physical_interface"> {{physical_interface}} </option>
+            </select>
+        </label> -->
+        <label class="input">
+            <!-- <input type="text" data-ng-model="newVlan.Interface" placeholder="Interface" class="input-sm" ng-required/> -->
+            <select ng-model="newVlan.Interface">
+                <option ng-repeat="physical_interface in ovs_brs" ng-value="physical_interface"> {{physical_interface}} </option>
+            </select>
+        </label>
+        <label class="label"> {{getWord('Cidr')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Cidr" placeholder="Cidr(例如:192.168.100.0/24)" class="input-sm" ng-required/>
+        </label>
+        <label class="label"> {{getWord('Listen Address')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Listen_address" placeholder="Listen Address(例如:192.168.100.10)" class="input-sm" ng-required/>
+        </label>
+        <label class="label"> {{getWord('Gateway')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newVlan.Gateway" placeholder="Gateway(例如:192.168.100.254)" class="input-sm" ng-required/>
+        </label>
+        <label class="label"> {{getWord('Dhcp Range')}} </label>
+        <label class="input">
+            <input type="ip" data-ng-model="newVlan.Dhcp_range" placeholder="Dhcp Range(例如:192.168.100.100,192.168.100.200)" class="input-sm" ng-required/>
+        </label>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary"  ng-click="formSubmit()" ng-disabled="vlanForm.$$invalid">
+        Create Vlan
+    </button>
+</div>

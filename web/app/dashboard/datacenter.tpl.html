@@ -1,0 +1,32 @@
+<div ng-repeat="center in centers" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentInfo">
+    <h4>{{center.name}}</h4>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td  width="30%">{{getWord("Center Name")}}</td>
+            <td>{{center.name}}</td>
+        </tr>
+        <tr>
+            <td>{{getWord("Network Server Status")}}</td>
+            <td ng-if="center.network_server=='no network server'">{{getWord("Network Server Not Bound")}}</td>
+
+            <td ng-if="center.network_server[0].Status=='Active'">{{center.network_server[0].Name}}<span class="label label-success">Running</span></td>
+            <td ng-if="center.network_server!='no network server'&&center.network_server[0].Status!='Active'">{{center.network_server[0].Name}}<span class="label label-warning">{{center.network_server[0].Status}}</span></td>
+        </tr>
+
+        <tr>
+            <td>{{getWord("Console Server Status")}}</td>
+            <td ng-if="center.spice_server=='no spiceserver'">{{getWord("Console Server Not Bound")}}</td>
+            <td ng-if="center.spice_server.Status=='Active'">{{center.spice_server.Name}}<span class="label label-success">Running</span></td>
+            <td ng-if="center.spice_server!='no spiceserver'&&center.spice_server.Status!='Active'">{{center.spice_server.Name}}<span class="label label-warning">{{center.spice_server.Status}}</span></td>
+
+        </tr>
+        <tr>
+            <td>{{getWord("Server Count")}}</td>
+            <td>{{center.servers_count}}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>

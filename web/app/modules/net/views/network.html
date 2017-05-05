@@ -1,0 +1,188 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Network', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+<!--
+        <div smart-include="app/layout/partials/sub-header.tpl.html"></div>
+-->
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+
+                    <div class="importServer col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <header class="outside">
+                            <strong class="ng-binding">{{getWord('Outside')}}</strong>&nbsp&nbsp
+                            <a id="importArea">
+                                <i class="fa fa-tasks">
+                                    <span ng-if="outsideNetworkServersInfo == 0" class="numberInfo label label-success">{{outsideNetworkServersInfo}}</span>
+                                    <span ng-if="outsideNetworkServersInfo != 0" class="numberInfo label label-danger">{{outsideNetworkServersInfo}}</span>
+                                </i>
+                            </a>
+                        </header>
+                        <div id="importServerList">
+                            <form name="outside" class="smart-form">
+                                <table class="table table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>{{getWord('Id')}}</th>
+                                        <th>{{getWord('Ip')}}</th>
+                                        <th>{{getWord('Hostname')}}</th>
+                                        <th>{{getWord('Network Bridge')}}</th>
+                                        <th>{{getWord('Status')}}</th>
+                                        <th>{{getWord('Import')}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="outside in outsideNetworkServers">
+                                        <td>{{outside.id}}</td>
+                                        <td>{{outside.ip}}</td>
+                                        <td>{{outside.hostname}}</td>
+                                        <td>{{outside.ovs_brs}}</td>
+                                        <td>{{outside.status}}</td>
+                                        <td><button  data-toggle="modal" data-target="#General1" class="btn btn-xs  btn-success" data-ng-click="selectId(outside.id)">Import NetworkServer</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <h1 align="center" data-ng-if="outsideNetworkServers.length==0">{{getWord('There\'s No Outside Server')}}</h1>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="row" id="dataCenter">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <header class="outside">
+                                            <strong class="ng-binding">{{getWord('General')}}</strong>&nbsp&nbsp<i class="fa fa-bar-chart-o"></i>
+                                        </header>
+                                    </div>
+                                    <div class="tab-pane fade active in padding-10 no-padding-bottom">
+                                        <table class="table table-bordered table-hover" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <!--<th>{{getWord('Id')}}</th>-->
+                                                <th>{{getWord('Name')}}</th>
+                                                <th>{{getWord('Description')}}</th>
+                                                <th>{{getWord('Network Bridge')}}</th>
+                                                <th>{{getWord('Status')}}</th>
+                                                <th>{{getWord('LastCheck')}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="network in networkServers">
+                                                <!--<td>{{network.Id}}</td>-->
+                                                <td>{{network.Name}}</td>
+                                                <td>{{network.Description}}</td>
+                                                <td>{{network.Ovs_brs}}</td>
+                                                <td>{{network.Status}}</td>
+                                                <td>{{network.LastCheck}}</td>
+                                                <!-- <td><button class="btn btn-xs  btn-success" data-ng-click="ImportNetworkServer(outside.id)">Import NetworkServer</button></td> -->
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <h1 align="center" data-ng-if="networkServers.length==0">{{getWord('There\'s No NetworkServer')}}</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+    <!-- General Setting -->
+    <div class="modal" id="General1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        <i class=" fa fa-plus"></i>{{getWord('Import Network Server')}}
+                    </h4>
+                </div>
+                <div class="modal-body form-group speical">
+    <form class="smart-form">
+
+        <fieldset>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Network Server ID')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="network_server_id" value="{{network_server_id}}" disabled="true">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Name')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="network_server_name">
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <label class="label col col-4">{{getWord('Description')}}</label>
+
+                    <div class="col col-8">
+                        <label class="input"> <i class="icon-append fa fa-flag"></i>
+                            <input type="text" ng-model="network_server_des">
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </fieldset>
+    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="dismissButton" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="submit" class="btn btn-primary"  ng-click="importNetworkServer()" ng-disabled="brickForm.$$invalid">
+                        {{getWord('Submit')}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+     <!-- General Setting end-->
+
+
+
+
+
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+
+            </article>
+        </div>
+
+    </section>
+</div>

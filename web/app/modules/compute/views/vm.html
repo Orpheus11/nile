@@ -1,0 +1,363 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['VM', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-4 col-md-2 col-lg-2"></big-breadcrumbs>
+        <div class="col-xs-12 col-sm-8 col-md-10 col-lg-10" data-sparkline-container>
+            <div class="sparkInfo warnInfo">
+                <h5>{{getWord("Alert Count")}}</h5>
+                <span class="txt-color-white">0</span>
+            </div>
+            <div class="sparkInfo">
+                <h5>{{getWord("Memory Usage")}}(%)</h5>
+                <span ng-if="monitor_mem.length != 0" class="txt-color-white">{{monitor_mem[0][1]}}</span>
+                <span ng-if="monitor_mem.length == 0" class="txt-color-white">0</span>
+            </div>
+            <div class="sparkInfo">
+                <h5>{{getWord("CPU Usage")}}(%)</h5>
+                <span ng-if="monitor_cpu.length != 0" class="txt-color-white">{{monitor_cpu[0][1]}}</span>
+                <span ng-if="monitor_cpu.length == 0" class="txt-color-white">0</span>
+            </div>
+        </div>
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+
+                        <h2></h2>
+
+                        <ul class="nav nav-tabs pull-right in" id="vmTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#s1"><i class="fa fa-bar-chart-o"></i> <span class="hidden-mobile hidden-tablet">{{getWord('General')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s2" data-ng-click="GetVMConsole()"><i class="fa fa-eye"></i> <span class="hidden-mobile hidden-tablet">{{getWord('Console')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s4" data-ng-click="monitorShow()"><i class="fa fa-bullseye"></i> <span class="hidden-mobile hidden-tablet">{{getWord('Monitor')}}</span></a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#s3"><i class="fa fa-list-alt"></i> <span class="hidden-mobile hidden-tablet">{{getWord('History')}}</span></a>
+                            </li>
+                        </ul>
+
+                    </header>
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
+                                    <div class="row no-space">
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats">
+                                            <table class="table table-hover table-striped">
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{getWord("Name")}}</td>
+                                                    <td>{{vm.Name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("vCPU Count")}}</td>
+                                                    <td>{{vm.CPU}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Memory")}}</td>
+                                                    <td>{{vm.Memory}}MB</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Status")}}</td>
+                                                    <td>{{vm.Status}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Last Health Check")}}</td>
+                                                    <td>{{vm.LastCheck}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Description")}}</td>
+                                                    <td>{{vm.Description}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                            <span class="onOffSwitch">
+                                                <span>CPU:</span>
+                                                <input type="radio" name="monitor_show" class="cpu_show" checked data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                                <span class="showInfo">{{getWord("Memory")}}:</span>
+                                                <input type="radio" name="monitor_show" class="mem_show" data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                                <span class="showInfo">{{getWord("Disk")}}:</span>
+                                                <input type="radio" name="monitor_show" class="disk_show" data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                                <span class="showInfo">{{getWord("Network")}}:</span>
+                                                <input type="radio" name="monitor_show" class="net_show" data-size="mini" data-on-text="ON" data-off-text="OFF" data-on-color="info"/>
+                                            </span>
+                                            <div id="monitor-chart" class="chart-large txt-color-blue" flot-basic flot-data="liveStats" flot-options="liveStatsOptions"></div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- easy-pie-chart -->
+                                    <div class="show-stat-microcharts" data-sparkline-container data-easy-pie-chart-container>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+
+                                            <div class="easy-pie-chart txt-color-blue easy-pie-cpu" data-percent="0" data-pie-size="50">
+                                                <span class="percent percent-sign">0</span>
+                                            </div>
+                                            <span class="easy-pie-title">CPU<i ng-if="cpu_up" class="fa fa-caret-up icon-color-bad"></i> <i ng-if="!cpu_up" class="fa fa-caret-down icon-color-good"></i> </span>
+                                            <ul class="smaller-stat hidden-sm pull-right">
+                                                <li>
+                                                    <span class="label bg-color-blue"><i class="fa fa-caret-up"></i>{{cpu_max}}%</span>
+                                                </li>
+                                                <li>
+                                                    <span class="label bg-color-blueLight"><i class="fa fa-caret-down"></i> {{cpu_min}}%</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="easy-pie-chart txt-color-greenDark easy-pie-read" data-percent="0" data-pie-size="50">
+                                                <span class="percent">0 </span>
+                                            </div>
+                                            <span class="easy-pie-title">{{getWord("Disk_R")}}<i ng-if="disk_r_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!disk_r_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                            <ul class="smaller-stat hidden-sm pull-right">
+                                                <li>
+                                                    <span class="label bg-color-greenDark">{{disk_r_max}}kb/s</span>
+                                                </li>
+                                                <li>
+                                                    <span class="label bg-color-green"><i class="fa fa-caret-up"></i> {{disk_r_min}}kb/s</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="easy-pie-chart txt-color-orangeDark easy-pie-in" data-percent="0" data-pie-size="50">
+                                                <!--<span class="percent degree-sign">0 <i class="fa fa-caret-up"></i></span>-->
+                                                <span class="percent">0 <i class="fa fa-caret-up"></i></span>
+                                            </div>
+                                            <span class="easy-pie-title">{{getWord("Net_In")}}<i ng-if="net_in_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!net_in_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                            <ul class="smaller-stat hidden-sm pull-right">
+                                                <li>
+                                                    <span class="label bg-color-orangeDark"><i class="fa fa-caret-up"></i> {{net_in_max}}kb/s</span>
+                                                </li>
+                                                <li>
+                                                    <span class="label bg-color-orange"><i class="fa fa-caret-down"></i> {{net_in_min}}kb/s</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="show-stat-microcharts" data-sparkline-container data-easy-pie-chart-container>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="easy-pie-chart txt-color-red easy-pie-mem" data-percent="0" data-pie-size="50">
+                                                <span class="percent percent-sign">0 </span>
+                                            </div>
+                                            <span class="easy-pie-title">{{getWord("Memory")}}<i ng-if="mem_up" class="fa fa-caret-up icon-color-bad"></i> <i ng-if="!mem_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                            <ul class="smaller-stat hidden-sm pull-right">
+                                                <li>
+                                                    <span class="label bg-color-red"><i class="fa fa-caret-up"></i> {{mem_max}}%</span>
+                                                </li>
+                                                <li>
+                                                    <span class="label bg-color-redLight"><i class="fa fa-caret-down"></i> {{mem_min}}%</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="easy-pie-chart txt-color-green easy-pie-write" data-percent="0" data-pie-size="50">
+                                                <!--<span class="percent degree-sign">0 <i class="fa fa-caret-up"></i></span>-->
+                                                <span class="percent">0 <i class="fa fa-caret-up"></i></span>
+                                            </div>
+                                            <span class="easy-pie-title">{{getWord("Disk_W")}}<i ng-if="disk_w_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!disk_w_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                            <ul class="smaller-stat hidden-sm pull-right">
+                                                <li>
+                                                    <span class="label bg-color-greenDark"><i class="fa fa-caret-up"></i> {{disk_w_max}}kb/s</span>
+                                                </li>
+                                                <li>
+                                                    <span class="label bg-color-green"><i class="fa fa-caret-down"></i>{{disk_w_min}}kb/s</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="easy-pie-chart txt-color-orange easy-pie-out" data-percent="0" data-pie-size="50">
+                                                <!--<span class="percent degree-sign">0 <i class="fa fa-caret-up"></i></span>-->
+                                                <span class="percent">0 <i class="fa fa-caret-up"></i></span>
+                                            </div>
+                                            <span class="easy-pie-title">{{getWord("Net_Out")}}<i ng-if="net_out_up" class="fa fa-caret-up icon-color-bad"></i><i ng-if="!net_out_up" class="fa fa-caret-down icon-color-good"></i></span>
+                                            <ul class="smaller-stat hidden-sm pull-right">
+                                                <li>
+                                                    <span class="label bg-color-orangeDark"><i class="fa fa-caret-up"></i>{{net_out_max}}kb/s</span>
+                                                </li>
+                                                <li>
+                                                    <span class="label bg-color-orange"><i class="fa fa-caret-down"></i>{{net_out_min}}kb/s</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- end -->
+
+                                </div>
+                                <!-- end s1 tab pane -->
+
+                                <div class="tab-pane fade" id="s2">
+                                    <br>
+                                    <iframe src="{{spiceUrl}}" frameborder="0" width="100%" height="900px"></iframe>
+                                    <!--<div align="center">-->
+                                        <!--<input type='hidden' id='host' value='{{console_ip}}'>-->
+                                        <!--<input type='hidden' id='port' value='{{consoleserver_port}}'>-->
+                                        <!--<lable for="password">Password: </lable><input type='password' id='password' value=''>-->
+                                        <!--<button class="btn btn-xs  btn-success" id="connectButton" data-ng-click="GetVMConsole()">Start</button>-->
+                                        <!--<button class="btn btn-xs  btn-danger" id="connectButton1" onclick="disconnect();">Stop</button>-->
+
+                                    <!--</div>-->
+                                    <!--<br>-->
+                                    <!--<div id="spice-area">-->
+                                        <!--<div id="spice-screen" class="spice-screen"></div>-->
+                                        <!--<iframe src="" frameborder="0"></iframe>-->
+                                    <!--</div>-->
+
+                                    <!--<div id="message-div" class="spice-message" type="hidden"></div>-->
+
+                                    <!--<div id="debug-div" type="hidden">-->
+
+                                    <!--</div>-->
+
+                                </div>
+                                <!-- end s2 tab pane -->
+
+                                <div class="tab-pane fade" id="s3">
+                                    <div class="table-responsive">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>{{getWord("Task Name")}}</th>
+                                                <th>{{getWord("VM Name")}}</th>
+                                                <th>{{getWord("Short Description")}}</th>
+                                                <th>{{getWord("Description")}}</th>
+                                                <th>{{getWord("User")}}</th>
+                                                <th>{{getWord("Time")}}</th>
+                                                <th>{{getWord("Status")}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-ng-repeat="h in vm_histories">
+                                                <td>{{h.Name}}</td>
+                                                <td>{{h.Entity_name}}</td>
+                                                <td>{{h.Short_desc}}</td>
+                                                <td>{{h.Long_desc}}</td>
+                                                <td>{{h.User_name}}</td>
+                                                <td>{{h.Submitted_on}}</td>
+                                                <td>{{h.Status}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                                <!-- end s3 tab pane -->
+
+                                <div class="tab-pane fade" id="s4">
+
+                                    <!--<div class="widget-body-toolbar bg-color-white smart-form" id="rev-toggles">-->
+                                        <!--<div class="inline-group">-->
+
+                                            <!--<select data-ng-click="selectRole">-->
+                                                <!--<option value="0" selected="selected">-&#45;&#45;</option>-->
+                                                <!--<option data-ng-repeat="role in ['cpu','mem','disk','net']" name="{{role}}">{{role}}</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                    <div jarvis-widget id="dygraphs-chart-cpu" data-widget-colorbutton="false" data-widget-color="blue" data-widget-togglebutton="false" data-widget-editbutton="false"
+                                         data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+                                        <header>
+                                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                                            <h2>CPU Used(%)</h2>
+                                        </header>
+                                        <div>
+                                            <div class="widget-body">
+                                                <!--<p class="alert alert-success">Roll period of 14 timesteps, custom range selector height and plot color.</p>-->
+                                                <!-- this is what the user will see -->
+                                                <div id="cpu" style="width: 100%;height: 300px;"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div jarvis-widget id="dygraphs-chart-mem" data-widget-colorbutton="false" data-widget-color="red" data-widget-togglebutton="false" data-widget-editbutton="false"
+                                         data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+                                        <header>
+                                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                                            <h2>Memory Used(%)</h2>
+                                        </header>
+                                        <div>
+                                            <div class="widget-body">
+                                                <!--<p class="alert alert-success">Roll period of 14 timesteps, custom range selector height and plot color.</p>-->
+                                                <!-- this is what the user will see -->
+                                                <div id="mem" style="width: 100%;height: 300px;"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div jarvis-widget id="dygraphs-chart-disk" data-widget-colorbutton="false" data-widget-color="green" data-widget-togglebutton="false" data-widget-editbutton="false"
+                                         data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+                                        <header>
+                                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                                            <h2>Disk IO(kbps)</h2>
+                                        </header>
+                                        <div>
+                                            <div class="widget-body">
+                                                <!--<p class="alert alert-success">Roll period of 14 timesteps, custom range selector height and plot color.</p>-->
+                                                <!-- this is what the user will see -->
+                                                <div id="disk" style="width: 100%;height: 300px;"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div jarvis-widget id="dygraphs-chart-net" data-widget-colorbutton="false" data-widget-color="yellow" data-widget-togglebutton="false" data-widget-editbutton="false"
+                                         data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+                                        <header>
+                                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                                            <h2>Network(kbps)</h2>
+                                        </header>
+                                        <div>
+                                            <div class="widget-body">
+                                                <!--<p class="alert alert-success">Roll period of 14 timesteps, custom range selector height and plot color.</p>-->
+                                                <!-- this is what the user will see -->
+                                                <div id="net" style="width: 100%;height: 300px;"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end s4 tab pane-->
+                            </div>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                <!--</div>-->
+                </div>
+            </article>
+        </div>
+
+    </section>
+</div>

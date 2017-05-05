@@ -1,0 +1,250 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <big-breadcrumbs items="['Center', 'Detail']" icon="table"
+                         class="col-xs-12 col-sm-4 col-md-2 col-lg-2"></big-breadcrumbs>
+        <div class="col-xs-12 col-sm-8 col-md-10 col-lg-10" data-sparkline-container>
+            <div class="sparkInfo">
+                <h5>{{getWord("VM Count")}}</h5>
+                <span class="txt-color-white">{{center_vms.length}}</span>
+            </div>
+            <div class="sparkInfo">
+                <h5>{{getWord("Inactive Server")}}</h5>
+                <span class="txt-color-white">{{center.inactive_server}}</span>
+            </div>
+            <div class="sparkInfo">
+                <h5>{{getWord("Total Server")}}</h5>
+                <span class="txt-color-white">{{center.active_server+center.inactive_server}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"
+                     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+
+                        <h2></h2>
+                        <!--<button type="button" class="btn btn-xs  btn-success">Start</button>&nbsp;
+                        <button type="button" class="btn btn-xs  btn-danger">Shutdown</button>&nbsp;
+                        <button type="button" class="btn btn-xs  btn-warning">Suspend</button>&nbsp;
+                        <button type="button" class="btn btn-xs  btn-success">Resume</button>-->
+
+                        <ul class="nav nav-tabs pull-right in" id="vmTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#s1"><i class="fa fa-bar-chart-o"></i> <span class="hidden-mobile hidden-tablet">{{getWord('General')}}</span></a>
+                            </li>
+<!--
+
+                            <li>
+                                <a data-toggle="tab" href="#s2"><i class="fa fa-eye"></i> <span class="hidden-mobile hidden-tablet">{{getWord('Detail')}}</span></a>
+                            </li>
+-->
+
+                            <li>
+                                <a data-toggle="tab" href="#s3"><i class="fa fa-list-alt"></i> <span class="hidden-mobile hidden-tablet">{{getWord('VMs')}}</span></a>
+                            </li>
+                        </ul>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div class="no-padding">
+
+                        <div class="widget-body">
+                            <!-- content -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
+                                    <div class="row no-space">
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats">
+                                            <table class="table table-hover table-striped">
+                                                <tbody>
+
+                                                <tr>
+                                                    <td>{{getWord("Center Name")}}</td>
+                                                    <td>{{center.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Description")}}</td>
+                                                    <td>{{center.description}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Total Server")}}</td>
+                                                    <td>{{center.server_count}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Active Server")}}</td>
+                                                    <td>{{center.active_server}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Inactive Server")}}</td>
+                                                    <td>{{center.inactive_server}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{getWord("Network Server Status")}}</td>
+                                                    <td ng-if="center.network_server=='no network server'">{{getWord("Network Server Not Bound")}}</td>
+
+                                                    <td ng-if="center.network_server[0].Status=='Active'">{{center.network_server[0].Name}}<span class="label label-success">Running</span></td>
+                                                    <td ng-if="center.network_server!='no network server'&&center.network_server[0].Status!='Active'">{{center.network_server[0].Name}}<span class="label label-warning">{{center.network_server[0].Status}}</span></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>{{getWord("Console Server Status")}}</td>
+                                                    <td ng-if="center.spice_server=='no spiceserver'">{{getWord("Console Server Not Bound")}}</td>
+                                                    <td ng-if="center.spice_server.Status=='Active'">{{center.spice_server.Name}}<span class="label label-success">Running</span></td>
+                                                    <td ng-if="center.spice_server!='no spiceserver'&&center.spice_server.Status!='Active'">{{center.spice_server.Name}}<span class="label label-warning">{{center.spice_server.Status}}</span></td>
+
+                                                </tr>
+
+
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 show-stats">
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 show-stats">
+                                            <table
+                                                    class="display projects-table table table-striped table-bordered table-hover"
+                                                    cellspacing="0" width="100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{getWord("Name")}}</th>
+                                                    <th>{{getWord("Hypervisor")}}</th>
+                                                    <th>{{getWord("Status")}}</th>
+                                                    <th>{{getWord("Description")}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr data-ng-repeat="server in center.servers">
+                                                    <td><a href="/#/Server/{{server.id}}">{{server.name}}</a></td>
+                                                    <td>{{server.hypervisor}}</td>
+                                                    <td ng-if="server.status == 'active'"><span class='label label-success'>Active</span></td>
+                                                    <td ng-if="server.status == 'inactive'"><span class='label label-danger'>Inactive</span></td>
+                                                    <td>{{server.description}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <h1  align="center" data-ng-if="center.servers.length==0">{{getWord('There\'s No Servers')}}</h1>
+
+
+                                            <table
+                                                    class="display projects-table table table-striped table-bordered table-hover"
+                                                    cellspacing="0" width="100%">
+                                                <thead>
+                                                <tr>
+
+                                                    <th>{{getWord("Name")}}</th>
+                                                    <th>{{getWord("CPU")}}</th>
+                                                    <th>{{getWord("Memory")}}</th>
+                                                    <th>{{getWord("Status")}}</th>
+                                                    <!--<th>Last Check</th>-->
+                                                    <!--<th>Description</th>-->
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr data-ng-repeat="vm in center_vms">
+                                                    <td><a href="/#/VM/{{vm.Id}}">{{vm.Name}}</a></td>
+                                                    <td>{{vm.CPU}}</td>
+                                                    <td>{{vm.Memory}}</td>
+                                                    <td ng-if="vm.Status == 'running'"><span class='label label-success'>Running</span></td>
+                                                    <td ng-if="vm.Status == ''"><span class='label label-warning'>Provision</span></td>
+                                                    <td ng-if="vm.Status == 'unknown'"><span class='label label-default'>Unknown</span></td>
+                                                    <td ng-if="vm.Status == 'shutdown'"><span class='label label-default'>Shutdown</span></td>
+                                                    <!--<td>{{vm.LastCheck}}</td>-->
+                                                    <!--<td>{{vm.Description}}</td>-->
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <h1  align="center" data-ng-if="center_vms.length==0">{{getWord('There\'s No VMs')}}</h1>
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                    <!--
+                                    test
+                                    -->
+
+
+                                </div>
+                                <!-- end s1 tab pane -->
+
+                                <div class="tab-pane fade" id="s2">
+                                    <div class="row">
+
+                                    </div>
+
+                                </div>
+                                <!-- end s2 tab pane -->
+
+                                <div class="tab-pane fade" id="s3">
+                                    <table
+                                           class="display projects-table table table-striped table-bordered table-hover"
+                                           cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Name</th>
+                                            <th>CPU</th>
+                                            <th>Memory</th>
+                                            <th>Status</th>
+                                            <th>Last Check</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="vm in center_vms">
+                                            <td></td>
+                                            <td><a href="/#/VM/{{vm.Id}}">{{vm.Name}}</a></td>
+                                            <td>{{vm.CPU}}</td>
+                                            <td>{{vm.Memory}}</td>
+                                            <td ng-if="vm.Status == 'running'"><span class='label label-success'>Running</span></td>
+                                            <td ng-if="vm.Status == ''"><span class='label label-warning'>Provision</span></td>
+                                            <td ng-if="vm.Status == 'unknown'"><span class='label label-default'>Unknown</span></td>
+                                            <td ng-if="vm.Status == 'shutdown'"><span class='label label-default'>Shutdown</span></td>
+                                            <td>{{vm.LastCheck}}</td>
+                                            <td>{{vm.Description}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- end s3 tab pane -->
+                            </div>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+
+            </article>
+        </div>
+
+    </section>
+</div>

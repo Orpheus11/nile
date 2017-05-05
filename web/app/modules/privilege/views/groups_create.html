@@ -1,0 +1,62 @@
+
+<div class="modal-header">
+    <h4 class="modal-title"> {{getWord('New Group')}}</h4>
+</div>
+<div class="modal-body  form-group">
+    <form class="smart-form" name="depForm">
+        <label class="label"> {{getWord('Name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newGroup.Group_name" placeholder="{{getWord('Name')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Display name')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newGroup.Display_name" placeholder="{{getWord('Display Name')}}" class="input-sm" ng-required/>
+        </label>
+
+        <label class="label"> {{getWord('Description')}} </label>
+        <label class="input">
+            <input type="text" data-ng-model="newGroup.Description" placeholder="{{getWord('Description')}}" class="input-sm" ng-required/>
+        </label>
+        <label class="label"> {{getWord('Role')}}</label>
+        <label class="select">
+            <select data-ng-model="newGroup.Role_id">
+                <option ng-repeat="role in roles" value="{{role.Id}}" ng-selected="role.Id == newGroup.Role_id"> {{role.Name}}</option>
+            </select>
+        </label>
+        <label class="label"> {{getWord('Users of Group')}} </label>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <ul>
+                    <li>  {{getWord('Include')}}</li>
+                    <li ng-repeat="user in newGroup.users">
+                        {{user.Username}}
+                        <button class="btn btn-default btn-xs" data-ng-click="removeFromGroup($index)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li>  {{getWord('Not_Include')}}  </li>
+                    <li ng-repeat="user in users" ng-show="!user.used">
+                        <button class="btn btn-default btn-xs" data-ng-click="addToGroup(user)">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        {{user.Username}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary"  ng-click="formSubmit()" ng-disabled="depForm.$$invalid">
+        {{getWord('Submit')}}
+    </button>
+</div>
